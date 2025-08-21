@@ -1,0 +1,7 @@
+{
+  "name": "xotex",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
