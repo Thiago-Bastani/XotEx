@@ -78,19 +78,14 @@
       <ion-card-content>
         <form (ngSubmit)="addConfession()" #confessionForm="ngForm">
           <!-- Category selector -->
-          <ion-item>
+          <ion-item class="category-select">
             <ion-label position="stacked">Categoria</ion-label>
-            <ion-select 
-              [(ngModel)]="selectedCategory"
-              name="category"
+            <app-category-selector
+              [selectedValue]="selectedCategory"
+              [options]="categoryOptions"
               placeholder="Escolha uma categoria"
-              interface="popover">
-              <ion-select-option 
-                *ngFor="let category of availableCategories" 
-                [value]="category">
-                {{ getCategoryEmoji(category) }} {{ category }}
-              </ion-select-option>
-            </ion-select>
+              (selectionChange)="onCategoryChange($event)">
+            </app-category-selector>
           </ion-item>
 
           <!-- Confession text -->

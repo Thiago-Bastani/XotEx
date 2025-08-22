@@ -1,0 +1,77 @@
+<!-- CATEGORY SELECTOR NEON COMPONENT -->
+<div class="category-selector-wrapper">
+  <!-- BOTÃO SELECTOR NEON -->
+  <ion-button 
+    expand="block" 
+    fill="clear" 
+    class="category-button"
+    [class.has-value]="selectedOption"
+    (click)="openModal()">
+    <div class="button-content">
+      <span class="category-text" [class.placeholder]="!selectedOption">
+        {{ displayText }}
+      </span>
+      <ion-icon name="chevron-down" class="dropdown-icon"></ion-icon>
+    </div>
+  </ion-button>
+
+  <!-- MODAL NEON PARA SELEÇÃO -->
+  <ion-modal 
+    [isOpen]="isModalOpen" 
+    (didDismiss)="closeModal()"
+    class="category-modal">
+    
+    <ng-template>
+      <div class="modal-wrapper">
+        <!-- HEADER DO MODAL -->
+        <div class="modal-header">
+          <h2>
+            <ion-icon name="list"></ion-icon>
+            Escolha uma Categoria
+          </h2>
+          <ion-button 
+            fill="clear" 
+            class="close-button"
+            (click)="closeModal()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </div>
+
+        <!-- CONTEÚDO DO MODAL -->
+        <div class="modal-content">
+          <!-- LISTA DE CATEGORIAS -->
+          <div class="categories-grid">
+            <div 
+              *ngFor="let option of options"
+              class="category-option"
+              [class.selected]="selectedValue === option.value"
+              (click)="selectOption(option)">
+              
+              <div class="option-content">
+                <span class="option-emoji">{{ option.emoji }}</span>
+                <span class="option-label">{{ option.label }}</span>
+              </div>
+              
+              <!-- INDICADOR DE SELEÇÃO -->
+              <ion-icon 
+                *ngIf="selectedValue === option.value"
+                name="checkmark-circle"
+                class="selected-icon">
+              </ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER DO MODAL -->
+        <div class="modal-footer">
+          <ion-button 
+            expand="block"
+            class="cancel-button"
+            (click)="closeModal()">
+            Cancelar
+          </ion-button>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>
+</div>

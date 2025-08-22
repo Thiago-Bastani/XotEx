@@ -1,5 +1,174 @@
 /*
- * App Global CSS - XotEx NEON CLUB Style
+ * App Global CSS - XotEx NEON CLUB// ===============================================
+// ION-SELECT NEON STYLING - GLOBAL OVERRIDE
+// ===============================================
+ion-select {
+  color: var(--pure-white) !important;
+  --background: var(--pure-black) !important;
+  background: var(--pure-black) !important;
+  
+  &::part(text) {
+    color: var(--pure-white) !important;
+    background: var(--pure-black) !important;
+  }
+  
+  &::part(container) {
+    background: var(--pure-black) !important;
+  }
+  
+  &::part(icon) {
+    color: var(--neon-cyan) !important;
+    opacity: 1 !important;
+  }
+  
+  .select-text {
+    color: var(--pure-white) !important;
+    background: var(--pure-black) !important;
+  }
+  
+  .select-icon {
+    color: var(--neon-cyan) !important;
+  }
+  
+  .select-placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+    background: var(--pure-black) !important;
+  }
+  
+  .native-wrapper {
+    background: var(--pure-black) !important;
+  }
+  
+  .select-wrapper {
+    background: var(--pure-black) !important;
+  }
+}
+
+// ION-SELECT POPOVER NEON THEME - FORÇA MÁXIMA
+.select-popover {
+  --background: var(--pure-black) !important;
+  background: var(--pure-black) !important;
+  
+  .popover-content {
+    background: var(--pure-black) !important;
+    border: 2px solid var(--neon-cyan) !important;
+    border-radius: 8px !important;
+  }
+  
+  .popover-wrapper {
+    background: var(--pure-black) !important;
+  }
+}
+
+ion-popover.select-popover {
+  --background: var(--pure-black) !important;
+  background: var(--pure-black) !important;
+  
+  .popover-content {
+    background: var(--pure-black) !important;
+  }
+  
+  .popover-wrapper {
+    background: var(--pure-black) !important;
+  }
+  
+  ion-list {
+    background: var(--pure-black) !important;
+    
+    ion-item {
+      --background: var(--pure-black) !important;
+      --color: var(--pure-white) !important;
+      background: var(--pure-black) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      
+      ion-label {
+        color: var(--pure-white) !important;
+        font-weight: 600;
+        background: transparent !important;
+      }
+      
+      &:hover, &.item-interactive.ion-activated {
+        --background: var(--neon-cyan) !important;
+        --color: var(--pure-black) !important;
+        background: var(--neon-cyan) !important;
+        
+        ion-label {
+          color: var(--pure-black) !important;
+        }
+      }
+      
+      &.item-radio-checked {
+        --background: var(--neon-green) !important;
+        --color: var(--pure-black) !important;
+        background: var(--neon-green) !important;
+        
+        ion-label {
+          color: var(--pure-black) !important;
+          font-weight: 800;
+        }
+      }
+    }
+  }
+  
+  ion-radio-group {
+    background: var(--pure-black) !important;
+    
+    ion-item {
+      background: var(--pure-black) !important;
+      
+      ion-radio {
+        --color: var(--neon-cyan);
+        --color-checked: var(--neon-green);
+        
+        &::part(container) {
+          border-color: var(--neon-cyan);
+          background: var(--pure-black);
+        }
+        
+        &.radio-checked::part(container) {
+          background: var(--neon-green);
+          border-color: var(--neon-green);
+        }
+      }
+    }
+  }
+}
+
+// FORÇA GLOBAL PARA TODOS OS POPOVERS
+ion-popover {
+  --background: var(--pure-black) !important;
+  background: var(--pure-black) !important;
+  
+  .popover-content {
+    background: var(--pure-black) !important;
+  }
+  
+  .popover-wrapper {
+    background: var(--pure-black) !important;
+  }
+  
+  ion-content {
+    --background: var(--pure-black) !important;
+    background: var(--pure-black) !important;
+  }
+  
+  ion-list {
+    background: var(--pure-black) !important;
+    
+    ion-item {
+      --background: var(--pure-black) !important;
+      background: var(--pure-black) !important;
+      --color: var(--pure-white) !important;
+      
+      ion-label {
+        color: var(--pure-white) !important;
+        background: transparent !important;
+      }
+    }
+  }
+}
+
+// ===============================================Style
  * ----------------------------------------------------------------------------
  * Put style rules here that you want to apply globally. These styles are for
  * the entire app and not just one component. Additionally, this file can be

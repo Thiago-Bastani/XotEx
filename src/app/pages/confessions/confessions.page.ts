@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { GameService } from '../../services/game';
+import { CategorySelectorComponent, CategoryOption } from '../../components/category-selector/category-selector.component';
 import { 
   Player, 
   GameSession, 
@@ -18,7 +19,7 @@ import {
   templateUrl: './confessions.page.html',
   styleUrls: ['./confessions.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [CommonModule, FormsModule, IonicModule, CategorySelectorComponent]
 })
 export class ConfessionsPage implements OnInit, OnDestroy {
   players: Player[] = [];
@@ -29,6 +30,7 @@ export class ConfessionsPage implements OnInit, OnDestroy {
   confessionText = '';
   selectedCategory: ConfessionCategory = ConfessionCategory.FUNNY;
   availableCategories = Object.values(ConfessionCategory);
+  categoryOptions: CategoryOption[] = [];
   suggestions: string[] = [];
   
   minConfessions = 3;
@@ -40,7 +42,9 @@ export class ConfessionsPage implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private router: Router
-  ) {}
+  ) {
+    this.initializeCategoryOptions();
+  }
 
   ngOnInit() {
     this.gameSubscription = this.gameService.gameSession$.subscribe((session: GameSession | null) => {
@@ -55,6 +59,41 @@ export class ConfessionsPage implements OnInit, OnDestroy {
       }
     });
     
+    this.updateSuggestions();
+  }
+
+  initializeCategoryOptions() {
+    this.categoryOptions = [
+      {
+        value: ConfessionCategory.FUNNY,
+        emoji: '🤣',
+        label: 'Engraçado'
+      },
+      {
+        value: ConfessionCategory.CHILDISH,
+        emoji: '🧸',
+        label: 'Infantil'
+      },
+      {
+        value: ConfessionCategory.EMBARRASSING,
+        emoji: '😳',
+        label: 'Vergonhoso'
+      },
+      {
+        value: ConfessionCategory.ROMANTIC,
+        emoji: '💕',
+        label: 'Romântico'
+      },
+      {
+        value: ConfessionCategory.SPICY,
+        emoji: '🌶️',
+        label: 'Picante'
+      }
+    ];
+  }
+
+  onCategoryChange(category: string) {
+    this.selectedCategory = category as ConfessionCategory;
     this.updateSuggestions();
   }
 
