@@ -1,186 +1,269 @@
 .home-content {
-  --background: var(--background-gradient);
+  --background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 70%);
+  background: var(--background);
+  min-height: 100vh;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(139, 93, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(255, 69, 0, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+  }
   
   .home-container {
-    padding: 20px;
-    height: 100%;
+    padding: 2rem 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 2rem;
+    min-height: 100vh;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
   }
 
-  .logo-section {
+  // Hero Section - Clean & Modern
+  .hero-section {
     text-align: center;
-    margin-top: 40px;
-    margin-bottom: 30px;
     
-    .logo-emoji {
-      font-size: 80px;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
-    }
-    
-    .app-title {
-      font-size: 3rem;
-      font-weight: 700;
-      color: white;
-      margin: 10px 0;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      letter-spacing: 2px;
-    }
-    
-    .app-subtitle {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin: 0;
-      font-weight: 300;
-    }
-  }
-
-  .main-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    margin-bottom: 30px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    
-    ion-card-content {
-      padding: 24px;
+    .brand-logo {
+      margin-bottom: 1rem;
       
-      .welcome-message {
+      .logo-icon {
+        font-size: 4rem;
+        display: block;
+        margin-bottom: 0.5rem;
+        filter: drop-shadow(0 0 20px rgba(139, 93, 255, 0.5));
+        animation: float 3s ease-in-out infinite;
+      }
+      
+      .brand-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+        background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+    }
+    
+    .brand-subtitle {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0 0 2rem 0;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+    
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1rem;
+      
+      .feature-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(139, 93, 255, 0.3);
+        border-radius: 12px;
+        padding: 1rem 0.5rem;
         text-align: center;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
         
-        h2 {
-          color: var(--confession-primary);
+        &:hover {
+          border-color: var(--neon-purple);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(139, 93, 255, 0.25);
+        }
+        
+        .feature-icon {
+          font-size: 1.5rem;
+          color: var(--neon-purple);
+          margin-bottom: 0.5rem;
+          display: block;
+        }
+        
+        .feature-text {
+          font-size: 0.75rem;
+          color: rgba(255, 255, 255, 0.8);
           font-weight: 600;
-          margin-bottom: 15px;
-          font-size: 1.4rem;
-        }
-        
-        p {
-          color: var(--confession-dark);
-          font-size: 1rem;
-          line-height: 1.5;
-          margin-bottom: 20px;
-        }
-        
-        .quick-stats {
-          display: flex;
-          justify-content: space-around;
-          margin-top: 20px;
-          
-          .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            
-            ion-icon {
-              font-size: 1.5rem;
-            }
-            
-            span {
-              color: var(--confession-dark);
-              font-size: 0.9rem;
-              font-weight: 500;
-              text-align: center;
-            }
-          }
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
       }
     }
   }
 
-  .action-buttons {
-    margin-bottom: 20px;
+  // Actions Section - Modern Button Design
+  .actions-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     
     ion-button {
-      margin-bottom: 12px;
-      height: var(--button-height);
-      border-radius: var(--button-border-radius);
-      font-weight: 600;
-      font-size: 1.1rem;
+      height: 56px;
+      --border-radius: 16px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-transform: none;
+      letter-spacing: 0.02em;
+      transition: all 0.3s ease;
       
-      &.primary-button {
-        --background: var(--confession-primary);
-        --background-activated: var(--confession-secondary);
-        --background-hover: var(--confession-secondary);
+      &.primary-action-btn {
+        --background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
         --color: white;
-        box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        box-shadow: 0 8px 25px rgba(139, 93, 255, 0.4);
         
-        &:not(.button-disabled):hover {
+        &:hover:not(.button-disabled) {
           transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+          box-shadow: 0 12px 35px rgba(139, 93, 255, 0.5);
+        }
+        
+        &:active {
+          transform: translateY(0);
         }
       }
       
-      &.secondary-button {
-        --border-color: white;
-        --color: white;
+      &.secondary-action-btn {
+        --border-color: var(--neon-purple);
+        --color: var(--neon-purple);
+        --border-width: 2px;
         
-        &:not(.button-disabled):hover {
-          --background: rgba(255, 255, 255, 0.1);
-        }
-      }
-      
-      &.tertiary-button {
-        --color: rgba(255, 255, 255, 0.8);
-        
-        &:not(.button-disabled):hover {
+        &:hover:not(.button-disabled) {
+          --background: rgba(139, 93, 255, 0.1);
           --color: white;
         }
       }
+      
+      &.tertiary-action-btn {
+        --color: rgba(255, 255, 255, 0.7);
+        
+        &:hover:not(.button-disabled) {
+          --color: white;
+          --background: rgba(255, 255, 255, 0.05);
+        }
+      }
     }
   }
 
-  .current-game-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
+  // Navigation Section - Subtle Navigation Buttons
+  .navigation-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     
-    ion-card-header {
-      padding-bottom: 0;
+    ion-button {
+      height: 48px;
+      --border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: none;
+      letter-spacing: 0.02em;
+      transition: all 0.3s ease;
       
-      ion-card-title {
-        color: var(--confession-primary);
-        font-weight: 600;
-        font-size: 1.2rem;
+      &.nav-action-btn {
+        --color: rgba(255, 255, 255, 0.6);
+        
+        &:hover:not(.button-disabled) {
+          --color: rgba(255, 255, 255, 0.9);
+          --background: rgba(255, 255, 255, 0.05);
+        }
       }
     }
-    
-    ion-card-content {
-      .game-info {
+  }
+
+  // Current Game Section - Sleek Card Design
+  .current-game-section {
+    .game-status-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(139, 93, 255, 0.3);
+      border-radius: 16px;
+      padding: 1.5rem;
+      backdrop-filter: blur(15px);
+      
+      .status-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        
+        .status-icon {
+          font-size: 1.5rem;
+          color: var(--neon-purple);
+        }
+        
+        h3 {
+          margin: 0;
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: white;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+      }
+      
+      .status-info {
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        margin-bottom: 16px;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
         
-        .info-item {
+        .status-item {
           display: flex;
+          justify-content: space-between;
           align-items: center;
-          gap: 10px;
           
-          ion-icon {
-            color: var(--confession-secondary);
-            font-size: 1.2rem;
-          }
-          
-          span {
-            color: var(--confession-dark);
+          .status-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
             font-weight: 500;
           }
+          
+          .status-value {
+            font-size: 0.9rem;
+            color: var(--neon-purple);
+            font-weight: 700;
+          }
+        }
+      }
+      
+      .clear-btn {
+        --color: var(--neon-red);
+        font-size: 0.9rem;
+        height: 40px;
+        --border-radius: 12px;
+        
+        &:hover {
+          --background: rgba(255, 0, 127, 0.1);
         }
       }
     }
   }
 }
 
-// Animações
-@keyframes fadeInUp {
+// Modern Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes slideInUp {
   from {
     opacity: 0;
     transform: translateY(30px);
@@ -191,56 +274,104 @@
   }
 }
 
-.logo-section {
-  animation: fadeInUp 0.6s ease-out;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.main-card {
-  animation: fadeInUp 0.8s ease-out;
+.hero-section {
+  animation: slideInUp 0.6s ease-out;
 }
 
-.action-buttons {
-  animation: fadeInUp 1s ease-out;
+.actions-section {
+  animation: slideInUp 0.8s ease-out 0.2s both;
 }
 
-// Responsividade
+.navigation-section {
+  animation: slideInUp 0.9s ease-out 0.3s both;
+}
+
+.current-game-section {
+  animation: fadeIn 0.6s ease-out 0.5s both;
+}
+
+// Responsive Design
 @media (max-width: 480px) {
   .home-content .home-container {
-    padding: 16px;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
     
-    .logo-section {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      
-      .logo-emoji {
-        font-size: 60px;
+    .hero-section {
+      .brand-logo {
+        .logo-icon {
+          font-size: 3.5rem;
+        }
+        
+        .brand-title {
+          font-size: 2rem;
+        }
       }
       
-      .app-title {
-        font-size: 2.5rem;
+      .brand-subtitle {
+        font-size: 0.9rem;
       }
       
-      .app-subtitle {
-        font-size: 1rem;
+      .feature-grid {
+        gap: 0.75rem;
+        
+        .feature-card {
+          padding: 0.75rem 0.25rem;
+          
+          .feature-icon {
+            font-size: 1.25rem;
+          }
+          
+          .feature-text {
+            font-size: 0.7rem;
+          }
+        }
       }
     }
     
-    .main-card ion-card-content {
-      padding: 20px;
+    .actions-section {
+      gap: 0.75rem;
       
-      .welcome-message {
-        .quick-stats {
-          flex-direction: column;
-          gap: 15px;
-          
-          .stat-item {
-            flex-direction: row;
-            justify-content: center;
-            gap: 10px;
-            
-            span {
-              font-size: 0.8rem;
-            }
+      ion-button {
+        height: 50px;
+        font-size: 0.95rem;
+      }
+    }
+    
+    .navigation-section {
+      gap: 0.5rem;
+      
+      ion-button {
+        height: 44px;
+        font-size: 0.85rem;
+      }
+    }
+    
+    .current-game-section {
+      .game-status-card {
+        padding: 1.25rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .home-content .home-container {
+    padding: 1rem 0.75rem;
+    
+    .hero-section {
+      .feature-grid {
+        .feature-card {
+          .feature-text {
+            font-size: 0.65rem;
           }
         }
       }
@@ -248,34 +379,31 @@
   }
 }
 
-// ===============================================
-// OVERRIDE GERAL DE FONTES - TAB1 (HOME)
-// ===============================================
+// Modern Typography Override
 .home-content {
-  // Força aplicação das fontes modernas em todos os elementos
+  // Force modern fonts on all elements
   *, *::before, *::after {
-    font-family: var(--font-secondary) !important;
+    font-family: var(--font-primary) !important;
   }
   
-  // Títulos e headings
+  // Headings with modern typography
   h1, h2, h3, h4, h5, h6,
-  .app-title,
-  ion-card-title {
+  .brand-title {
     font-family: var(--font-heading) !important;
   }
   
-  // Elementos de destaque
-  .logo-emoji,
-  .stat-item span,
+  // Accent elements
+  .logo-icon,
+  .feature-text,
   ion-button {
     font-family: var(--font-accent) !important;
   }
   
-  // Textos e subtítulos
-  .app-subtitle,
+  // Body text with clean typography
+  .brand-subtitle,
   p,
-  .info-item span,
-  ion-card-subtitle {
+  .status-label,
+  .status-value {
     font-family: var(--font-secondary) !important;
   }
 }

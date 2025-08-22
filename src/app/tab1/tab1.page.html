@@ -1,107 +1,104 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>
-      XotEx
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" class="home-content">
   <div class="home-container">
-    <!-- Logo e título -->
-    <div class="logo-section">
-      <div class="logo-emoji">🎭</div>
-      <h1 class="app-title">XotEx</h1>
-      <p class="app-subtitle">Jogo de confissões para grupos de amigos</p>
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="brand-logo">
+        <div class="logo-icon">🎭</div>
+        <h1 class="brand-title">XotEx</h1>
+      </div>
+      <p class="brand-subtitle">O jogo de confissões que revela segredos</p>
+      
+      <div class="feature-grid">
+        <div class="feature-card">
+          <ion-icon name="people-outline" class="feature-icon"></ion-icon>
+          <span class="feature-text">4-8 players</span>
+        </div>
+        <div class="feature-card">
+          <ion-icon name="timer-outline" class="feature-icon"></ion-icon>
+          <span class="feature-text">30-60 min</span>
+        </div>
+        <div class="feature-card">
+          <ion-icon name="heart-outline" class="feature-icon"></ion-icon>
+          <span class="feature-text">Diversão</span>
+        </div>
+      </div>
     </div>
 
-    <!-- Cartão principal -->
-    <ion-card class="main-card">
-      <ion-card-content>
-        <div class="welcome-message">
-          <h2>Bem-vindo ao XotEx!</h2>
-          <p>Prepare-se para descobrir os segredos mais divertidos dos seus amigos!</p>
-          <div class="quick-stats">
-            <div class="stat-item">
-              <ion-icon name="people" color="primary"></ion-icon>
-              <span>4-8 jogadores</span>
-            </div>
-            <div class="stat-item">
-              <ion-icon name="time" color="secondary"></ion-icon>
-              <span>30-60 min</span>
-            </div>
-            <div class="stat-item">
-              <ion-icon name="happy" color="tertiary"></ion-icon>
-              <span>Diversão garantida</span>
-            </div>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Botões de ação -->
-    <div class="action-buttons">
+    <!-- Actions Section -->
+    <div class="actions-section">
       <ion-button 
         expand="full" 
-        size="large" 
-        class="primary-button"
-        (click)="startNewGame()"
-        [disabled]="false">
-        <ion-icon name="play-circle" slot="start"></ion-icon>
+        class="primary-action-btn"
+        (click)="startNewGame()">
+        <ion-icon name="play" slot="start"></ion-icon>
         Novo Jogo
       </ion-button>
 
       <ion-button 
         expand="full" 
-        size="large" 
         fill="outline"
-        class="secondary-button"
+        class="secondary-action-btn"
         (click)="continueGame()"
         [disabled]="!hasExistingGame">
-        <ion-icon name="refresh-circle" slot="start"></ion-icon>
-        Continuar Jogo
+        <ion-icon name="refresh" slot="start"></ion-icon>
+        Continuar
+      </ion-button>
+    </div>
+
+    <!-- Navigation Section -->
+    <div class="navigation-section">
+      <ion-button 
+        expand="full" 
+        fill="clear"
+        class="nav-action-btn"
+        (click)="goToHelp()">
+        <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+        Como Jogar
       </ion-button>
 
       <ion-button 
         expand="full" 
-        size="large" 
         fill="clear"
-        class="tertiary-button"
-        (click)="goToHelp()">
-        <ion-icon name="help-circle" slot="start"></ion-icon>
-        Ver Instruções
+        class="nav-action-btn"
+        (click)="goToSettings()">
+        <ion-icon name="settings-outline" slot="start"></ion-icon>
+        Configurações
       </ion-button>
     </div>
 
-    <!-- Informações do jogo atual -->
-    <ion-card *ngIf="currentGame" class="current-game-card">
-      <ion-card-header>
-        <ion-card-title>Jogo em Andamento</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="game-info">
-          <div class="info-item">
-            <ion-icon name="people"></ion-icon>
-            <span>{{ currentGame.players.length }} jogadores</span>
+    <!-- Current Game Card -->
+    <div *ngIf="currentGame" class="current-game-section">
+      <div class="game-status-card">
+        <div class="status-header">
+          <ion-icon name="game-controller-outline" class="status-icon"></ion-icon>
+          <h3>Jogo Ativo</h3>
+        </div>
+        
+        <div class="status-info">
+          <div class="status-item">
+            <span class="status-label">Jogadores:</span>
+            <span class="status-value">{{ currentGame.players.length }}</span>
           </div>
-          <div class="info-item">
-            <ion-icon name="flame"></ion-icon>
-            <span>Heat Level {{ currentGame.heatLevel }}</span>
+          <div class="status-item">
+            <span class="status-label">Heat Level:</span>
+            <span class="status-value">{{ currentGame.heatLevel }}</span>
           </div>
-          <div class="info-item">
-            <ion-icon name="trophy"></ion-icon>
-            <span>{{ currentGame.completedRounds.length }} rodadas</span>
+          <div class="status-item">
+            <span class="status-label">Rodadas:</span>
+            <span class="status-value">{{ currentGame.completedRounds.length }}</span>
           </div>
         </div>
+        
         <ion-button 
           fill="clear" 
-          color="danger"
           size="small"
+          color="danger"
+          class="clear-btn"
           (click)="confirmClearGame()">
-          <ion-icon name="trash" slot="start"></ion-icon>
+          <ion-icon name="trash-outline" slot="start"></ion-icon>
           Limpar Dados
         </ion-button>
-      </ion-card-content>
-    </ion-card>
+      </div>
+    </div>
   </div>
 </ion-content>

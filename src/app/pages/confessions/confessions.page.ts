@@ -55,7 +55,7 @@ export class ConfessionsPage implements OnInit, OnDestroy {
           this.updateCurrentPlayerConfessions();
         }
       } else {
-        this.router.navigate(['/tabs/tab1']);
+        this.router.navigate(['/home']);
       }
     });
     

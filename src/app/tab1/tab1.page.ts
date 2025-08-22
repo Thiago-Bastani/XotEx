@@ -93,7 +93,11 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   goToHelp() {
-    this.router.navigate(['/tabs/tab2']);
+    this.router.navigate(['/help']);
+  }
+
+  goToSettings() {
+    this.router.navigate(['/settings']);
   }
 
   async confirmClearGame() {

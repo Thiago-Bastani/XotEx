@@ -106,7 +106,7 @@ export class GamePage implements OnInit, OnDestroy {
           }
         }
       } else {
-        this.router.navigate(['/tabs/tab1']);
+        this.router.navigate(['/home']);
       }
     });
   }
@@ -360,7 +360,7 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   goHome() {
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['/home']);
   }
 
   // Calcular resultado da rodada sem modificar estado (evitar loop infinito)
