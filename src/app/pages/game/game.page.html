@@ -17,12 +17,6 @@
         </div>
       </div>
 
-      <ion-button 
-        fill="clear" 
-        class="stats-btn"
-        (click)="showGameStats()">
-        <ion-icon name="stats-chart" slot="icon-only"></ion-icon>
-      </ion-button>
     </div>
 
     <!-- Mystery Box Phase -->
@@ -181,6 +175,72 @@
         <span *ngIf="isGameFinished()">Ver Resultados Finais</span>
         <ion-icon name="arrow-forward" slot="end"></ion-icon>
       </ion-button>
+    </div>
+
+    <!-- Scores Phase -->
+    <div class="scores-section" *ngIf="gamePhase === 'scores'">
+      <div class="scores-content">
+        <div class="scores-header">
+          <div class="scores-icon">📊</div>
+          <h2 class="scores-title">Pontuações</h2>
+          <p class="scores-subtitle">Rodada {{ completedRounds }} finalizada</p>
+        </div>
+
+        <div class="scores-stats" *ngIf="gameStats">
+          <div class="overall-stats">
+            <div class="stat-item">
+              <span class="stat-value">{{ gameStats.totalRounds }}</span>
+              <span class="stat-label">Rodadas</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ gameStats.heatLevel }}</span>
+              <span class="stat-label">Heat Level</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ getAverageAccuracy() }}%</span>
+              <span class="stat-label">Precisão Média</span>
+            </div>
+          </div>
+
+          <div class="players-scores">
+            <h3 class="players-title">Desempenho dos Jogadores</h3>
+            <div class="players-list">
+              <div 
+                *ngFor="let playerStat of gameStats.playerStats; let i = index"
+                class="player-score-item"
+                [class.top-player]="i === 0">
+                <div class="player-rank">
+                  <span class="rank-number">{{ i + 1 }}º</span>
+                </div>
+                <div class="player-info">
+                  <div class="player-avatar" [style.background-color]="playerStat.player.color">
+                    {{ playerStat.player.avatar }}
+                  </div>
+                  <div class="player-details">
+                    <span class="player-name">{{ playerStat.player.name }}</span>
+                    <span class="player-accuracy">{{ playerStat.accuracy.toFixed(1) }}% acertos</span>
+                  </div>
+                </div>
+                <div class="player-points">
+                  <span class="points-value">{{ playerStat.correctGuesses }}</span>
+                  <span class="points-label">acertos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="scores-actions">
+          <ion-button 
+            expand="full"
+            class="continue-btn"
+            (click)="proceedToNextRound()">
+            <ion-icon name="arrow-forward" slot="start"></ion-icon>
+            <span *ngIf="!isGameFinished()">Próxima Rodada</span>
+            <span *ngIf="isGameFinished()">Ver Resultados Finais</span>
+          </ion-button>
+        </div>
+      </div>
     </div>
 
     <!-- Game Finished -->

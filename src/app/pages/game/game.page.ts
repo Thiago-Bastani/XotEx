@@ -15,7 +15,7 @@ import {
   GameStatus
 } from '../../models/game.model';
 
-type GamePhase = 'reading' | 'voting' | 'results' | 'finished';
+type GamePhase = 'reading' | 'voting' | 'results' | 'scores' | 'finished';
 
 @Component({
   selector: 'app-game',
@@ -333,6 +333,16 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   nextRound() {
+    // Se não é a primeira rodada, mostrar scores primeiro
+    if (this.completedRounds > 0) {
+      this.gamePhase = 'scores';
+      this.gameStats = this.gameService.getGameStats();
+    } else {
+      this.proceedToNextRound();
+    }
+  }
+
+  proceedToNextRound() {
     const hasNext = this.gameService.nextRound();
     
     if (hasNext) {
@@ -391,6 +401,13 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   Math = Math;
+
+  getAverageAccuracy(): number {
+    if (!this.gameStats || !this.gameStats.averageAccuracy || isNaN(this.gameStats.averageAccuracy)) {
+      return 0;
+    }
+    return Math.round(this.gameStats.averageAccuracy);
+  }
 
   isGameFinished(): boolean {
     // Verificar se todas as confissões foram utilizadas
