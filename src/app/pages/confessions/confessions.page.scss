@@ -1,292 +1,425 @@
+// ===============================================
+// XOTEX NEON CLUB - CONFESSIONS PAGE MODERN DESIGN 🔥
+// ===============================================
+// - Fundo: 100% preto
+// - Texto: 100% branco  
+// - Cards: Preto com bordas neon coloridas
+// - Formulários: Bordas visíveis e campos destacados
+
 .confessions-content {
-  --background: var(--background-gradient);
+  background: var(--pure-black);
+  color: var(--pure-white);
   
   .confessions-container {
-    padding: 20px;
+    padding: 16px;
     min-height: 100%;
+    background: var(--pure-black);
   }
 
+  // TOP START GAME BUTTON - NEON SUCCESS
   .top-actions {
     margin-bottom: 20px;
     
     .start-game-button {
-      height: var(--button-height);
-      border-radius: var(--button-border-radius);
-      font-weight: 600;
-      font-size: 1.1rem;
-      --background: var(--confession-success);
-      --background-activated: #00a082;
-      --color: white;
+      width: 100%;
+      height: 64px;
+      background: var(--pure-black);
+      border: 4px solid var(--neon-green);
+      border-radius: 12px;
+      color: var(--pure-white);
+      font-weight: 800;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      box-shadow: 0 0 30px rgba(0, 255, 127, 0.4);
       
-      &:not(.button-disabled):hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
+      &:not(.button-disabled):active {
+        background: var(--neon-green);
+        color: var(--pure-black);
+        transform: scale(0.98);
+      }
+      
+      ion-icon {
+        color: var(--neon-green);
+        margin-left: 12px;
+        font-size: 1.4rem;
       }
     }
   }
 
+  // PLAYERS STATUS COMPACT - NEON TRACKER
   .players-status-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--pure-black);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 12px;
     margin-bottom: 20px;
+    padding: 16px;
     
     .players-status-compact {
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 15px;
-      padding: 10px 0;
+      gap: 16px;
+      padding: 8px 0;
       
       .player-status-icon {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
         padding: 12px;
-        border-radius: 12px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
         position: relative;
-        min-width: 60px;
+        min-width: 64px;
+        background: var(--pure-black);
+        border: 2px solid transparent;
         
-        &:hover {
-          background: rgba(255, 255, 255, 0.1);
-          transform: translateY(-2px);
+        &:active {
+          transform: scale(0.95);
         }
         
         &.current {
-          background: var(--confession-secondary);
-          box-shadow: 0 4px 12px rgba(162, 155, 254, 0.3);
+          border-color: var(--neon-yellow);
+          box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+          
+          .player-avatar {
+            transform: scale(1.1);
+          }
         }
         
         &.completed {
+          border-color: var(--neon-green);
+          
           .player-avatar {
-            filter: drop-shadow(0 0 8px rgba(0, 184, 148, 0.5));
+            filter: drop-shadow(0 0 12px rgba(0, 255, 127, 0.6));
           }
         }
         
         .player-avatar {
           font-size: 2rem;
-          transition: filter 0.3s ease;
+          transition: all 0.2s ease;
+          color: var(--pure-white);
         }
         
         .status-indicator {
           display: flex;
           align-items: center;
           justify-content: center;
-          min-height: 20px;
+          min-height: 24px;
           
           ion-icon {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            color: var(--neon-green);
           }
           
           .count {
-            color: var(--confession-secondary);
-            font-weight: 600;
+            color: var(--pure-white);
+            font-weight: 800;
             font-size: 0.8rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 2px 6px;
-            border-radius: 10px;
+            background: var(--neon-orange);
+            color: var(--pure-black);
+            padding: 4px 8px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
           }
         }
       }
     }
   }
 
+  // PROGRESS CARD - NEON INDICATOR
   .progress-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--pure-black);
+    border: 2px solid var(--neon-purple);
+    border-radius: 12px;
     margin-bottom: 20px;
+    padding: 20px;
     
     .progress-info {
       text-align: center;
       
       h2 {
-        color: var(--confession-primary);
-        font-weight: 600;
-        margin-bottom: 10px;
+        color: var(--pure-white);
+        font-weight: 800;
+        margin-bottom: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 10px;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 1.3rem;
         
         .player-avatar {
-          font-size: 1.5rem;
+          font-size: 1.6rem;
+          padding: 8px;
+          border: 2px solid var(--pure-white);
+          border-radius: 50%;
+          background: var(--pure-black);
         }
       }
       
       p {
-        color: var(--confession-dark);
-        margin-bottom: 15px;
+        color: var(--pure-white);
+        margin-bottom: 16px;
         font-size: 1rem;
+        font-weight: 600;
+        opacity: 0.8;
       }
       
       ion-progress-bar {
-        margin-top: 10px;
-        height: 8px;
-        border-radius: 4px;
+        margin-top: 12px;
+        height: 12px;
+        border-radius: 6px;
+        border: 2px solid var(--pure-white);
+        
+        &::part(stream) {
+          background: var(--neon-purple);
+          box-shadow: 0 0 15px rgba(139, 93, 255, 0.5);
+        }
+        
+        &::part(track) {
+          background: var(--pure-black);
+        }
       }
     }
   }
 
-  .confessions-list-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+  // CONFESSION FORM CARD - NEON INPUT
+  .confession-form-card {
+    background: var(--pure-black);
+    border: 2px solid var(--neon-pink);
+    border-radius: 12px;
     margin-bottom: 20px;
+    padding: 20px;
     
     ion-card-header {
+      padding: 0 0 16px 0;
+      
       ion-card-title {
-        color: var(--confession-primary);
-        font-weight: 600;
+        color: var(--pure-white);
+        font-weight: 800;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 1.2rem;
+        
+        ion-icon {
+          color: var(--neon-pink);
+          font-size: 1.4rem;
+        }
       }
       
       ion-card-subtitle {
-        color: var(--confession-dark);
-        font-style: italic;
-        margin-top: 5px;
+        color: var(--pure-white);
+        font-weight: 600;
+        margin-top: 8px;
+        opacity: 0.7;
+        font-size: 0.9rem;
       }
     }
     
+    // FORM ITEMS - NEON INPUTS
     ion-item {
-      --background: transparent;
-      --border-color: var(--confession-light);
-      --color: var(--confession-dark);
-      margin-bottom: 15px;
+      --background: var(--pure-black);
+      --border-color: var(--neon-blue);
+      --color: var(--pure-white);
+      background: var(--pure-black);
+      border: 2px solid var(--neon-blue);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      padding: 4px 12px;
       
       ion-label {
-        font-weight: 600;
-        color: var(--confession-primary);
+        font-weight: 800;
+        color: var(--pure-white);
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+        font-size: 0.9rem;
       }
       
       ion-select, ion-textarea {
-        --color: var(--confession-dark);
+        --color: var(--pure-white);
+        --placeholder-color: rgba(255, 255, 255, 0.5);
         font-size: 1rem;
+        font-weight: 600;
+        
+        input, textarea {
+          color: var(--pure-white) !important;
+          background: transparent !important;
+        }
+      }
+      
+      &.ion-focused {
+        border-color: var(--neon-yellow);
+        box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+      }
+      
+      &.item-has-value {
+        border-color: var(--neon-green);
       }
     }
     
+    // SUGGESTIONS - NEON CHIPS
     .suggestions {
       margin: 20px 0;
       
       h4 {
-        color: var(--confession-secondary);
-        font-weight: 600;
+        color: var(--pure-white);
+        font-weight: 800;
         margin-bottom: 12px;
         font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
       
       .suggestion-chips {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
         
         ion-chip {
-          --background: var(--confession-light);
-          --color: var(--confession-primary);
+          --background: var(--pure-black);
+          --color: var(--pure-white);
+          border: 2px solid var(--neon-cyan);
+          border-radius: 20px;
           cursor: pointer;
-          transition: transform 0.2s ease;
+          transition: all 0.2s ease;
           
-          &:hover {
-            transform: scale(1.05);
+          &:active {
+            background: var(--neon-cyan);
+            color: var(--pure-black);
+            transform: scale(0.95);
           }
           
           ion-label {
             font-size: 0.85rem;
-            font-weight: 500;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
           }
         }
       }
     }
     
+    // FORM ACTIONS - NEON SUBMIT
     .form-actions {
       margin-top: 20px;
       
       .add-confession-button {
-        height: var(--button-height);
-        border-radius: var(--button-border-radius);
-        font-weight: 600;
-        --background: var(--confession-accent);
-        --background-activated: var(--confession-danger);
-        --color: white;
+        width: 100%;
+        height: 56px;
+        background: var(--pure-black);
+        border: 3px solid var(--neon-pink);
+        border-radius: 8px;
+        color: var(--pure-white);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
         
-        &:not(.button-disabled):hover {
-          transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(253, 121, 168, 0.3);
+        &:not(.button-disabled):active {
+          background: var(--neon-pink);
+          color: var(--pure-black);
         }
         
         &.button-disabled {
           opacity: 0.5;
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        ion-icon {
+          color: var(--neon-pink);
+          margin-right: 8px;
         }
       }
     }
   }
 
+  // CONFESSIONS LIST CARD - NEON REVIEW
   .confessions-list-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--pure-black);
+    border: 2px solid var(--neon-orange);
+    border-radius: 12px;
     margin-bottom: 20px;
+    padding: 20px;
     
     ion-card-header {
+      padding: 0 0 16px 0;
+      
       ion-card-title {
-        color: var(--confession-primary);
-        font-weight: 600;
+        color: var(--pure-white);
+        font-weight: 800;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+        ion-icon {
+          color: var(--neon-orange);
+        }
       }
     }
     
     .confessions-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 16px;
       
       .confession-item {
         display: flex;
         align-items: flex-start;
         gap: 12px;
         padding: 16px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: var(--pure-black);
+        border: 2px solid var(--pure-white);
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        
+        &:active {
+          transform: scale(0.98);
+        }
         
         .confession-content {
           flex: 1;
           
           .confession-category {
             font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--confession-secondary);
-            margin-bottom: 6px;
+            font-weight: 800;
+            color: var(--neon-cyan);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
           }
           
           .confession-text {
-            color: var(--confession-dark);
+            color: var(--pure-white);
             line-height: 1.5;
             font-size: 0.95rem;
+            font-weight: 600;
           }
         }
         
         ion-button {
-          --color: var(--confession-danger);
-          min-width: 40px;
+          --color: var(--neon-red);
+          --background: var(--pure-black);
+          border: 2px solid var(--neon-red);
+          border-radius: 6px;
+          min-width: 44px;
+          height: 44px;
           
-          &:hover {
-            --background: rgba(232, 67, 147, 0.1);
+          &:active {
+            --background: var(--neon-red);
+            --color: var(--pure-black);
+          }
+          
+          ion-icon {
+            font-size: 1.2rem;
           }
         }
       }
@@ -294,7 +427,19 @@
   }
 }
 
-// Animações
+// ===============================================
+// ANIMAÇÕES MODERNAS
+// ===============================================
+
+@keyframes neonPulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(139, 93, 255, 0.3); 
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(139, 93, 255, 0.6); 
+  }
+}
+
 @keyframes slideInUp {
   from {
     opacity: 0;
@@ -335,35 +480,129 @@
   animation: fadeIn 0.3s ease-out;
 }
 
-// Responsividade
+// ===============================================
+// RESPONSIVIDADE MODERNA
+// ===============================================
+
 @media (max-width: 480px) {
   .confessions-content .confessions-container {
-    padding: 16px;
+    padding: 12px;
+    
+    .top-actions {
+      .start-game-button {
+        height: 56px;
+        font-size: 1.1rem;
+        
+        ion-icon {
+          font-size: 1.2rem;
+        }
+      }
+    }
     
     .players-status-card {
+      padding: 12px;
+      
       .players-status-compact {
-        gap: 10px;
+        gap: 12px;
         
         .player-status-icon {
-          min-width: 50px;
+          min-width: 56px;
           padding: 8px;
           
           .player-avatar {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
           }
           
           .status-indicator .count {
             font-size: 0.7rem;
-            padding: 1px 4px;
+            padding: 2px 6px;
           }
         }
       }
     }
     
-    .suggestion-chips {
-      ion-chip {
+    .progress-card {
+      padding: 16px;
+      
+      .progress-info {
+        h2 {
+          font-size: 1.1rem;
+          
+          .player-avatar {
+            font-size: 1.4rem;
+          }
+        }
+        
+        p {
+          font-size: 0.9rem;
+        }
+        
+        ion-progress-bar {
+          height: 10px;
+        }
+      }
+    }
+    
+    .confession-form-card {
+      padding: 16px;
+      
+      ion-card-header {
+        ion-card-title {
+          font-size: 1.1rem;
+        }
+        
+        ion-card-subtitle {
+          font-size: 0.8rem;
+        }
+      }
+      
+      ion-item {
+        padding: 2px 8px;
+        
         ion-label {
           font-size: 0.8rem;
+        }
+      }
+      
+      .form-actions {
+        .add-confession-button {
+          height: 48px;
+          font-size: 1rem;
+        }
+      }
+      
+      .suggestion-chips {
+        ion-chip {
+          ion-label {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+    
+    .confessions-list-card {
+      padding: 16px;
+      
+      .confessions-list {
+        gap: 12px;
+        
+        .confession-item {
+          padding: 12px;
+          
+          .confession-content {
+            .confession-category {
+              font-size: 0.7rem;
+            }
+            
+            .confession-text {
+              font-size: 0.9rem;
+            }
+          }
+          
+          ion-button {
+            min-width: 40px;
+            height: 40px;
+          }
         }
       }
     }
@@ -374,5 +613,41 @@
   .confessions-content .confessions-container {
     max-width: 700px;
     margin: 0 auto;
+    padding: 24px;
+    
+    .top-actions {
+      .start-game-button {
+        height: 72px;
+        font-size: 1.3rem;
+      }
+    }
+    
+    .players-status-card {
+      padding: 24px;
+      
+      .players-status-compact {
+        gap: 20px;
+        
+        .player-status-icon {
+          min-width: 72px;
+          padding: 16px;
+          
+          .player-avatar {
+            font-size: 2.2rem;
+          }
+        }
+      }
+    }
+    
+    .confession-form-card {
+      padding: 24px;
+      
+      .form-actions {
+        .add-confession-button {
+          height: 64px;
+          font-size: 1.2rem;
+        }
+      }
+    }
   }
 }
