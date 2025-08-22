@@ -46,6 +46,10 @@ export class ConfessionsPage implements OnInit, OnDestroy {
     this.initializeCategoryOptions();
   }
 
+  goBack() {
+    this.router.navigate(['/setup']);
+  }
+
   ngOnInit() {
     this.gameSubscription = this.gameService.gameSession$.subscribe((session: GameSession | null) => {
       if (session) {
@@ -242,5 +246,10 @@ export class ConfessionsPage implements OnInit, OnDestroy {
   private showError(message: string) {
     this.errorMessage = message;
     this.showErrorToast = true;
+  }
+
+  // Adiciona método auxiliar para extrair o value do select
+  getSelectValue(event: Event): string {
+    return (event.target as HTMLSelectElement).value;
   }
 }

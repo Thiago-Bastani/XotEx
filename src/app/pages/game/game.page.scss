@@ -1,917 +1,695 @@
-// ===============================================
-// XOTEX NEON CLUB - MODERN YOUNG DESIGN 🔥
-// ===============================================
-// - Fundo: 100% preto
-// - Texto: 100% branco  
-// - Componentes: Preto com bordas neon coloridas
-// - Bordas: Mistas (grossas unilaterais redondas + finas quadradas)
-// - Animações: Apenas glow sutil com box-shadow
-// - Zero hover: Focado em mobile
-// - Estilo: Moderno, jovem, minimalista neon
-
 .game-content {
-  background: var(--pure-black);
-  color: var(--pure-white);
+  --background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 70%);
+  background: var(--background);
+  min-height: 100vh;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 40% 60%, rgba(255, 69, 0, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 60% 40%, rgba(255, 0, 127, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
   
   .game-container {
-    padding: 16px;
-    min-height: 100%;
-    background: var(--pure-black);
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1.5rem;
+    max-width: 450px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  // STATUS CARD - MODERNO NEON
-  .status-card {
-    background: var(--pure-black);
-    border-left: 6px solid var(--neon-purple);
-    border-radius: 0 12px 12px 0;
-    margin-bottom: 16px;
-    padding: 16px;
+  // Header Section
+  .header-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     
-    &.glow-subtle {
-      box-shadow: 0 0 20px rgba(139, 93, 255, 0.3);
+    .back-btn, .stats-btn {
+      --color: rgba(255, 255, 255, 0.7);
+      width: 40px;
+      height: 40px;
+      --border-radius: 50%;
+      
+      &:hover {
+        --color: white;
+        --background: rgba(255, 255, 255, 0.1);
+      }
+      
+      ion-icon {
+        font-size: 1.2rem;
+      }
     }
     
-    .game-status {
-      display: flex;
-      justify-content: space-around;
+    .header-content {
+      flex: 1;
       text-align: center;
       
-      .status-item {
+      .page-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin: 0 0 0.25rem 0;
+        color: white;
+        letter-spacing: 0.05em;
+      }
+      
+      .game-status {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
+        justify-content: center;
+        gap: 1rem;
         
-        ion-icon {
-          font-size: 2rem;
-          color: var(--pure-white);
+        .heat-level, .round-info {
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
         
-        span {
-          color: var(--pure-white);
-          font-family: var(--font-accent) !important;
-          font-weight: 700;
-          font-size: 0.9rem;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
+        .heat-level {
+          color: var(--neon-red);
+        }
+        
+        .round-info {
+          color: var(--neon-purple);
         }
       }
     }
   }
 
-  // MYSTERY BOX - MODERNO JOVEM
-  .mystery-box-container {
+  // Mystery Box Section
+  .mystery-box-section {
+    flex: 1;
     display: flex;
-    justify-content: center;
     align-items: center;
-    min-height: 280px;
-    margin-bottom: 20px;
+    justify-content: center;
+    padding: 2rem 0;
     
     .mystery-box {
-      background: var(--pure-black);
-      border: 3px solid var(--neon-orange);
-      border-radius: 16px;
-      padding: 40px;
+      width: 280px;
+      height: 280px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px solid rgba(255, 69, 0, 0.3);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      transition: box-shadow 0.3s ease;
-      position: relative;
-      min-width: 280px;
-      text-align: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
       
       &:active {
-        transform: scale(0.98);
+        transform: scale(0.95);
       }
       
       &.opening {
-        border-color: var(--neon-pink);
-        box-shadow: 0 0 30px rgba(255, 20, 147, 0.6);
+        animation: shake 0.5s ease-in-out;
       }
       
-      .box-top {
-        .box-emoji {
+      .box-content {
+        text-align: center;
+        
+        .box-icon {
           font-size: 4rem;
-          margin-bottom: 20px;
+          margin-bottom: 1rem;
           display: block;
         }
         
-        .box-text {
+        .box-title {
           font-size: 1.5rem;
-          font-family: var(--font-heading) !important;
           font-weight: 800;
-          color: var(--pure-white);
-          margin-bottom: 12px;
+          color: white;
+          margin: 0 0 0.5rem 0;
           text-transform: uppercase;
-          letter-spacing: 1px;
+          letter-spacing: 0.05em;
         }
         
         .box-subtitle {
-          color: var(--pure-white);
-          font-family: var(--font-secondary) !important;
-          font-weight: 600;
-          text-transform: uppercase;
           font-size: 0.9rem;
-          opacity: 0.8;
+          color: rgba(255, 255, 255, 0.7);
+          margin: 0;
+          font-weight: 500;
         }
       }
     }
   }
 
-  // CONFESSION CARD - MODERNO FLAT
-  .confession-card {
-    background: var(--pure-black);
-    border: 2px solid var(--neon-pink);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    
-    &.glow-attention {
-      box-shadow: 0 0 25px rgba(255, 20, 147, 0.4);
-    }
-    
-    ion-card-header {
-      padding: 20px 20px 0;
+  // Confession Section
+  .confession-section {
+    .confession-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 0, 127, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      backdrop-filter: blur(15px);
       
-      ion-card-title {
-        color: var(--pure-white);
-        font-family: var(--font-heading) !important;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 1.1rem;
+      .confession-header {
+        margin-bottom: 1.5rem;
         
-        ion-icon {
+        .confession-category {
+          font-size: 0.9rem;
+          font-weight: 700;
           color: var(--neon-pink);
-          font-size: 1.3rem;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
       }
       
-      ion-card-subtitle {
-        color: var(--pure-white);
-        font-family: var(--font-secondary) !important;
-        font-weight: 600;
-        margin-top: 8px;
-        text-transform: uppercase;
-        opacity: 0.7;
+      .confession-text {
+        font-size: 1.1rem;
+        color: white;
+        line-height: 1.5;
+        font-weight: 500;
+        font-style: italic;
+        text-align: center;
       }
-    }
-    
-    .confession-text {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      color: var(--pure-white);
-      font-family: var(--font-secondary) !important;
-      font-style: italic;
-      text-align: center;
-      padding: 24px;
-      margin: 20px;
-      background: var(--pure-black);
-      border-right: 4px solid var(--neon-yellow);
-      border-radius: 0 8px 8px 0;
-      font-weight: 500;
     }
   }
 
-  // CURRENT PLAYER CARD - DESTAQUE MODERNO
-  .current-player-card {
-    background: var(--pure-black);
-    border-top: 4px solid var(--neon-purple);
-    border-radius: 12px 12px 0 0;
-    margin-bottom: 16px;
-    padding: 20px;
-    
-    &.glow-pulse {
-      animation: neon-glow-pulse 2s ease-in-out infinite;
-    }
-    
-    .current-player-turn {
-      .turn-indicator {
+  // Voting Section
+  .voting-section {
+    .current-voter {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(139, 93, 255, 0.3);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      
+      .voter-info {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 1rem;
         
-        .turn-avatar {
+        .voter-avatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .voter-details {
+          h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 0 0.25rem 0;
+          }
+          
+          p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+    
+    .voting-options {
+      .voting-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        text-align: center;
+        margin: 0 0 1.5rem 0;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      
+      .players-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 1rem;
+        
+        .player-option {
+          position: relative;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid;
+          border-radius: 16px;
+          padding: 1.5rem 1rem;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          
+          &:active {
+            transform: scale(0.95);
+          }
+          
+          &.selected {
+            background: rgba(0, 255, 65, 0.1);
+            border-color: var(--neon-green) !important;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+          }
+          
+          .option-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 0.75rem auto;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+          }
+          
+          .option-name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+            display: block;
+          }
+          
+          .selection-indicator {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            ion-icon {
+              font-size: 1.2rem;
+              color: white;
+            }
+          }
+        }
+      }
+      
+      .vote-confirmation {
+        margin-top: 2rem;
+        
+        .selected-vote {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(0, 255, 65, 0.3);
+          border-radius: 12px;
+          padding: 1rem;
+          margin-bottom: 1rem;
+          text-align: center;
+          
+          span {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+          }
+          
+          .selected-player {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            
+            .selected-avatar {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 1.25rem;
+              border: 2px solid rgba(0, 255, 65, 0.5);
+            }
+            
+            .selected-name {
+              font-size: 1rem;
+              font-weight: 700;
+              color: var(--neon-green);
+            }
+          }
+        }
+        
+        .confirm-vote-btn {
+          height: 52px;
+          --border-radius: 12px;
+          --background: linear-gradient(45deg, var(--neon-green), var(--neon-yellow));
+          --color: black;
+          font-weight: 700;
+          font-size: 1rem;
+          letter-spacing: 0.02em;
+          box-shadow: 0 6px 20px rgba(0, 255, 65, 0.4);
+          
+          &:active {
+            transform: translateY(1px);
+          }
+        }
+      }
+    }
+    
+    .waiting-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      
+      .waiting-content {
+        .waiting-icon {
+          font-size: 3rem;
+          margin-bottom: 1rem;
+          display: block;
+        }
+        
+        h3 {
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: white;
+          margin: 0 0 0.5rem 0;
+        }
+        
+        p {
+          font-size: 0.9rem;
+          color: rgba(255, 255, 255, 0.7);
+          margin: 0;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  // Results Section
+  .results-section {
+    .results-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      
+      .results-title {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: white;
+        margin: 0 0 1.5rem 0;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      
+      .author-reveal {
+        background: rgba(0, 255, 65, 0.1);
+        border: 1px solid rgba(0, 255, 65, 0.3);
+        border-radius: 16px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        
+        .author-avatar {
           width: 60px;
           height: 60px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 2rem;
-          font-family: var(--font-accent) !important;
-          font-weight: 900;
-          border: 3px solid var(--pure-white);
+          font-size: 1.8rem;
+          border: 2px solid rgba(0, 255, 65, 0.5);
         }
         
-        .turn-info {
-          flex: 1;
-          
+        .author-info {
           h3 {
-            color: var(--pure-white);
-            font-family: var(--font-heading) !important;
-            font-weight: 800;
-            margin: 0 0 8px 0;
             font-size: 1.3rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: var(--neon-green);
+            margin: 0 0 0.25rem 0;
           }
           
           p {
-            color: var(--pure-white);
-            font-family: var(--font-secondary) !important;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
             margin: 0;
-            font-size: 1rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            opacity: 0.8;
+            font-weight: 500;
           }
         }
       }
     }
-  }
-
-  // VOTING CARD - GRID MODERNO
-  .voting-card {
-    background: var(--pure-black);
-    border: 2px solid var(--neon-green);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 20px;
     
-    ion-card-header {
-      padding: 0 0 20px 0;
+    .votes-results {
+      margin-bottom: 2rem;
       
-      ion-card-title {
-        color: var(--pure-white);
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 12px;
+      .votes-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: white;
+        margin: 0 0 1rem 0;
+        text-align: center;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        
-        ion-icon {
-          color: var(--neon-green);
-          font-size: 1.3rem;
-        }
+        letter-spacing: 0.05em;
       }
       
-      ion-card-subtitle {
-        color: var(--pure-white);
-        margin-top: 8px;
-        font-weight: 600;
-        opacity: 0.7;
-      }
-    }
-    
-    .players-voting-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-      
-      .voting-player-card {
-        background: var(--pure-black);
-        border: 2px solid var(--pure-white);
-        border-radius: 8px;
-        padding: 16px;
-        color: var(--pure-white);
+      .votes-list {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        min-height: 100px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        position: relative;
+        gap: 0.75rem;
         
-        &:active {
-          transform: scale(0.95);
-        }
-        
-        &.selected {
-          border-color: var(--neon-yellow);
-          border-width: 3px;
-          box-shadow: 0 0 20px rgba(255, 255, 0, 0.4);
-        }
-        
-        .voting-player-info {
+        .vote-item {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          padding: 1rem;
           display: flex;
-          flex-direction: column;
           align-items: center;
-          flex: 1;
+          justify-content: space-between;
           
-          .voting-player-avatar {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
+          .voter-info, .voted-for {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            
+            .vote-avatar, .voted-avatar {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 0.9rem;
+              border: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            
+            .voter-name, .voted-name {
+              font-size: 0.85rem;
+              color: white;
+              font-weight: 600;
+            }
           }
           
-          .voting-player-name {
+          .arrow {
+            color: rgba(255, 255, 255, 0.5);
             font-weight: 700;
-            text-align: center;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-          }
-        }
-        
-        .selected-icon {
-          position: absolute;
-          top: -8px;
-          right: -8px;
-          background: var(--neon-yellow);
-          color: var(--pure-black);
-          border-radius: 50%;
-          font-size: 1.2rem;
-          width: 24px;
-          height: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 900;
-        }
-      }
-    }
-    
-    .voting-actions {
-      .confirm-vote-button {
-        width: 100%;
-        height: 56px;
-        background: var(--pure-black);
-        border: 3px solid var(--neon-green);
-        border-radius: 8px;
-        color: var(--pure-white);
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 1.1rem;
-        
-        &:active {
-          background: var(--neon-green);
-          color: var(--pure-black);
-        }
-        
-        &.glow-ready {
-          box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
-        }
-      }
-    }
-  }
-
-  // VOTING PROGRESS - LISTA MODERNA
-  .voting-progress-card {
-    background: var(--pure-black);
-    border: 2px solid var(--neon-blue);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 20px;
-    
-    ion-card-header {
-      padding: 0 0 16px 0;
-      
-      ion-card-title {
-        color: var(--pure-white);
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        
-        ion-icon {
-          color: var(--neon-blue);
-          font-size: 1.3rem;
-        }
-      }
-      
-      ion-card-subtitle {
-        color: var(--pure-white);
-        font-weight: 600;
-        text-transform: uppercase;
-        opacity: 0.7;
-        margin-top: 8px;
-      }
-    }
-    
-    .voting-progress {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
-      
-      .voting-progress-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px;
-        background: var(--pure-black);
-        border: 2px solid var(--pure-white);
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        
-        &.voted {
-          border-color: var(--neon-green);
-          border-left-width: 6px;
-          border-radius: 0 8px 8px 0;
-        }
-        
-        &.current {
-          border-color: var(--neon-yellow);
-          border-left-width: 6px;
-          border-radius: 0 8px 8px 0;
-          box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
-        }
-        
-        .progress-avatar {
-          font-size: 1.4rem;
-          margin-right: 12px;
-        }
-        
-        .progress-name {
-          color: var(--pure-white);
-          font-weight: 700;
-          flex: 1;
-          text-transform: uppercase;
-          letter-spacing: 0.3px;
-        }
-        
-        .progress-status {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          
-          ion-icon {
-            font-size: 1.3rem;
           }
           
-          .waiting-indicator {
-            font-size: 1.3rem;
-            opacity: 0.5;
+          .result-indicator {
+            ion-icon {
+              font-size: 1.2rem;
+            }
           }
         }
       }
     }
     
-    .reveal-button {
-      width: 100%;
+    .continue-btn {
       height: 56px;
-      background: var(--pure-black);
-      border: 3px solid var(--neon-orange);
-      border-radius: 8px;
-      color: var(--pure-white);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 1.1rem;
-      
-      &.glow-attention {
-        box-shadow: 0 0 30px rgba(255, 69, 0, 0.6);
-      }
+      --border-radius: 16px;
+      --background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+      --color: white;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      box-shadow: 0 8px 25px rgba(139, 93, 255, 0.4);
       
       &:active {
-        background: var(--neon-orange);
-        color: var(--pure-black);
+        transform: translateY(1px);
       }
     }
   }
 
-  // RESULTS SECTION - EXPLOSÃO MODERNA
-  .results-card {
-    background: var(--pure-black);
-    border: 3px solid var(--neon-red);
-    border-radius: 12px;
-    margin-bottom: 20px;
-    padding: 24px;
+  // Finished Section
+  .finished-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     
-    &.glow-results {
-      box-shadow: 0 0 40px rgba(255, 0, 127, 0.5);
-    }
-    
-    ion-card-header {
-      padding: 0 0 24px 0;
+    .finished-content {
       text-align: center;
+      padding: 2rem 1rem;
       
-      ion-card-title {
-        color: var(--pure-white);
-        font-weight: 900;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 1.4rem;
-        
-        ion-icon {
-          color: var(--neon-red);
-          font-size: 1.5rem;
-        }
+      .trophy-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        display: block;
       }
-    }
-    
-    .author-reveal {
-      text-align: center;
-      margin-bottom: 32px;
       
-      h3 {
-        color: var(--pure-white);
+      h2 {
+        font-size: 2rem;
         font-weight: 800;
-        margin-bottom: 16px;
+        color: white;
+        margin: 0 0 0.5rem 0;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.05em;
       }
       
-      .author-card {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 32px;
-        background: var(--pure-black);
-        border: 3px solid var(--pure-white);
-        border-radius: 12px;
-        
-        .author-avatar {
-          font-size: 3rem;
-          margin-bottom: 12px;
-        }
-        
-        .author-name {
-          font-size: 1.2rem;
-          font-weight: 800;
-          color: var(--pure-white);
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-      }
-    }
-    
-    .vote-results {
-      margin-bottom: 32px;
-      
-      h4 {
-        color: var(--pure-white);
-        font-weight: 800;
-        margin-bottom: 16px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-      
-      .vote-results-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        
-        .vote-result-item {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 16px;
-          background: var(--pure-black);
-          border: 2px solid var(--pure-white);
-          border-radius: 8px;
-          
-          &.correct {
-            border-color: var(--neon-green);
-            border-left-width: 6px;
-            border-radius: 0 8px 8px 0;
-          }
-          
-          .vote-player-info {
-            display: flex;
-            flex-direction: column;
-            
-            .vote-player-name {
-              color: var(--pure-white);
-              font-weight: 700;
-              text-transform: uppercase;
-              letter-spacing: 0.3px;
-            }
-            
-            .vote-count {
-              color: var(--pure-white);
-              font-size: 0.9rem;
-              font-weight: 600;
-              opacity: 0.7;
-              text-transform: uppercase;
-            }
-          }
-          
-          ion-icon {
-            font-size: 1.5rem;
-          }
-        }
-      }
-    }
-    
-    .consequences {
-      margin-bottom: 32px;
-      
-      .consequence-section {
-        margin-bottom: 24px;
-        
-        h4 {
-          color: var(--pure-white);
-          font-weight: 800;
-          margin-bottom: 16px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-        
-        .consequence-players {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          
-          .consequence-player {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 16px;
-            background: var(--pure-black);
-            border-radius: 8px;
-            
-            &.correct {
-              border-left: 6px solid var(--neon-green);
-              border-radius: 0 8px 8px 0;
-            }
-            
-            &.wrong {
-              border-left: 6px solid var(--neon-red);
-              border-radius: 0 8px 8px 0;
-            }
-            
-            .consequence-avatar {
-              font-size: 1.6rem;
-            }
-            
-            .consequence-name {
-              flex: 1;
-              color: var(--pure-white);
-              font-weight: 800;
-              text-transform: uppercase;
-              letter-spacing: 0.3px;
-            }
-            
-            .consequence-action {
-              color: var(--pure-white);
-              font-weight: 800;
-              font-size: 0.9rem;
-              text-transform: uppercase;
-            }
-          }
-        }
-      }
-      
-      .author-story-section {
-        background: var(--pure-black);
-        border: 2px solid var(--neon-yellow);
-        border-radius: 8px;
-        padding: 20px;
-        text-align: center;
-        
-        h4 {
-          color: var(--pure-white);
-          margin: 0 0 12px 0;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
-        
-        .story-instruction {
-          color: var(--pure-white);
-          margin: 0;
-          font-weight: 600;
-          text-transform: uppercase;
-          opacity: 0.8;
-        }
-      }
-    }
-    
-    .continue-actions {
-      .next-round-button {
-        width: 100%;
-        height: 56px;
-        background: var(--pure-black);
-        border: 3px solid var(--neon-purple);
-        border-radius: 8px;
-        color: var(--pure-white);
-        font-weight: 900;
-        font-size: 1.1rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        
-        &.glow-next {
-          box-shadow: 0 0 30px rgba(139, 93, 255, 0.6);
-        }
-        
-        &:active {
-          background: var(--neon-purple);
-          color: var(--pure-black);
-        }
-      }
-    }
-  }
-
-  // FINISHED CARD - CELEBRAÇÃO MODERNA
-  .finished-card {
-    background: var(--pure-black);
-    border: 3px solid var(--neon-green);
-    border-radius: 12px;
-    margin-bottom: 20px;
-    padding: 24px;
-    
-    &.glow-celebration {
-      box-shadow: 0 0 50px rgba(0, 255, 65, 0.6);
-    }
-    
-    ion-card-header {
-      padding: 0 0 24px 0;
-      text-align: center;
-      
-      ion-card-title {
-        color: var(--pure-white);
-        font-weight: 900;
-        font-size: 1.6rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 12px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        
-        ion-icon {
-          color: var(--neon-green);
-          font-size: 1.8rem;
-        }
-      }
-      
-      ion-card-subtitle {
-        color: var(--pure-white);
-        margin-top: 12px;
+      p {
         font-size: 1rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        opacity: 0.8;
-      }
-    }
-    
-    .final-stats {
-      h3 {
-        color: var(--pure-white);
-        font-weight: 800;
-        margin-bottom: 16px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0 0 2rem 0;
+        font-weight: 500;
       }
       
-      .stats-list {
+      .final-stats {
         display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 24px;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 2rem;
         
         .stat-item {
-          display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 16px;
-          background: var(--pure-black);
-          border: 2px solid var(--pure-white);
-          border-radius: 8px;
+          text-align: center;
           
-          ion-icon {
-            font-size: 1.4rem;
+          .stat-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--neon-yellow);
+            margin-bottom: 0.25rem;
           }
           
-          span {
-            color: var(--pure-white);
-            font-weight: 700;
+          .stat-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
             text-transform: uppercase;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.05em;
+            font-weight: 600;
           }
         }
       }
       
-      .player-final-stats {
-        h4 {
-          color: var(--pure-white);
-          font-weight: 800;
-          margin-bottom: 16px;
-          text-transform: uppercase;
-          letter-spacing: 0.5px;
-        }
+      .final-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         
-        .player-stat-item {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 16px;
-          background: var(--pure-black);
-          border: 2px solid var(--pure-white);
-          border-radius: 8px;
-          margin-bottom: 12px;
+        .new-game-btn {
+          height: 56px;
+          --border-radius: 16px;
+          --background: linear-gradient(45deg, var(--neon-green), var(--neon-yellow));
+          --color: black;
+          font-weight: 700;
+          font-size: 1rem;
+          letter-spacing: 0.02em;
+          box-shadow: 0 8px 25px rgba(0, 255, 65, 0.4);
           
-          .player-stat-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            
-            .stat-avatar {
-              font-size: 1.4rem;
-            }
-            
-            .stat-name {
-              color: var(--pure-white);
-              font-weight: 800;
-              text-transform: uppercase;
-              letter-spacing: 0.3px;
-            }
-          }
-          
-          .player-stat-data {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            
-            .stat-accuracy {
-              color: var(--pure-white);
-              font-weight: 800;
-              font-size: 0.9rem;
-              text-transform: uppercase;
-            }
-            
-            .stat-confessions {
-              color: var(--pure-white);
-              font-size: 0.8rem;
-              font-weight: 600;
-              text-transform: uppercase;
-              opacity: 0.7;
-            }
+          &:active {
+            transform: translateY(1px);
           }
         }
-      }
-    }
-    
-    .finish-actions {
-      margin-top: 24px;
-      
-      .home-button {
-        width: 100%;
-        height: 56px;
-        background: var(--pure-black);
-        border: 3px solid var(--neon-purple);
-        border-radius: 8px;
-        color: var(--pure-white);
-        font-weight: 900;
-        font-size: 1.1rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
         
-        &:active {
-          background: var(--neon-purple);
-          color: var(--pure-black);
+        .home-btn {
+          height: 48px;
+          --border-radius: 12px;
+          --border-color: rgba(255, 255, 255, 0.3);
+          --color: rgba(255, 255, 255, 0.8);
+          font-weight: 600;
+          
+          &:hover {
+            --background: rgba(255, 255, 255, 0.1);
+            --color: white;
+          }
         }
       }
     }
   }
 }
 
-// ===============================================
-// ANIMAÇÕES MODERNAS - APENAS GLOW SUTIL
-// ===============================================
+// Animations
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
 
-@keyframes neon-glow-pulse {
-  0%, 100% { 
-    box-shadow: 0 0 20px rgba(139, 93, 255, 0.3);
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  50% { 
-    box-shadow: 0 0 30px rgba(139, 93, 255, 0.6);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-// ===============================================
-// RESPONSIVIDADE MODERNA
-// ===============================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
+.header-section {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.mystery-box-section, .confession-section {
+  animation: slideInUp 0.7s ease-out 0.1s both;
+}
+
+.voting-section, .results-section, .finished-section {
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.player-option, .vote-item {
+  animation: fadeIn 0.4s ease-out;
+}
+
+// Responsive Design
 @media (max-width: 480px) {
   .game-content .game-container {
-    padding: 12px;
+    padding: 1.5rem 1rem;
+    gap: 1.25rem;
     
-    .mystery-box-container {
-      min-height: 240px;
-      
-      .mystery-box {
-        padding: 32px 24px;
-        min-width: 240px;
+    .header-section {
+      .header-content {
+        .page-title {
+          font-size: 1.25rem;
+        }
         
-        .box-top {
-          .box-emoji {
-            font-size: 3.5rem;
-            margin-bottom: 16px;
+        .game-status {
+          gap: 0.75rem;
+          
+          .heat-level, .round-info {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+    
+    .mystery-box-section {
+      .mystery-box {
+        width: 240px;
+        height: 240px;
+        
+        .box-content {
+          .box-icon {
+            font-size: 3rem;
           }
           
-          .box-text {
-            font-size: 1.3rem;
+          .box-title {
+            font-size: 1.25rem;
           }
           
           .box-subtitle {
@@ -921,140 +699,48 @@
       }
     }
     
-    .players-voting-grid {
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 12px;
-      
-      .voting-player-card {
-        padding: 12px;
-        min-height: 90px;
+    .confession-section {
+      .confession-card {
+        padding: 1.5rem;
         
-        .voting-player-info {
-          .voting-player-avatar {
-            font-size: 2rem;
-            margin-bottom: 6px;
-          }
-          
-          .voting-player-name {
-            font-size: 0.8rem;
-          }
-        }
-        
-        .selected-icon {
-          top: -6px;
-          right: -6px;
+        .confession-text {
           font-size: 1rem;
-          width: 20px;
-          height: 20px;
         }
       }
     }
     
-    .confession-text {
-      font-size: 1.1rem;
-      padding: 20px;
-      margin: 16px;
-    }
-    
-    .current-player-card {
-      padding: 16px;
-      
-      .current-player-turn {
-        .turn-indicator {
-          gap: 12px;
+    .voting-section {
+      .voting-options {
+        .players-grid {
+          grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+          gap: 0.75rem;
           
-          .turn-avatar {
-            width: 50px;
-            height: 50px;
-            font-size: 1.6rem;
-          }
-          
-          .turn-info {
-            h3 {
-              font-size: 1.1rem;
+          .player-option {
+            padding: 1rem 0.75rem;
+            
+            .option-avatar {
+              width: 44px;
+              height: 44px;
+              font-size: 1.25rem;
             }
             
-            p {
-              font-size: 0.9rem;
+            .option-name {
+              font-size: 0.8rem;
             }
           }
         }
       }
     }
     
-    .confirm-vote-button,
-    .reveal-button,
-    .next-round-button,
-    .home-button {
-      height: 48px;
-      font-size: 1rem;
-      letter-spacing: 0.5px;
-    }
-    
-    .voting-progress-item {
-      padding: 12px;
-      
-      .progress-avatar {
-        font-size: 1.2rem;
-        margin-right: 8px;
-      }
-      
-      .progress-name {
-        font-size: 0.9rem;
-      }
-    }
-    
-    .consequence-player {
-      padding: 12px;
-      gap: 12px;
-      
-      .consequence-avatar {
-        font-size: 1.4rem;
-      }
-      
-      .consequence-action {
-        font-size: 0.8rem;
-      }
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .game-content .game-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 24px;
-    
-    .mystery-box {
-      padding: 48px;
-      min-width: 320px;
-      
-      .box-top {
-        .box-emoji {
-          font-size: 5rem;
-        }
-        
-        .box-text {
-          font-size: 1.8rem;
-        }
-      }
-    }
-    
-    .players-voting-grid {
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 20px;
-      
-      .voting-player-card {
-        padding: 20px;
-        min-height: 110px;
-        
-        .voting-player-info {
-          .voting-player-avatar {
-            font-size: 2.4rem;
-          }
+    .finished-section {
+      .finished-content {
+        .final-stats {
+          gap: 1.5rem;
           
-          .voting-player-name {
-            font-size: 1rem;
+          .stat-item {
+            .stat-value {
+              font-size: 1.75rem;
+            }
           }
         }
       }
@@ -1062,41 +748,54 @@
   }
 }
 
-// ===============================================
-// OVERRIDE GERAL DE FONTES - PÁGINA GAME
-// ===============================================
+@media (max-width: 360px) {
+  .game-content .game-container {
+    padding: 1rem 0.75rem;
+    
+    .voting-section {
+      .voting-options {
+        .players-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+    
+    .finished-section {
+      .finished-content {
+        .final-stats {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    }
+  }
+}
+
+// Typography Override
 .game-content {
-  // Força aplicação das fontes modernas em todos os elementos
   *, *::before, *::after {
-    font-family: var(--font-secondary) !important;
+    font-family: var(--font-primary) !important;
   }
   
-  // Títulos e headings
-  h1, h2, h3, h4, h5, h6,
-  ion-card-title,
-  .box-text,
-  .turn-info h3,
-  .author-name,
-  .voting-player-name {
+  .page-title,
+  .box-title,
+  .results-title,
+  .voting-title {
     font-family: var(--font-heading) !important;
   }
   
-  // Elementos de destaque
-  .turn-avatar,
-  .voting-player-avatar,
-  .author-avatar,
-  .consequence-avatar,
-  .stat-avatar,
-  .progress-avatar,
-  .status-item span {
+  .heat-level,
+  .round-info,
+  .stat-value,
+  .continue-btn,
+  .new-game-btn {
     font-family: var(--font-accent) !important;
   }
   
-  // Textos especiais
   .confession-text,
   .box-subtitle,
-  ion-card-subtitle,
-  .turn-info p {
+  .voter-details p,
+  .waiting-content p {
     font-family: var(--font-secondary) !important;
   }
 }

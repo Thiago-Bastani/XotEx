@@ -345,7 +345,7 @@ export class GameService {
   }
 
   // Métodos privados
-  private getCurrentSession(): GameSession | null {
+  getCurrentSession(): GameSession | null {
     return this.gameSessionSubject.value;
   }
 

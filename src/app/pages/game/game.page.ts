@@ -11,7 +11,8 @@ import {
   GameSession, 
   Confession, 
   ConfessionCategory,
-  RoundResult
+  RoundResult,
+  GameStatus
 } from '../../models/game.model';
 
 type GamePhase = 'reading' | 'voting' | 'results' | 'finished';
@@ -42,6 +43,7 @@ export class GamePage implements OnInit, OnDestroy {
   // Results
   roundResult: RoundResult | null = null;
   gameStats: any = null;
+  currentRound: any = null;
   
   // UI
   showErrorToast = false;
@@ -63,7 +65,15 @@ export class GamePage implements OnInit, OnDestroy {
         this.heatLevel = session.heatLevel;
         this.completedRounds = session.completedRounds.length;
         
+        // Verificar se o jogo está finalizado
+        if (session.status === GameStatus.FINISHED) {
+          this.gamePhase = 'finished';
+          this.gameStats = this.gameService.getGameStats();
+          return;
+        }
+        
         if (session.currentRound) {
+          this.currentRound = session.currentRound;
           this.currentConfession = session.currentRound.confession;
           
           const oldVotesCount = Object.keys(this.votes).length;
@@ -90,6 +100,9 @@ export class GamePage implements OnInit, OnDestroy {
                 console.error('Erro ao calcular resultado:', error);
               }
             }
+          } else if (this.allPlayersVoted()) {
+            // Se todos já votaram, revelar automaticamente os resultados
+            this.revealResults();
           } else if (Object.keys(this.votes).length > 0) {
             this.gamePhase = 'voting';
             this.initializeVotingState();
@@ -361,6 +374,45 @@ export class GamePage implements OnInit, OnDestroy {
 
   goHome() {
     this.router.navigate(['/home']);
+  }
+
+  startNewGame() {
+    this.gameService.createNewGame();
+    this.router.navigate(['/setup']);
+  }
+
+  getAuthor(): Player | null {
+    if (!this.currentConfession) return null;
+    return this.players.find(p => p.id === this.currentConfession!.playerId) || null;
+  }
+
+  getPlayerById(playerId: string): Player | null {
+    return this.players.find(p => p.id === playerId) || null;
+  }
+
+  Math = Math;
+
+  isGameFinished(): boolean {
+    // Verificar se todas as confissões foram utilizadas
+    const session = this.gameService.getCurrentSession();
+    if (!session) return false;
+    
+    const totalConfessions = session.players.reduce((total, player) => {
+      return total + session.confessions.filter(c => c.playerId === player.id).length;
+    }, 0);
+    
+    return session.completedRounds.length >= totalConfessions;
+  }
+
+
+  getVotesList(): any[] {
+    if (!this.currentRound?.votes) return [];
+    
+    // Converter objeto de votos em array para *ngFor
+    return Object.entries(this.currentRound.votes).map(([playerId, votedForId]) => ({
+      playerId,
+      votedForId
+    }));
   }
 
   // Calcular resultado da rodada sem modificar estado (evitar loop infinito)

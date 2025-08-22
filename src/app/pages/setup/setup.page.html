@@ -1,110 +1,95 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Configurar Jogadores</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" class="setup-content">
   <div class="setup-container">
-    <!-- Instruções -->
-    <ion-card class="instructions-card">
-      <ion-card-content>
-        <div class="instructions">
-          <h2>👥 Adicione os Jogadores</h2>
-          <p>Mínimo de 3 e máximo de 8 jogadores para começar a diversão!</p>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Formulário para adicionar jogador -->
-    <ion-card class="add-player-card">
-      <ion-card-content>
-        <form (ngSubmit)="addPlayer()" #playerForm="ngForm">
-          <ion-item>
-            <ion-label position="stacked">Nome do Jogador</ion-label>
-            <ion-input
-              [(ngModel)]="newPlayerName"
-              name="playerName"
-              placeholder="Digite o nome..."
-              maxlength="20"
-              [clearInput]="true"
-              #nameInput>
-            </ion-input>
-          </ion-item>
-          
-          <div class="form-actions">
-            <ion-button 
-              type="submit"
-              expand="block"
-              [disabled]="!isValidPlayerName()"
-              class="add-button">
-              <ion-icon name="person-add" slot="start"></ion-icon>
-              Adicionar Jogador
-            </ion-button>
-          </div>
-        </form>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Lista de jogadores -->
-    <ion-card class="players-list-card" *ngIf="players.length > 0">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="people"></ion-icon>
-          Jogadores ({{ players.length }}/8)
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="players-grid">
-          <div 
-            *ngFor="let player of players; trackBy: trackByPlayerId"
-            class="player-card"
-            [style.background-color]="player.color">
-            <div class="player-info">
-              <div class="player-avatar">{{ player.avatar }}</div>
-              <div class="player-name">{{ player.name }}</div>
-            </div>
-            <ion-button 
-              fill="clear" 
-              size="small"
-              class="remove-button"
-              (click)="removePlayer(player.id)">
-              <ion-icon name="close" color="light"></ion-icon>
-            </ion-button>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Mensagem quando não há jogadores -->
-    <ion-card class="empty-state-card" *ngIf="players.length === 0">
-      <ion-card-content>
-        <div class="empty-state">
-          <div class="empty-icon">👥</div>
-          <h3>Nenhum jogador adicionado</h3>
-          <p>Adicione pelo menos 4 jogadores para começar!</p>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Botão para continuar -->
-    <div class="bottom-actions">
+    <!-- Header Section -->
+    <div class="header-section">
       <ion-button 
-        expand="full"
-        size="large"
-        [disabled]="players.length < 4"
-        (click)="proceedToConfessions()"
-        class="continue-button">
-        <ion-icon name="arrow-forward" slot="end"></ion-icon>
-        Continuar ({{ players.length >= 4 ? 'Pronto!' : players.length + '/4' }})
+        fill="clear" 
+        class="back-btn"
+        (click)="goBack()">
+        <ion-icon name="chevron-back" slot="icon-only"></ion-icon>
       </ion-button>
       
-      <p class="requirement-text" *ngIf="players.length < 4">
-        Adicione mais {{ 4 - players.length }} jogador(es) para continuar
-      </p>
+      <div class="header-content">
+        <h1 class="page-title">Jogadores</h1>
+        <p class="page-subtitle">Adicione de 4 a 8 jogadores para começar</p>
+      </div>
+    </div>
+
+    <!-- Add Player Section -->
+    <div class="add-player-section">
+      <div class="input-container">
+        <div class="input-wrapper">
+          <input 
+            type="text"
+            class="player-input"
+            [(ngModel)]="newPlayerName"
+            placeholder="Nome do jogador"
+            maxlength="20"
+            (keyup.enter)="addPlayer()"
+            #nameInput>
+          <span class="input-highlight"></span>
+        </div>
+        
+        <ion-button 
+          class="add-btn"
+          [disabled]="!isValidPlayerName()"
+          (click)="addPlayer()">
+          <ion-icon name="add" slot="icon-only"></ion-icon>
+        </ion-button>
+      </div>
+      
+      <div class="requirements-text" *ngIf="players.length < 4">
+        Faltam {{ 4 - players.length }} jogador(es)
+      </div>
+    </div>
+
+    <!-- Players Grid -->
+    <div class="players-section" *ngIf="players.length > 0">
+      <div class="players-counter">
+        <span class="counter-text">{{ players.length }}/8</span>
+      </div>
+      
+      <div class="players-grid">
+        <div 
+          *ngFor="let player of players; trackBy: trackByPlayerId"
+          class="player-card"
+          [style.border-color]="player.color">
+          <div class="player-content">
+            <div class="player-avatar" [style.background-color]="player.color">
+              {{ player.avatar }}
+            </div>
+            <span class="player-name">{{ player.name }}</span>
+          </div>
+          
+          <ion-button 
+            fill="clear" 
+            size="small"
+            class="remove-btn"
+            (click)="removePlayer(player.id)">
+            <ion-icon name="close" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="players.length === 0">
+      <div class="empty-icon">👥</div>
+      <h3>Nenhum jogador ainda</h3>
+      <p>Adicione jogadores para começar a diversão</p>
+    </div>
+
+    <!-- Continue Button -->
+    <div class="continue-section">
+      <ion-button 
+        expand="full"
+        class="continue-btn"
+        [disabled]="players.length < 4"
+        (click)="proceedToConfessions()">
+        <span *ngIf="players.length >= 4">Continuar</span>
+        <span *ngIf="players.length < 4">{{ players.length }}/4 mínimo</span>
+        <ion-icon name="arrow-forward" slot="end" *ngIf="players.length >= 4"></ion-icon>
+      </ion-button>
     </div>
   </div>
 

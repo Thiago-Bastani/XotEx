@@ -1,476 +1,306 @@
-// ===============================================
-// XOTEX NEON CLUB - SETUP PAGE MODERN DESIGN 🔥
-// ===============================================
-// - Fundo: 100% preto
-// - Texto: 100% branco  
-// - Componentes: Preto com bordas neon coloridas
-// - Campos de input: Preto com bordas visíveis
-
 .setup-content {
-  background: var(--pure-black);
-  color: var(--pure-white);
+  --background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 70%);
+  background: var(--background);
+  min-height: 100vh;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(139, 93, 255, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 20, 147, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
   
   .setup-container {
-    padding: 16px;
-    min-height: 100%;
-    background: var(--pure-black);
+    position: relative;
+    z-index: 1;
+    padding: 2rem 1.5rem;
+    max-width: 400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
-  // INSTRUCTIONS CARD - NEON WELCOME
-  .instructions-card {
-    background: var(--pure-black);
-    border-top: 4px solid var(--neon-purple);
-    border-radius: 12px 12px 0 0;
-    margin-bottom: 20px;
-    padding: 24px;
+  // Header Section
+  .header-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
     
-    .instructions {
-      text-align: center;
+    .back-btn {
+      --color: rgba(255, 255, 255, 0.7);
+      margin-top: 0.25rem;
+      width: 40px;
+      height: 40px;
+      --border-radius: 50%;
       
-      h2 {
-        color: var(--pure-white);
-        font-weight: 800;
-        margin-bottom: 12px;
-        font-size: 1.4rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+      &:hover {
+        --color: white;
+        --background: rgba(255, 255, 255, 0.1);
       }
       
-      p {
-        color: var(--pure-white);
+      ion-icon {
+        font-size: 1.2rem;
+      }
+    }
+    
+    .header-content {
+      flex: 1;
+      
+      .page-title {
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 0 0 0.5rem 0;
+        background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: 0.05em;
+      }
+      
+      .page-subtitle {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7);
         margin: 0;
-        font-size: 1rem;
-        line-height: 1.5;
-        font-weight: 600;
-        opacity: 0.8;
+        font-weight: 500;
       }
     }
   }
 
-  // ADD PLAYER CARD - NEON FORM
-  .add-player-card {
-    background: var(--pure-black);
-    border: 2px solid var(--neon-green);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 20px;
+  // Add Player Section
+  .add-player-section {
+    margin-bottom: 2rem;
     
-    ion-item {
-      --background: var(--pure-black);
-      --border-color: var(--neon-blue);
-      --color: var(--pure-white);
-      background: var(--pure-black);
-      border: 2px solid var(--neon-blue);
-      border-radius: 8px;
-      margin-bottom: 16px;
-      padding: 4px 12px;
+    .input-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
       
-      ion-label {
-        font-weight: 700;
-        color: var(--pure-white);
-        text-transform: uppercase;
-        letter-spacing: 0.3px;
-        font-size: 0.9rem;
-      }
-      
-      ion-input {
-        --color: var(--pure-white);
-        --placeholder-color: rgba(255, 255, 255, 0.5);
-        font-size: 1.1rem;
-        font-weight: 600;
+      .input-wrapper {
+        flex: 1;
+        position: relative;
         
-        input {
-          color: var(--pure-white) !important;
-          background: transparent !important;
+        .player-input {
+          width: 100%;
+          height: 56px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid rgba(139, 93, 255, 0.3);
+          border-radius: 16px;
+          padding: 0 1.5rem;
+          font-size: 1rem;
+          font-weight: 600;
+          color: white;
+          outline: none;
+          transition: all 0.3s ease;
+          
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
+          }
+          
+          &:focus {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 0 3px rgba(139, 93, 255, 0.1);
+          }
         }
       }
       
-      &.ion-focused {
-        border-color: var(--neon-yellow);
-        box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
-      }
-    }
-    
-    .form-actions {
-      margin-top: 16px;
-      
-      .add-button {
-        width: 100%;
+      .add-btn {
+        width: 56px;
         height: 56px;
-        background: var(--pure-black);
-        border: 3px solid var(--neon-green);
-        border-radius: 8px;
-        color: var(--pure-white);
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        --border-radius: 16px;
+        --background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+        --color: white;
+        transition: all 0.3s ease;
         
-        &:not(.button-disabled):active {
-          background: var(--neon-green);
-          color: var(--pure-black);
+        &:not(.button-disabled) {
+          box-shadow: 0 4px 15px rgba(139, 93, 255, 0.3);
+          
+          &:active {
+            transform: scale(0.95);
+          }
         }
         
         &.button-disabled {
-          opacity: 0.5;
-          border-color: rgba(255, 255, 255, 0.3);
+          --background: rgba(255, 255, 255, 0.1);
+          --color: rgba(255, 255, 255, 0.3);
+          box-shadow: none;
         }
         
         ion-icon {
-          color: var(--neon-green);
-          margin-right: 8px;
+          font-size: 1.5rem;
         }
       }
     }
+    
+    .requirements-text {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+      text-align: center;
+      font-weight: 500;
+    }
   }
 
-  // PLAYERS LIST CARD - NEON GRID
-  .players-list-card {
-    background: var(--pure-black);
-    border: 2px solid var(--neon-pink);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 20px;
+  // Players Section
+  .players-section {
+    flex: 1;
+    margin-bottom: 2rem;
     
-    ion-card-header {
-      padding: 0 0 16px 0;
+    .players-counter {
+      text-align: center;
+      margin-bottom: 1.5rem;
       
-      ion-card-title {
-        color: var(--pure-white);
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        
-        ion-icon {
-          font-size: 1.4rem;
-          color: var(--neon-pink);
-        }
+      .counter-text {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(139, 93, 255, 0.3);
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: var(--neon-purple);
+        letter-spacing: 0.05em;
       }
     }
     
     .players-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
       
       .player-card {
         position: relative;
-        background: var(--pure-black);
-        border: 2px solid var(--pure-white);
-        border-radius: 8px;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 110px;
-        transition: all 0.2s ease;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid;
+        border-radius: 16px;
+        padding: 1.5rem 1rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        min-height: 100px;
         
-        &:active {
-          transform: scale(0.95);
-        }
-        
-        .player-info {
+        .player-content {
           display: flex;
           flex-direction: column;
           align-items: center;
-          flex: 1;
-          width: 100%;
+          gap: 0.75rem;
           
           .player-avatar {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
-            padding: 8px;
-            border-radius: 50%;
-            border: 2px solid var(--pure-white);
             width: 50px;
             height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
           }
           
           .player-name {
-            color: var(--pure-white);
-            font-weight: 700;
-            text-align: center;
             font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
             word-break: break-word;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
+            line-height: 1.2;
           }
         }
         
-        .remove-button {
+        .remove-btn {
           position: absolute;
           top: -8px;
           right: -8px;
-          background: var(--neon-red);
-          color: var(--pure-white);
-          border: 2px solid var(--pure-white);
-          border-radius: 50%;
           width: 32px;
           height: 32px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          
-          ion-icon {
-            font-size: 1.2rem;
-            color: var(--pure-white);
-          }
+          --border-radius: 50%;
+          --background: var(--neon-red);
+          --color: white;
+          border: 2px solid rgba(255, 255, 255, 0.2);
           
           &:active {
-            background: var(--pure-white);
-            
-            ion-icon {
-              color: var(--neon-red);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // EMPTY STATE CARD - NEON INVITATION
-  .empty-state-card {
-    background: var(--pure-black);
-    border: 2px solid var(--neon-orange);
-    border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 20px;
-    
-    .empty-state {
-      text-align: center;
-      padding: 20px;
-      
-      .empty-icon {
-        font-size: 4rem;
-        margin-bottom: 16px;
-      }
-      
-      h3 {
-        color: var(--pure-white);
-        font-weight: 800;
-        margin-bottom: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-      
-      p {
-        color: var(--pure-white);
-        margin: 0;
-        opacity: 0.7;
-        font-weight: 600;
-      }
-    }
-  }
-
-  // BOTTOM ACTIONS - NEON CONTINUE
-  .bottom-actions {
-    margin-top: 32px;
-    
-    .continue-button {
-      width: 100%;
-      height: 56px;
-      background: var(--pure-black);
-      border: 3px solid var(--neon-purple);
-      border-radius: 8px;
-      color: var(--pure-white);
-      font-weight: 800;
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-      
-      &:not(.button-disabled):active {
-        background: var(--neon-purple);
-        color: var(--pure-black);
-      }
-      
-      &.button-disabled {
-        opacity: 0.5;
-        border-color: rgba(255, 255, 255, 0.3);
-      }
-      
-      &:not(.button-disabled).glow-ready {
-        box-shadow: 0 0 25px rgba(139, 93, 255, 0.5);
-      }
-      
-      ion-icon {
-        color: var(--neon-purple);
-        margin-left: 8px;
-      }
-    }
-    
-    .requirement-text {
-      text-align: center;
-      color: var(--pure-white);
-      font-size: 0.9rem;
-      margin: 0;
-      font-weight: 600;
-      opacity: 0.7;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-    }
-  }
-}
-
-// ===============================================
-// RESPONSIVIDADE MODERNA
-// ===============================================
-
-@media (max-width: 480px) {
-  .setup-content .setup-container {
-    padding: 12px;
-    
-    .instructions-card {
-      padding: 20px 16px;
-      
-      .instructions {
-        h2 {
-          font-size: 1.2rem;
-        }
-        
-        p {
-          font-size: 0.9rem;
-        }
-      }
-    }
-    
-    .add-player-card {
-      padding: 16px;
-      
-      ion-item {
-        padding: 2px 8px;
-        
-        ion-label {
-          font-size: 0.8rem;
-        }
-        
-        ion-input {
-          font-size: 1rem;
-        }
-      }
-      
-      .form-actions {
-        .add-button {
-          height: 48px;
-          font-size: 1rem;
-        }
-      }
-    }
-    
-    .players-list-card {
-      padding: 16px;
-      
-      .players-grid {
-        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-        gap: 12px;
-        
-        .player-card {
-          padding: 12px;
-          min-height: 90px;
-          
-          .player-info {
-            .player-avatar {
-              font-size: 1.8rem;
-              width: 44px;
-              height: 44px;
-              margin-bottom: 6px;
-            }
-            
-            .player-name {
-              font-size: 0.8rem;
-            }
+            transform: scale(0.9);
           }
           
-          .remove-button {
-            top: -6px;
-            right: -6px;
-            width: 28px;
-            height: 28px;
-            
-            ion-icon {
-              font-size: 1rem;
-            }
-          }
-        }
-      }
-    }
-    
-    .empty-state-card {
-      padding: 16px;
-      
-      .empty-state {
-        padding: 16px;
-        
-        .empty-icon {
-          font-size: 3rem;
-          margin-bottom: 12px;
-        }
-        
-        h3 {
-          font-size: 1.1rem;
-        }
-        
-        p {
-          font-size: 0.9rem;
-        }
-      }
-    }
-    
-    .bottom-actions {
-      margin-top: 24px;
-      
-      .continue-button {
-        height: 48px;
-        font-size: 1rem;
-      }
-      
-      .requirement-text {
-        font-size: 0.8rem;
-      }
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .setup-content .setup-container {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 24px;
-    
-    .players-grid {
-      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-      gap: 20px;
-      
-      .player-card {
-        padding: 20px;
-        min-height: 120px;
-        
-        .player-info {
-          .player-avatar {
-            font-size: 2.4rem;
-            width: 54px;
-            height: 54px;
-          }
-          
-          .player-name {
+          ion-icon {
             font-size: 1rem;
           }
         }
       }
     }
   }
+
+  // Empty State
+  .empty-state {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    
+    .empty-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+    
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+      color: white;
+    }
+    
+    p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin: 0;
+      font-weight: 500;
+    }
+  }
+
+  // Continue Section
+  .continue-section {
+    .continue-btn {
+      height: 56px;
+      --border-radius: 16px;
+      font-weight: 700;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      transition: all 0.3s ease;
+      
+      &:not(.button-disabled) {
+        --background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+        --color: white;
+        box-shadow: 0 8px 25px rgba(139, 93, 255, 0.4);
+        
+        &:active {
+          transform: translateY(1px);
+          box-shadow: 0 4px 15px rgba(139, 93, 255, 0.3);
+        }
+      }
+      
+      &.button-disabled {
+        --background: rgba(255, 255, 255, 0.1);
+        --color: rgba(255, 255, 255, 0.4);
+        box-shadow: none;
+      }
+    }
+  }
 }
 
-// Animações
+// Animations
 @keyframes slideInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -487,43 +317,62 @@
   }
 }
 
-.instructions-card {
-  animation: slideInUp 0.5s ease-out;
-}
-
-.add-player-card {
+.header-section {
   animation: slideInUp 0.6s ease-out;
 }
 
-.players-list-card {
-  animation: slideInUp 0.7s ease-out;
+.add-player-section {
+  animation: slideInUp 0.7s ease-out 0.1s both;
+}
+
+.players-section, .empty-state {
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.continue-section {
+  animation: slideInUp 0.9s ease-out 0.3s both;
 }
 
 .player-card {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.4s ease-out;
 }
 
-// Responsividade
+// Responsive Design
 @media (max-width: 480px) {
   .setup-content .setup-container {
-    padding: 16px;
+    padding: 1.5rem 1rem;
     
-    .players-grid {
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 10px;
-      
-      .player-card {
-        padding: 12px;
-        min-height: 80px;
+    .header-section {
+      .header-content {
+        .page-title {
+          font-size: 1.75rem;
+        }
         
-        .player-info {
-          .player-avatar {
-            font-size: 1.5rem;
-            margin-bottom: 6px;
-          }
+        .page-subtitle {
+          font-size: 0.85rem;
+        }
+      }
+    }
+    
+    .players-section {
+      .players-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.75rem;
+        
+        .player-card {
+          padding: 1rem 0.75rem;
+          min-height: 90px;
           
-          .player-name {
-            font-size: 0.85rem;
+          .player-content {
+            .player-avatar {
+              width: 44px;
+              height: 44px;
+              font-size: 1.25rem;
+            }
+            
+            .player-name {
+              font-size: 0.8rem;
+            }
           }
         }
       }
@@ -531,43 +380,43 @@
   }
 }
 
-@media (min-width: 768px) {
+@media (max-width: 360px) {
   .setup-content .setup-container {
-    max-width: 600px;
-    margin: 0 auto;
+    padding: 1rem 0.75rem;
+    
+    .players-section {
+      .players-grid {
+        .player-card {
+          .player-content {
+            .player-name {
+              font-size: 0.75rem;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
-// ===============================================
-// OVERRIDE GERAL DE FONTES - PÁGINA SETUP
-// ===============================================
+// Typography Override
 .setup-content {
-  // Força aplicação das fontes modernas em todos os elementos
   *, *::before, *::after {
-    font-family: var(--font-secondary) !important;
+    font-family: var(--font-primary) !important;
   }
   
-  // Títulos e headings
-  h1, h2, h3, h4, h5, h6,
-  ion-card-title,
-  .page-title,
-  .section-title,
-  .player-name {
+  .page-title {
     font-family: var(--font-heading) !important;
   }
   
-  // Elementos de destaque
-  .player-avatar,
-  .color-option,
-  .heat-level-text,
-  .confessions-count {
+  .player-name,
+  .counter-text,
+  .continue-btn {
     font-family: var(--font-accent) !important;
   }
   
-  // Botões e labels
-  ion-button,
-  ion-label,
-  ion-card-subtitle {
+  .page-subtitle,
+  .requirements-text,
+  .empty-state p {
     font-family: var(--font-secondary) !important;
   }
 }

@@ -27,6 +27,10 @@ export class SetupPage implements OnInit, OnDestroy {
     private router: Router
   ) {}
 
+  goBack() {
+    this.router.navigate(['/home']);
+  }
+
   ngOnInit() {
     this.gameSubscription = this.gameService.gameSession$.subscribe((session: GameSession | null) => {
       if (session) {
