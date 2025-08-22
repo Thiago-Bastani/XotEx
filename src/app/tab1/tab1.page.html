@@ -18,14 +18,23 @@
     <!-- Cartão principal -->
     <ion-card class="main-card">
       <ion-card-content>
-        <div class="game-description">
-          <h2>Como jogar:</h2>
-          <ol>
-            <li>Cada jogador escreve confissões anônimas</li>
-            <li>Uma confissão é revelada</li>
-            <li>Todos tentam adivinhar quem escreveu</li>
-            <li>Quem erra bebe, quem acerta distribui!</li>
-          </ol>
+        <div class="welcome-message">
+          <h2>Bem-vindo ao XotEx!</h2>
+          <p>Prepare-se para descobrir os segredos mais divertidos dos seus amigos!</p>
+          <div class="quick-stats">
+            <div class="stat-item">
+              <ion-icon name="people" color="primary"></ion-icon>
+              <span>3-8 jogadores</span>
+            </div>
+            <div class="stat-item">
+              <ion-icon name="time" color="secondary"></ion-icon>
+              <span>30-60 min</span>
+            </div>
+            <div class="stat-item">
+              <ion-icon name="happy" color="tertiary"></ion-icon>
+              <span>Diversão garantida</span>
+            </div>
+          </div>
         </div>
       </ion-card-content>
     </ion-card>
@@ -58,9 +67,9 @@
         size="large" 
         fill="clear"
         class="tertiary-button"
-        (click)="showRules()">
+        (click)="goToHelp()">
         <ion-icon name="help-circle" slot="start"></ion-icon>
-        Regras Completas
+        Ver Instruções
       </ion-button>
     </div>
 

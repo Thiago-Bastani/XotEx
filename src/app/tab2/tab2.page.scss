@@ -1,0 +1,164 @@
+.help-content {
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.help-container {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 1rem;
+}
+
+.logo-emoji {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--ion-color-primary);
+  margin: 0.5rem 0;
+}
+
+.app-subtitle {
+  font-size: 1.1rem;
+  color: var(--ion-color-medium);
+  margin: 0;
+}
+
+.instructions-card,
+.rules-card,
+.tips-card {
+  margin-bottom: 1.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.instructions-card {
+  background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-secondary) 100%);
+  color: white;
+  
+  ion-card-title {
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.rules-card {
+  background: var(--ion-color-light);
+  
+  ion-card-title {
+    color: var(--ion-color-primary);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.tips-card {
+  background: linear-gradient(135deg, var(--ion-color-warning) 0%, var(--ion-color-tertiary) 100%);
+  color: white;
+  
+  ion-card-title {
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.game-description {
+  h2 {
+    color: white;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+}
+
+.instructions-list {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  padding-left: 1.2rem;
+  
+  li {
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+  }
+}
+
+.rules-content {
+  h3 {
+    color: var(--ion-color-primary);
+    margin: 1.5rem 0 0.8rem 0;
+    font-weight: 600;
+    font-size: 1.2rem;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  
+  p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    color: var(--ion-color-dark);
+  }
+  
+  ul {
+    margin-bottom: 1rem;
+    padding-left: 1.2rem;
+    
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.5;
+      color: var(--ion-color-dark);
+      
+      strong {
+        color: var(--ion-color-primary);
+      }
+    }
+  }
+}
+
+.tips-list {
+  font-size: 1rem;
+  line-height: 1.6;
+  padding-left: 1.2rem;
+  
+  li {
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+  }
+}
+
+// Responsivo
+@media (max-width: 768px) {
+  .help-container {
+    padding: 0.5rem;
+  }
+  
+  .logo-section {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .app-title {
+    font-size: 2rem;
+  }
+  
+  .logo-emoji {
+    font-size: 3rem;
+  }
+}

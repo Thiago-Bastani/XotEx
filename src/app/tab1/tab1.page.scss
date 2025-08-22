@@ -48,23 +48,44 @@
     ion-card-content {
       padding: 24px;
       
-      .game-description {
+      .welcome-message {
+        text-align: center;
+        
         h2 {
           color: var(--confession-primary);
           font-weight: 600;
           margin-bottom: 15px;
-          font-size: 1.3rem;
+          font-size: 1.4rem;
         }
         
-        ol {
-          margin: 0;
-          padding-left: 20px;
+        p {
+          color: var(--confession-dark);
+          font-size: 1rem;
+          line-height: 1.5;
+          margin-bottom: 20px;
+        }
+        
+        .quick-stats {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 20px;
           
-          li {
-            margin-bottom: 8px;
-            line-height: 1.5;
-            color: var(--confession-dark);
-            font-weight: 400;
+          .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            
+            ion-icon {
+              font-size: 1.5rem;
+            }
+            
+            span {
+              color: var(--confession-dark);
+              font-size: 0.9rem;
+              font-weight: 500;
+              text-align: center;
+            }
           }
         }
       }
@@ -206,6 +227,23 @@
     
     .main-card ion-card-content {
       padding: 20px;
+      
+      .welcome-message {
+        .quick-stats {
+          flex-direction: column;
+          gap: 15px;
+          
+          .stat-item {
+            flex-direction: row;
+            justify-content: center;
+            gap: 10px;
+            
+            span {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
     }
   }
 }

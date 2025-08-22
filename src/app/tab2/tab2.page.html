@@ -1,17 +1,101 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>
-      Tab 2
+      Ajuda
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="help-content">
+  <div class="help-container">
+    <!-- Logo e título -->
+    <div class="logo-section">
+      <div class="logo-emoji">🎭</div>
+      <h1 class="app-title">XotEx</h1>
+      <p class="app-subtitle">Jogo de confissões para grupos de amigos</p>
+    </div>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <!-- Instruções do jogo -->
+    <ion-card class="instructions-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="help-circle" color="primary"></ion-icon>
+          Como jogar
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="game-description">
+          <ol class="instructions-list">
+            <li>Cada jogador escreve confissões anônimas</li>
+            <li>Uma confissão é revelada</li>
+            <li>Todos tentam adivinhar quem escreveu</li>
+            <li>Quem erra bebe, quem acerta distribui!</li>
+          </ol>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Regras detalhadas -->
+    <ion-card class="rules-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="book" color="secondary"></ion-icon>
+          Regras Completas
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="rules-content">
+          <h3>🎯 Objetivo</h3>
+          <p>Adivinhar quem escreveu cada confissão!</p>
+          
+          <h3>👥 Jogadores</h3>
+          <p>De 3 a 8 jogadores</p>
+          
+          <h3>📝 Preparação</h3>
+          <ul>
+            <li>Cada jogador escreve 3-5 confissões anônimas</li>
+            <li>As confissões podem ser engraçadas, constrangedoras ou íntimas</li>
+            <li>Seja criativo e honesto!</li>
+          </ul>
+          
+          <h3>🎮 Gameplay</h3>
+          <ul>
+            <li>Uma confissão aleatória é revelada</li>
+            <li>Todos votam em quem acham que escreveu</li>
+            <li>O autor é revelado</li>
+            <li>Continue até acabarem as confissões</li>
+          </ul>
+          
+          <h3>🍺 Consequências</h3>
+          <ul>
+            <li><strong>Quem errou:</strong> bebe!</li>
+            <li><strong>Quem acertou:</strong> distribui doses!</li>
+            <li><strong>Autor da confissão:</strong> conta a história completa!</li>
+          </ul>
+          
+          <h3>🔥 Heat Level</h3>
+          <p>O nível de intensidade aumenta conforme o jogo progride, revelando confissões mais picantes!</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Dicas -->
+    <ion-card class="tips-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="bulb" color="warning"></ion-icon>
+          Dicas para se divertir
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ul class="tips-list">
+          <li>Seja criativo com suas confissões</li>
+          <li>Misture confissões verdadeiras com algumas inventadas</li>
+          <li>Observe as reações dos outros jogadores</li>
+          <li>Lembre-se: o objetivo é se divertir!</li>
+          <li>Mantenha um ambiente respeitoso</li>
+        </ul>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

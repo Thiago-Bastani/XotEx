@@ -92,33 +92,8 @@ export class Tab1Page implements OnInit, OnDestroy {
     }
   }
 
-  async showRules() {
-    const alert = await this.alertController.create({
-      header: 'Regras do XotEx',
-      message: `
-        <strong>Objetivo:</strong> Adivinhar quem escreveu cada confissão!
-        
-        <br><br><strong>Como jogar:</strong>
-        <br>1. Adicione de 3 a 8 jogadores
-        <br>2. Cada jogador escreve 3-5 confissões anônimas
-        <br>3. Uma confissão aleatória é revelada
-        <br>4. Todos votam em quem acham que escreveu
-        <br>5. O autor é revelado
-        
-        <br><br><strong>Consequências:</strong>
-        <br>• Quem errou: bebe! 🍺
-        <br>• Quem acertou: distribui doses! 😈
-        
-        <br><br><strong>Heat Level:</strong>
-        <br>A cada 3 rodadas, o nível de "calor" aumenta e confissões mais picantes aparecem!
-        
-        <br><br><strong>Categorias:</strong>
-        <br>🤣 Engraçado • 🧸 Infantil • 😳 Vergonhoso • 💕 Romântico • 🌶️ Picante
-      `,
-      buttons: ['Entendi!']
-    });
-
-    await alert.present();
+  goToHelp() {
+    this.router.navigate(['/tabs/tab2']);
   }
 
   async confirmClearGame() {
