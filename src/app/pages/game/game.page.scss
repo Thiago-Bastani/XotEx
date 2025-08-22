@@ -49,6 +49,7 @@
         
         span {
           color: var(--pure-white);
+          font-family: var(--font-accent) !important;
           font-weight: 700;
           font-size: 0.9rem;
           text-transform: uppercase;
@@ -95,6 +96,7 @@
         
         .box-text {
           font-size: 1.5rem;
+          font-family: var(--font-heading) !important;
           font-weight: 800;
           color: var(--pure-white);
           margin-bottom: 12px;
@@ -104,6 +106,7 @@
         
         .box-subtitle {
           color: var(--pure-white);
+          font-family: var(--font-secondary) !important;
           font-weight: 600;
           text-transform: uppercase;
           font-size: 0.9rem;
@@ -129,6 +132,7 @@
       
       ion-card-title {
         color: var(--pure-white);
+        font-family: var(--font-heading) !important;
         font-weight: 800;
         display: flex;
         align-items: center;
@@ -145,6 +149,7 @@
       
       ion-card-subtitle {
         color: var(--pure-white);
+        font-family: var(--font-secondary) !important;
         font-weight: 600;
         margin-top: 8px;
         text-transform: uppercase;
@@ -156,6 +161,7 @@
       font-size: 1.3rem;
       line-height: 1.6;
       color: var(--pure-white);
+      font-family: var(--font-secondary) !important;
       font-style: italic;
       text-align: center;
       padding: 24px;
@@ -193,6 +199,7 @@
           align-items: center;
           justify-content: center;
           font-size: 2rem;
+          font-family: var(--font-accent) !important;
           font-weight: 900;
           border: 3px solid var(--pure-white);
         }
@@ -202,6 +209,7 @@
           
           h3 {
             color: var(--pure-white);
+            font-family: var(--font-heading) !important;
             font-weight: 800;
             margin: 0 0 8px 0;
             font-size: 1.3rem;
@@ -211,6 +219,7 @@
           
           p {
             color: var(--pure-white);
+            font-family: var(--font-secondary) !important;
             margin: 0;
             font-size: 1rem;
             font-weight: 600;
@@ -1050,5 +1059,44 @@
         }
       }
     }
+  }
+}
+
+// ===============================================
+// OVERRIDE GERAL DE FONTES - PÁGINA GAME
+// ===============================================
+.game-content {
+  // Força aplicação das fontes modernas em todos os elementos
+  *, *::before, *::after {
+    font-family: var(--font-secondary) !important;
+  }
+  
+  // Títulos e headings
+  h1, h2, h3, h4, h5, h6,
+  ion-card-title,
+  .box-text,
+  .turn-info h3,
+  .author-name,
+  .voting-player-name {
+    font-family: var(--font-heading) !important;
+  }
+  
+  // Elementos de destaque
+  .turn-avatar,
+  .voting-player-avatar,
+  .author-avatar,
+  .consequence-avatar,
+  .stat-avatar,
+  .progress-avatar,
+  .status-item span {
+    font-family: var(--font-accent) !important;
+  }
+  
+  // Textos especiais
+  .confession-text,
+  .box-subtitle,
+  ion-card-subtitle,
+  .turn-info p {
+    font-family: var(--font-secondary) !important;
   }
 }

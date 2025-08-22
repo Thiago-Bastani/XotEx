@@ -868,3 +868,39 @@ ion-select-popover {
     }
   }
 }
+
+// ===============================================
+// OVERRIDE GERAL DE FONTES - PÁGINA CONFESSIONS
+// ===============================================
+.confessions-content {
+  // Força aplicação das fontes modernas em todos os elementos
+  *, *::before, *::after {
+    font-family: var(--font-secondary) !important;
+  }
+  
+  // Títulos e headings
+  h1, h2, h3, h4, h5, h6,
+  ion-card-title,
+  .page-title,
+  .section-title,
+  .form-title {
+    font-family: var(--font-heading) !important;
+  }
+  
+  // Elementos de destaque
+  .category-item,
+  .confession-category-badge,
+  .stats-number,
+  .filter-chip {
+    font-family: var(--font-accent) !important;
+  }
+  
+  // Textos e conteúdo
+  .confession-text,
+  ion-textarea,
+  ion-label,
+  ion-card-subtitle,
+  .confession-content p {
+    font-family: var(--font-secondary) !important;
+  }
+}

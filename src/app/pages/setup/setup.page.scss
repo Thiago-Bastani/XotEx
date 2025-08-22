@@ -537,3 +537,37 @@
     margin: 0 auto;
   }
 }
+
+// ===============================================
+// OVERRIDE GERAL DE FONTES - PÁGINA SETUP
+// ===============================================
+.setup-content {
+  // Força aplicação das fontes modernas em todos os elementos
+  *, *::before, *::after {
+    font-family: var(--font-secondary) !important;
+  }
+  
+  // Títulos e headings
+  h1, h2, h3, h4, h5, h6,
+  ion-card-title,
+  .page-title,
+  .section-title,
+  .player-name {
+    font-family: var(--font-heading) !important;
+  }
+  
+  // Elementos de destaque
+  .player-avatar,
+  .color-option,
+  .heat-level-text,
+  .confessions-count {
+    font-family: var(--font-accent) !important;
+  }
+  
+  // Botões e labels
+  ion-button,
+  ion-label,
+  ion-card-subtitle {
+    font-family: var(--font-secondary) !important;
+  }
+}

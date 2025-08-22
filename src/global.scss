@@ -1,5 +1,158 @@
 /*
- * App Global CSS - XotEx NEON CLUB// ===============================================
+ * App Global CSS - XotEx NEON CLUB
+ */
+
+// ===============================================
+// FONTES MODERNAS & JOVENS - IMPORTAÇÃO
+// ===============================================
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+// ===============================================
+// VARIÁVEIS DE FONTES JOVENS
+// ===============================================
+:root {
+  --font-primary: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-accent: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+// ===============================================
+// APLICAÇÃO GLOBAL DAS FONTES MODERNAS
+// ===============================================
+
+// Fonte base mais arredondada - FORÇADA
+* {
+  font-family: var(--font-primary) !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+// Títulos com fonte moderna - FORÇADA
+h1, h2, h3, h4, h5, h6, ion-title, ion-card-title {
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
+// Botões com fonte arredondada - FORÇADA
+ion-button, button {
+  font-family: var(--font-accent) !important;
+  font-weight: 700 !important;
+  text-transform: none !important; // Remove maiúsculas forçadas
+  border-radius: 12px !important; // Mais arredondado
+}
+
+// Textos legíveis - FORÇADA
+p, span, ion-label, ion-text {
+  font-family: var(--font-secondary) !important;
+  font-weight: 500 !important;
+  line-height: 1.6 !important;
+}
+
+// Forms modernos - FORÇADA
+ion-input, ion-textarea, ion-select {
+  font-family: var(--font-primary) !important;
+  font-weight: 500 !important;
+}
+
+// Cards mais arredondados
+ion-card {
+  border-radius: 16px !important;
+}
+
+// Items mais arredondados
+ion-item {
+  border-radius: 12px !important;
+}
+
+// ===============================================
+// TAMANHOS DE FONTE RESPONSIVOS & MODERNOS
+// ===============================================
+
+h1 { 
+  font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+  font-weight: 800 !important;
+}
+
+h2 { 
+  font-size: clamp(1.5rem, 3.5vw, 2rem) !important;
+  font-weight: 700 !important;
+}
+
+h3 { 
+  font-size: clamp(1.2rem, 3vw, 1.5rem) !important;
+  font-weight: 600 !important;
+}
+
+h4 { 
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem) !important;
+  font-weight: 600 !important;
+}
+
+p, span, ion-label {
+  font-size: clamp(0.9rem, 2vw, 1rem) !important;
+}
+
+ion-button {
+  font-size: clamp(0.9rem, 2vw, 1.1rem) !important;
+  font-weight: 700 !important;
+}
+
+// ===============================================
+// COMPONENTES ESPECÍFICOS DO IONIC - FONTES JOVENS
+// ===============================================
+
+// TOOLBAR E HEADERS
+ion-toolbar {
+  ion-title {
+    font-family: var(--font-heading) !important;
+    font-weight: 800 !important;
+    font-size: 1.2rem !important;
+    letter-spacing: 0.02em !important;
+    text-transform: none !important;
+  }
+  
+  ion-back-button {
+    font-family: var(--font-accent) !important;
+    font-weight: 600 !important;
+  }
+}
+
+// PROGRESS BAR E TEXTOS DE STATUS
+ion-progress-bar {
+  border-radius: 8px !important;
+}
+
+// CARDS E CONTEÚDO
+ion-card-content {
+  font-family: var(--font-secondary) !important;
+  
+  h2, h3, h4 {
+    font-family: var(--font-heading) !important;
+    font-weight: 700 !important;
+  }
+  
+  p {
+    font-family: var(--font-secondary) !important;
+    font-weight: 500 !important;
+    line-height: 1.6 !important;
+  }
+}
+
+// FORÇA ESPECÍFICA PARA TEXTOS COMUNS
+.player-name, 
+.confession-text,
+.category-text,
+.instruction-text {
+  font-family: var(--font-secondary) !important;
+  font-weight: 500 !important;
+}
+
+// ===============================================
 // ION-SELECT NEON STYLING - GLOBAL OVERRIDE
 // ===============================================
 ion-select {
@@ -168,8 +321,10 @@ ion-popover {
   }
 }
 
-// ===============================================Style
- * ----------------------------------------------------------------------------
+// ===============================================
+// IONIC FRAMEWORK CORE STYLES
+// ===============================================
+/*
  * Put style rules here that you want to apply globally. These styles are for
  * the entire app and not just one component. Additionally, this file can be
  * used as an entry point to import other CSS/Sass files to be included in the

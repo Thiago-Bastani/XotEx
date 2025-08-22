@@ -162,3 +162,36 @@
     font-size: 3rem;
   }
 }
+
+// ===============================================
+// OVERRIDE GERAL DE FONTES - TAB2 (HELP)
+// ===============================================
+.help-content {
+  // Força aplicação das fontes modernas em todos os elementos
+  *, *::before, *::after {
+    font-family: var(--font-secondary) !important;
+  }
+  
+  // Títulos e headings
+  h1, h2, h3, h4, h5, h6,
+  .app-title,
+  ion-card-title {
+    font-family: var(--font-heading) !important;
+  }
+  
+  // Elementos de destaque
+  .logo-emoji,
+  strong,
+  li strong {
+    font-family: var(--font-accent) !important;
+  }
+  
+  // Textos e conteúdo
+  .app-subtitle,
+  p,
+  li,
+  .instructions-list li,
+  .tips-list li {
+    font-family: var(--font-secondary) !important;
+  }
+}

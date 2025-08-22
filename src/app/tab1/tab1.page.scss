@@ -247,3 +247,35 @@
     }
   }
 }
+
+// ===============================================
+// OVERRIDE GERAL DE FONTES - TAB1 (HOME)
+// ===============================================
+.home-content {
+  // Força aplicação das fontes modernas em todos os elementos
+  *, *::before, *::after {
+    font-family: var(--font-secondary) !important;
+  }
+  
+  // Títulos e headings
+  h1, h2, h3, h4, h5, h6,
+  .app-title,
+  ion-card-title {
+    font-family: var(--font-heading) !important;
+  }
+  
+  // Elementos de destaque
+  .logo-emoji,
+  .stat-item span,
+  ion-button {
+    font-family: var(--font-accent) !important;
+  }
+  
+  // Textos e subtítulos
+  .app-subtitle,
+  p,
+  .info-item span,
+  ion-card-subtitle {
+    font-family: var(--font-secondary) !important;
+  }
+}
