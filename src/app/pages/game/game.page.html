@@ -66,20 +66,39 @@
 
     <!-- Voting Phase -->
     <div class="voting-section" *ngIf="gamePhase === 'voting'">
-      <ion-card class="voting-card">
+      
+      <!-- Current Player Turn -->
+      <ion-card class="current-player-card" *ngIf="currentVotingPlayer">
+        <ion-card-content>
+          <div class="current-player-turn">
+            <div class="turn-indicator">
+              <div class="turn-avatar" [style.background-color]="currentVotingPlayer.color">
+                {{ currentVotingPlayer.avatar }}
+              </div>
+              <div class="turn-info">
+                <h3>Vez de {{ currentVotingPlayer.name }}</h3>
+                <p>🔄 Passe o celular para {{ currentVotingPlayer.name }} votar</p>
+              </div>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Voting Options -->
+      <ion-card class="voting-card" *ngIf="canPlayerVote() && currentVotingPlayer">
         <ion-card-header>
           <ion-card-title>
             <ion-icon name="help-circle"></ion-icon>
             Quem escreveu esta confissão?
           </ion-card-title>
           <ion-card-subtitle>
-            Escolha quem você acha que foi o autor
+            {{ currentVotingPlayer.name }}, escolha quem você acha que foi o autor
           </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          <div class="players-voting-grid">
+          <div class="players-voting-grid" *ngIf="getVotingOptions().length > 0">
             <div 
-              *ngFor="let player of getVotablePlayers()"
+              *ngFor="let player of getVotingOptions()"
               class="voting-player-card"
               [class.selected]="currentVote === player.id"
               [style.background-color]="player.color"
@@ -96,7 +115,7 @@
             </div>
           </div>
           
-          <div class="voting-actions" *ngIf="currentVote">
+          <div class="voting-actions" *ngIf="currentVote && canPlayerVote()">
             <ion-button 
               expand="full"
               size="large"
@@ -110,26 +129,40 @@
       </ion-card>
 
       <!-- Voting Progress -->
-      <ion-card class="voting-progress-card" *ngIf="hasVotes()">
+      <ion-card class="voting-progress-card" *ngIf="players && players.length > 0">
         <ion-card-header>
           <ion-card-title>
-            <ion-icon name="time"></ion-icon>
+            <ion-icon name="people"></ion-icon>
             Progresso da Votação
           </ion-card-title>
+          <ion-card-subtitle>
+            {{ getVotesCount() }} de {{ players.length }} jogadores votaram
+          </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
           <div class="voting-progress">
             <div 
-              *ngFor="let player of getVotablePlayers()"
+              *ngFor="let player of players"
               class="voting-progress-item"
-              [class.voted]="hasPlayerVoted(player.id)">
+              [class.voted]="hasPlayerVoted(player.id)"
+              [class.current]="isCurrentPlayerTurn(player.id)">
               <span class="progress-avatar">{{ player.avatar }}</span>
               <span class="progress-name">{{ player.name }}</span>
-              <ion-icon 
-                *ngIf="hasPlayerVoted(player.id)"
-                name="checkmark-circle"
-                color="success">
-              </ion-icon>
+              <div class="progress-status">
+                <ion-icon 
+                  *ngIf="hasPlayerVoted(player.id)"
+                  name="checkmark-circle"
+                  color="success">
+                </ion-icon>
+                <ion-icon 
+                  *ngIf="isCurrentPlayerTurn(player.id) && !hasPlayerVoted(player.id)"
+                  name="time"
+                  color="warning">
+                </ion-icon>
+                <span 
+                  *ngIf="!hasPlayerVoted(player.id) && !isCurrentPlayerTurn(player.id)"
+                  class="waiting-indicator">⏳</span>
+              </div>
             </div>
           </div>
           
@@ -141,6 +174,17 @@
             <ion-icon name="eye" slot="start"></ion-icon>
             Revelar Resultado
           </ion-button>
+
+          <!-- Debug Info -->
+          <div *ngIf="gamePhase === 'voting'" class="debug-info" style="margin-top: 10px; font-size: 12px; color: #666;">
+            <p>Debug: Jogador atual: {{ currentVotingPlayer?.name || 'Nenhum' }}</p>
+            <p>Debug: Pode votar: {{ canPlayerVote() ? 'Sim' : 'Não' }}</p>
+            <p>Debug: Todos votaram: {{ allPlayersVoted() ? 'Sim' : 'Não' }}</p>
+            <p>Debug: Fase: {{ gamePhase }}</p>
+            <ion-button size="small" fill="clear" (click)="forceUpdateVotingState()">
+              🔄 Atualizar Estado
+            </ion-button>
+          </div>
         </ion-card-content>
       </ion-card>
     </div>
@@ -189,25 +233,36 @@
           <!-- Consequences -->
           <div class="consequences">
             <div class="consequence-section" *ngIf="roundResult.correctGuessers.length > 0">
-              <h4>🎉 Acertaram (distribuem doses):</h4>
+              <h4>🎉 Acertaram e distribuem doses:</h4>
               <div class="consequence-players">
-                <span 
+                <div 
                   *ngFor="let player of roundResult.correctGuessers"
                   class="consequence-player correct">
-                  {{ player.avatar }} {{ player.name }}
-                </span>
+                  <span class="consequence-avatar">{{ player.avatar }}</span>
+                  <span class="consequence-name">{{ player.name }}</span>
+                  <span class="consequence-action">👑 Distribui!</span>
+                </div>
               </div>
             </div>
             
             <div class="consequence-section" *ngIf="roundResult.wrongGuessers.length > 0">
-              <h4>🍺 Erraram (bebem):</h4>
+              <h4>🍺 Erraram e devem beber:</h4>
               <div class="consequence-players">
-                <span 
+                <div 
                   *ngFor="let player of roundResult.wrongGuessers"
                   class="consequence-player wrong">
-                  {{ player.avatar }} {{ player.name }}
-                </span>
+                  <span class="consequence-avatar">{{ player.avatar }}</span>
+                  <span class="consequence-name">{{ player.name }}</span>
+                  <span class="consequence-action">🍻 Bebe!</span>
+                </div>
               </div>
+            </div>
+
+            <div class="author-story-section">
+              <h4>📖 {{ roundResult.actualAuthor.name }}, conte a história completa!</h4>
+              <p class="story-instruction">
+                Agora é a hora de {{ roundResult.actualAuthor.name }} contar todos os detalhes sobre essa confissão! 🎭
+              </p>
             </div>
           </div>
 

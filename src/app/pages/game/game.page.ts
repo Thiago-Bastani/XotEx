@@ -36,6 +36,8 @@ export class GamePage implements OnInit, OnDestroy {
   // Voting
   currentVote: string | null = null;
   votes: { [playerId: string]: string } = {};
+  currentVotingPlayerIndex = 0;
+  currentVotingPlayer: Player | null = null;
   
   // Results
   roundResult: RoundResult | null = null;
@@ -44,6 +46,7 @@ export class GamePage implements OnInit, OnDestroy {
   // UI
   showErrorToast = false;
   errorMessage = '';
+  isRevealingResults = false;
   
   private gameSubscription: Subscription | null = null;
 
@@ -55,6 +58,8 @@ export class GamePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.gameSubscription = this.gameService.gameSession$.subscribe((session: GameSession | null) => {
+      console.log('🔄 SUBSCRIPTION TRIGGERED - Session updated');
+      
       if (session) {
         this.players = [...session.players];
         this.heatLevel = session.heatLevel;
@@ -62,15 +67,40 @@ export class GamePage implements OnInit, OnDestroy {
         
         if (session.currentRound) {
           this.currentConfession = session.currentRound.confession;
+          
+          const oldVotesCount = Object.keys(this.votes).length;
+          
+          // NOVA ESTRATÉGIA: Sempre sincronizar com o serviço (fonte da verdade)
+          // mas preservar currentVote se estiver selecionado
+          const preservedCurrentVote = this.currentVote;
           this.votes = { ...session.currentRound.votes };
+          this.currentVote = preservedCurrentVote;
+          
+          const newVotesCount = Object.keys(this.votes).length;
+          if (newVotesCount !== oldVotesCount) {
+            console.log(`� VOTOS MUDARAM: ${oldVotesCount} → ${newVotesCount}`);
+            console.log(`� VOTOS ATUAIS:`, Object.keys(this.votes));
+            
+            // Re-encontrar o jogador atual após sincronização
+            this.findNextVotingPlayer();
+          }
           
           if (session.currentRound.revealed) {
             this.gamePhase = 'results';
-            this.roundResult = this.gameService.revealRound();
+            // Só calcular o resultado se ainda não temos e não estamos revelando
+            if (!this.roundResult && !this.isRevealingResults) {
+              try {
+                this.roundResult = this.calculateRoundResult(session.currentRound, session.players);
+              } catch (error) {
+                console.error('Erro ao calcular resultado:', error);
+              }
+            }
           } else if (Object.keys(this.votes).length > 0) {
             this.gamePhase = 'voting';
+            this.initializeVotingState();
           } else {
             this.gamePhase = 'voting';
+            this.initializeVotingState();
           }
         } else {
           // Tentar iniciar próxima rodada
@@ -100,7 +130,78 @@ export class GamePage implements OnInit, OnDestroy {
     setTimeout(() => {
       this.gamePhase = 'voting';
       this.isBoxOpening = false;
+      this.initializeVotingState();
     }, 1000);
+  }
+
+  // Inicializar estado da votação de forma consistente
+  initializeVotingState() {
+    this.currentVote = null;
+    this.currentVotingPlayerIndex = 0;
+    this.findNextVotingPlayer();
+  }
+
+  updateCurrentVotingPlayer() {
+    this.findNextVotingPlayer();
+  }
+
+  // Método principal para encontrar o próximo jogador
+  findNextVotingPlayer() {
+    console.log('🔍 PROCURANDO PRÓXIMO JOGADOR...');
+    this.currentVotingPlayer = null;
+    
+    // Verificações de segurança
+    if (!this.players || this.players.length === 0) {
+      console.error('❌ Nenhum jogador disponível');
+      return;
+    }
+    
+    // Verificar se todos os jogadores já votaram
+    if (this.allPlayersVoted()) {
+      console.log('✅ Todos os jogadores votaram - finalizando votação');
+      return;
+    }
+    
+    // Procurar o próximo jogador que ainda não votou
+    for (let i = 0; i < this.players.length; i++) {
+      const player = this.players[i];
+      if (player && player.id && !this.hasPlayerVoted(player.id)) {
+        this.currentVotingPlayer = player;
+        this.currentVotingPlayerIndex = i;
+        console.log(`🎯 PRÓXIMO JOGADOR: ${player.name} (${this.getVotesCount()}/${this.players.length} votos)`);
+        return;
+      }
+    }
+    
+    console.warn('⚠️ Nenhum jogador válido encontrado para votar');
+  }
+
+  getCurrentVotingPlayerName(): string {
+    return this.currentVotingPlayer?.name || 'Nenhum jogador';
+  }
+
+  getVotingOptions(): Player[] {
+    // Verificar se temos dados válidos
+    if (!this.currentConfession || !this.currentVotingPlayer || !this.currentVotingPlayer.id || !this.players) {
+      console.warn('Dados inválidos para getVotingOptions:', {
+        confession: !!this.currentConfession,
+        currentPlayer: !!this.currentVotingPlayer,
+        playerId: this.currentVotingPlayer?.id,
+        players: this.players?.length
+      });
+      return [];
+    }
+    
+    // Todos os jogadores votam nas mesmas opções: podem votar em qualquer um exceto si mesmos
+    // Isso mantém o anonimato - ninguém pode votar em si mesmo
+    return this.players.filter(player => 
+      player && player.id && player.id !== this.currentVotingPlayer!.id
+    );
+  }
+
+  isCurrentPlayerTurn(playerId: string): boolean {
+    if (!playerId || !this.currentVotingPlayer) return false;
+    return this.currentVotingPlayer.id === playerId;
   }
 
   getCategoryEmoji(category: ConfessionCategory | undefined): string {
@@ -116,52 +217,132 @@ export class GamePage implements OnInit, OnDestroy {
     return emojiMap[category] || '💭';
   }
 
-  getVotablePlayers(): Player[] {
-    if (!this.currentConfession) return [];
-    
-    return this.players.filter(player => 
-      player.id !== this.currentConfession!.playerId
-    );
-  }
-
   vote(playerId: string) {
+    console.log(`🖱️ CLIQUE EM VOTO: ${playerId}`);
+    
+    // Validações de segurança
+    if (!playerId) {
+      this.showError('Erro: ID do jogador inválido');
+      return;
+    }
+    
+    if (!this.canPlayerVote()) {
+      console.log('❌ NÃO PODE VOTAR AGORA');
+      this.showError('Erro: Não é possível votar agora');
+      return;
+    }
+    
+    if (!this.currentVotingPlayer) {
+      this.showError('Erro: Nenhum jogador selecionado para votar');
+      return;
+    }
+    
+    // Verificar se é uma opção válida
+    const votingOptions = this.getVotingOptions();
+    if (!votingOptions.some(player => player.id === playerId)) {
+      this.showError('Erro: Opção de voto inválida');
+      return;
+    }
+    
+    console.log(`✏️ SELECIONANDO VOTO: ${playerId}`);
     this.currentVote = playerId;
   }
 
   confirmVote() {
-    if (!this.currentVote) return;
+    // Validações de segurança
+    if (!this.currentVote || !this.currentVotingPlayer) {
+      this.showError('Erro: Dados de votação inválidos');
+      return;
+    }
+
+    console.log(`🗳️ CONFIRMANDO VOTO: ${this.currentVotingPlayer.name} → ${this.currentVote}`);
+
+    // Verificar se o jogador ainda não votou (double check)
+    if (this.hasPlayerVoted(this.currentVotingPlayer.id)) {
+      this.showError('Erro: Jogador já votou');
+      return;
+    }
     
     try {
-      // Para simulação, vamos usar o primeiro jogador como votante
-      // Em uma implementação real, isso seria baseado no jogador atual
-      const votingPlayer = this.getVotablePlayers()[0];
-      if (votingPlayer) {
-        this.gameService.vote(votingPlayer.id, this.currentVote);
-        this.currentVote = null;
-      }
+      console.log(`🔵 ANTES DE REGISTRAR NO SERVIÇO: ${Object.keys(this.votes).length} votos locais`);
+      
+      // Registrar o voto no serviço
+      this.gameService.vote(this.currentVotingPlayer.id, this.currentVote);
+      
+      // NÃO atualizar votos localmente - deixar a subscription fazer isso
+      // Isso evita duplicação de estado
+      
+      console.log(`🔵 APÓS REGISTRAR NO SERVIÇO: ${Object.keys(this.votes).length} votos locais`);
+      
+      // Limpar seleção atual
+      this.currentVote = null;
+      
+      // A subscription vai chamar findNextVotingPlayer() automaticamente
+      
     } catch (error: any) {
-      this.showError(error.message);
+      console.error('❌ ERRO AO VOTAR:', error);
+      this.showError(error.message || 'Erro ao registrar voto');
     }
   }
 
+  canPlayerVote(): boolean {
+    // Verificar se estamos na fase de votação
+    if (this.gamePhase !== 'voting') return false;
+    
+    // Verificar se há um jogador atual válido
+    if (!this.currentVotingPlayer || !this.currentVotingPlayer.id) return false;
+    
+    // Verificar se o jogador atual ainda não votou
+    if (this.hasPlayerVoted(this.currentVotingPlayer.id)) return false;
+    
+    // Verificar se ainda não terminaram todos os votos
+    if (this.allPlayersVoted()) return false;
+    
+    return true;
+  }
+
+  getVotesCount(): number {
+    return this.votes ? Object.keys(this.votes).length : 0;
+  }
+
   hasVotes(): boolean {
-    return Object.keys(this.votes).length > 0;
+    return this.votes ? Object.keys(this.votes).length > 0 : false;
   }
 
   hasPlayerVoted(playerId: string): boolean {
+    if (!playerId || !this.votes) return false;
     return this.votes[playerId] !== undefined;
   }
 
   allPlayersVoted(): boolean {
-    return this.gameService.allPlayersVoted();
+    if (!this.players || this.players.length === 0 || !this.votes) return false;
+    
+    // Verificar localmente se todos os jogadores votaram
+    const localCheck = this.players.every(player => 
+      player && player.id && this.votes[player.id] !== undefined
+    );
+    
+    // Verificar também com o serviço
+    try {
+      const serviceCheck = this.gameService.allPlayersVoted();
+      return localCheck && serviceCheck;
+    } catch (error) {
+      console.error('Erro ao verificar votos no serviço:', error);
+      return localCheck;
+    }
   }
 
   revealResults() {
+    if (this.isRevealingResults) return; // Evitar múltiplas chamadas
+    
     try {
+      this.isRevealingResults = true;
       this.roundResult = this.gameService.revealRound();
       this.gamePhase = 'results';
     } catch (error: any) {
       this.showError(error.message);
+    } finally {
+      this.isRevealingResults = false;
     }
   }
 
@@ -173,6 +354,8 @@ export class GamePage implements OnInit, OnDestroy {
       this.roundResult = null;
       this.currentVote = null;
       this.votes = {};
+      this.currentVotingPlayerIndex = 0;
+      this.currentVotingPlayer = null;
     } else {
       this.gamePhase = 'finished';
       this.gameStats = this.gameService.getGameStats();
@@ -205,6 +388,75 @@ export class GamePage implements OnInit, OnDestroy {
 
   goHome() {
     this.router.navigate(['/tabs/tab1']);
+  }
+
+  // Método para forçar atualização do estado (para debug)
+  forceUpdateVotingState() {
+    console.log('Forçando atualização do estado de votação...');
+    this.findNextVotingPlayer();
+  }
+
+  // Debug: obter estado atual
+  getDebugState(): any {
+    return {
+      gamePhase: this.gamePhase,
+      currentPlayer: this.currentVotingPlayer?.name,
+      canVote: this.canPlayerVote(),
+      allVoted: this.allPlayersVoted(),
+      votesCount: this.getVotesCount(),
+      totalPlayers: this.players?.length,
+      votes: this.votes
+    };
+  }
+
+  // Calcular resultado da rodada sem modificar estado (evitar loop infinito)
+  calculateRoundResult(round: any, players: Player[]): RoundResult {
+    const actualAuthor = players.find(p => p.id === round.confession.playerId)!;
+    
+    // Calcular resultados dos votos
+    const voteResults: any[] = [];
+    const voteCounts: { [playerId: string]: number } = {};
+
+    // Contar votos
+    Object.values(round.votes).forEach((votedForId: any) => {
+      voteCounts[votedForId] = (voteCounts[votedForId] || 0) + 1;
+    });
+
+    // Criar resultados
+    players.forEach(player => {
+      if (player.id !== round.confession.playerId) {
+        voteResults.push({
+          playerId: player.id,
+          playerName: player.name,
+          votes: voteCounts[player.id] || 0,
+          isCorrect: player.id === round.confession.playerId
+        });
+      }
+    });
+
+    // Identificar quem acertou e errou (excluindo o autor da confissão)
+    const correctGuessers: Player[] = [];
+    const wrongGuessers: Player[] = [];
+
+    Object.entries(round.votes).forEach(([voterId, votedForId]) => {
+      // O autor da confissão vota mas não sofre consequências
+      if (voterId === round.confession.playerId) return;
+      
+      const voter = players.find(p => p.id === voterId)!;
+      if (votedForId === round.confession.playerId) {
+        correctGuessers.push(voter);
+      } else {
+        wrongGuessers.push(voter);
+      }
+    });
+
+    return {
+      confession: round.confession,
+      actualAuthor,
+      votes: voteResults,
+      correctGuessers,
+      wrongGuessers
+    };
   }
 
   private showError(message: string) {

@@ -71,8 +71,8 @@ export class SetupPage implements OnInit, OnDestroy {
   }
 
   proceedToConfessions() {
-    if (this.players.length < 3) {
-      this.showError('Mínimo de 3 jogadores necessário');
+    if (this.players.length < 4) {
+      this.showError('Mínimo de 4 jogadores necessário');
       return;
     }
 

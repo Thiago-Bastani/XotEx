@@ -85,7 +85,7 @@
         <div class="empty-state">
           <div class="empty-icon">👥</div>
           <h3>Nenhum jogador adicionado</h3>
-          <p>Adicione pelo menos 3 jogadores para começar!</p>
+          <p>Adicione pelo menos 4 jogadores para começar!</p>
         </div>
       </ion-card-content>
     </ion-card>
@@ -95,15 +95,15 @@
       <ion-button 
         expand="full"
         size="large"
-        [disabled]="players.length < 3"
+        [disabled]="players.length < 4"
         (click)="proceedToConfessions()"
         class="continue-button">
         <ion-icon name="arrow-forward" slot="end"></ion-icon>
-        Continuar ({{ players.length >= 3 ? 'Pronto!' : players.length + '/3' }})
+        Continuar ({{ players.length >= 4 ? 'Pronto!' : players.length + '/4' }})
       </ion-button>
       
-      <p class="requirement-text" *ngIf="players.length < 3">
-        Adicione mais {{ 3 - players.length }} jogador(es) para continuar
+      <p class="requirement-text" *ngIf="players.length < 4">
+        Adicione mais {{ 4 - players.length }} jogador(es) para continuar
       </p>
     </div>
   </div>

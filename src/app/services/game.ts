@@ -90,8 +90,8 @@ export class GameService {
     const session = this.getCurrentSession();
     if (!session) throw new Error('Nenhuma sessão ativa');
 
-    if (session.players.length < 3) {
-      throw new Error('Mínimo de 3 jogadores necessário');
+    if (session.players.length < 4) {
+      throw new Error('Mínimo de 4 jogadores necessário');
     }
 
     session.status = GameStatus.CONFESSIONS;
@@ -202,20 +202,34 @@ export class GameService {
   // Votar em uma confissão
   vote(playerId: string, votedForPlayerId: string): void {
     const session = this.getCurrentSession();
-    if (!session || !session.currentRound) return;
+    if (!session || !session.currentRound) {
+      throw new Error('Sessão ou rodada inválida');
+    }
 
     if (session.currentRound.revealed) {
       throw new Error('Rodada já foi revelada');
     }
 
-    // Não pode votar em si mesmo
-    if (playerId === votedForPlayerId) {
-      throw new Error('Não pode votar em si mesmo');
+    // Verificar se o jogador existe
+    const player = session.players.find(p => p.id === playerId);
+    if (!player) {
+      throw new Error('Jogador não encontrado');
     }
 
-    // Não pode votar no autor da confissão
-    if (votedForPlayerId === session.currentRound.confession.playerId) {
-      throw new Error('Não pode votar no autor da confissão');
+    // Verificar se o voto já foi registrado
+    if (session.currentRound.votes[playerId] !== undefined) {
+      throw new Error('Jogador já votou');
+    }
+
+    // Verificar se o voto é para um jogador válido
+    const votedPlayer = session.players.find(p => p.id === votedForPlayerId);
+    if (!votedPlayer) {
+      throw new Error('Jogador votado não encontrado');
+    }
+
+    // Ninguém pode votar em si mesmo para manter anonimato
+    if (playerId === votedForPlayerId) {
+      throw new Error('Não pode votar em si mesmo');
     }
 
     session.currentRound.votes[playerId] = votedForPlayerId;
@@ -227,11 +241,8 @@ export class GameService {
     const session = this.getCurrentSession();
     if (!session || !session.currentRound) return false;
 
-    const playersWhoCanVote = session.players.filter(p => 
-      p.id !== session.currentRound!.confession.playerId
-    );
-
-    return playersWhoCanVote.every(player => 
+    // Todos os jogadores votam, incluindo o autor da confissão
+    return session.players.every(player => 
       session.currentRound!.votes[player.id] !== undefined
     );
   }
@@ -269,11 +280,14 @@ export class GameService {
       }
     });
 
-    // Identificar quem acertou
+    // Identificar quem acertou e errou (excluindo o autor da confissão)
     const correctGuessers: Player[] = [];
     const wrongGuessers: Player[] = [];
 
     Object.entries(round.votes).forEach(([voterId, votedForId]) => {
+      // O autor da confissão vota mas não sofre consequências
+      if (voterId === round.confession.playerId) return;
+      
       const voter = session.players.find(p => p.id === voterId)!;
       if (votedForId === round.confession.playerId) {
         correctGuessers.push(voter);
