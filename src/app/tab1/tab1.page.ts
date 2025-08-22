@@ -34,6 +34,11 @@ export class Tab1Page implements OnInit, OnDestroy {
     });
   }
 
+  ionViewWillEnter() {
+    // Always reset animation state when entering the page
+    this.isLogoEating = false;
+  }
+
   ngOnDestroy() {
     if (this.gameSubscription) {
       this.gameSubscription.unsubscribe();
@@ -70,14 +75,16 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   private createNewGame() {
-    // Trigger logo eating animation
+    // Trigger fast logo eating animation
     this.isLogoEating = true;
     
-    // Wait for animation to complete before navigating
+    // Navigate right after fast animation
     setTimeout(() => {
       const gameId = this.gameService.createNewGame();
       this.router.navigate(['/setup']);
-    }, 1800); // Match animation duration
+      // Reset animation state after navigation
+      this.isLogoEating = false;
+    }, 500); // Match fast animation duration
   }
 
   continueGame() {
