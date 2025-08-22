@@ -6,6 +6,96 @@
     min-height: 100%;
   }
 
+  .top-actions {
+    margin-bottom: 20px;
+    
+    .start-game-button {
+      height: var(--button-height);
+      border-radius: var(--button-border-radius);
+      font-weight: 600;
+      font-size: 1.1rem;
+      --background: var(--confession-success);
+      --background-activated: #00a082;
+      --color: white;
+      
+      &:not(.button-disabled):hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
+      }
+    }
+  }
+
+  .players-status-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    .players-status-compact {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding: 10px 0;
+      
+      .player-status-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        min-width: 60px;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-2px);
+        }
+        
+        &.current {
+          background: var(--confession-secondary);
+          box-shadow: 0 4px 12px rgba(162, 155, 254, 0.3);
+        }
+        
+        &.completed {
+          .player-avatar {
+            filter: drop-shadow(0 0 8px rgba(0, 184, 148, 0.5));
+          }
+        }
+        
+        .player-avatar {
+          font-size: 2rem;
+          transition: filter 0.3s ease;
+        }
+        
+        .status-indicator {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 20px;
+          
+          ion-icon {
+            font-size: 1.2rem;
+          }
+          
+          .count {
+            color: var(--confession-secondary);
+            font-weight: 600;
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+  }
+
   .progress-card {
     background: var(--card-gradient);
     border-radius: var(--card-border-radius);
@@ -45,46 +135,7 @@
     }
   }
 
-  .player-navigation {
-    margin-bottom: 20px;
-    
-    ion-segment {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
-      
-      ion-segment-button {
-        --background: transparent;
-        --background-checked: var(--confession-secondary);
-        --color: white;
-        --color-checked: white;
-        
-        .segment-content {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 4px;
-          padding: 8px 4px;
-          
-          .segment-avatar {
-            font-size: 1.2rem;
-          }
-          
-          .segment-name {
-            font-size: 0.8rem;
-            font-weight: 600;
-          }
-          
-          .segment-count {
-            font-size: 0.7rem;
-            opacity: 0.8;
-          }
-        }
-      }
-    }
-  }
-
-  .confession-form-card {
+  .confessions-list-card {
     background: var(--card-gradient);
     border-radius: var(--card-border-radius);
     box-shadow: var(--box-shadow);
@@ -241,111 +292,6 @@
       }
     }
   }
-
-  .overall-progress-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
-    
-    ion-card-header {
-      ion-card-title {
-        color: var(--confession-primary);
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-    }
-    
-    .player-progress {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      
-      .player-progress-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 16px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
-        
-        &.completed {
-          background: rgba(0, 184, 148, 0.2);
-          border-color: var(--confession-success);
-        }
-        
-        .player-info {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          
-          .player-avatar {
-            font-size: 1.2rem;
-          }
-          
-          .player-name {
-            color: var(--confession-dark);
-            font-weight: 600;
-          }
-        }
-        
-        .progress-status {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          
-          .progress-count {
-            color: var(--confession-secondary);
-            font-weight: 600;
-            font-size: 0.9rem;
-          }
-          
-          ion-icon {
-            font-size: 1.2rem;
-          }
-        }
-      }
-    }
-  }
-
-  .bottom-actions {
-    margin-top: 30px;
-    
-    .start-game-button {
-      height: var(--button-height);
-      border-radius: var(--button-border-radius);
-      font-weight: 600;
-      font-size: 1.1rem;
-      --background: var(--confession-success);
-      --background-activated: #00a082;
-      --color: white;
-      margin-bottom: 10px;
-      
-      &:not(.button-disabled):hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
-      }
-      
-      &.button-disabled {
-        opacity: 0.5;
-        --background: var(--ion-color-medium);
-      }
-    }
-    
-    .requirement-text {
-      text-align: center;
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.9rem;
-      margin: 0;
-      font-style: italic;
-    }
-  }
 }
 
 // Animações
@@ -369,11 +315,15 @@
   }
 }
 
-.progress-card {
+.top-actions {
+  animation: slideInUp 0.4s ease-out;
+}
+
+.players-status-card {
   animation: slideInUp 0.5s ease-out;
 }
 
-.player-navigation {
+.progress-card {
   animation: slideInUp 0.6s ease-out;
 }
 
@@ -390,17 +340,21 @@
   .confessions-content .confessions-container {
     padding: 16px;
     
-    .player-navigation {
-      ion-segment {
-        .segment-content {
-          padding: 6px 2px;
+    .players-status-card {
+      .players-status-compact {
+        gap: 10px;
+        
+        .player-status-icon {
+          min-width: 50px;
+          padding: 8px;
           
-          .segment-name {
-            font-size: 0.7rem;
+          .player-avatar {
+            font-size: 1.5rem;
           }
           
-          .segment-count {
-            font-size: 0.6rem;
+          .status-indicator .count {
+            font-size: 0.7rem;
+            padding: 1px 4px;
           }
         }
       }

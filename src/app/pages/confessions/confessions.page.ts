@@ -71,6 +71,13 @@ export class ConfessionsPage implements OnInit, OnDestroy {
     this.clearForm();
   }
 
+  selectPlayer(index: number) {
+    this.currentPlayerIndex = index;
+    this.currentPlayer = this.players[this.currentPlayerIndex];
+    this.updateCurrentPlayerConfessions();
+    this.clearForm();
+  }
+
   getProgressValue(): number {
     if (!this.currentPlayerConfessions) return 0;
     return Math.min(this.currentPlayerConfessions.length / this.minConfessions, 1);

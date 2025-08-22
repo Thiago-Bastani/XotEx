@@ -9,6 +9,44 @@
 
 <ion-content [fullscreen]="true" class="confessions-content">
   <div class="confessions-container">
+    <!-- Start game button (only when all complete) -->
+    <div class="top-actions" *ngIf="canStartGame()">
+      <ion-button 
+        expand="full"
+        size="large"
+        (click)="startGame()"
+        class="start-game-button">
+        <ion-icon name="play" slot="end"></ion-icon>
+        Começar Jogo!
+      </ion-button>
+    </div>
+
+    <!-- Compact player status -->
+    <ion-card class="players-status-card">
+      <ion-card-content>
+        <div class="players-status-compact">
+          <div 
+            *ngFor="let player of players; let i = index"
+            class="player-status-icon"
+            [class.current]="i === currentPlayerIndex"
+            [class.completed]="isPlayerComplete(player.id)"
+            (click)="selectPlayer(i)">
+            <span class="player-avatar">{{ player.avatar }}</span>
+            <div class="status-indicator">
+              <ion-icon 
+                *ngIf="isPlayerComplete(player.id)"
+                name="checkmark-circle"
+                color="success">
+              </ion-icon>
+              <span class="count" *ngIf="!isPlayerComplete(player.id)">
+                {{ getPlayerConfessions(player.id).length }}/{{ minConfessions }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
     <!-- Progress indicator -->
     <ion-card class="progress-card">
       <ion-card-content>
@@ -25,24 +63,6 @@
         </div>
       </ion-card-content>
     </ion-card>
-
-    <!-- Navigation -->
-    <div class="player-navigation" *ngIf="players.length > 1">
-      <ion-segment 
-        [(ngModel)]="currentPlayerIndex" 
-        (ionChange)="onPlayerChange($event)"
-        scrollable="true">
-        <ion-segment-button 
-          *ngFor="let player of players; let i = index" 
-          [value]="i">
-          <div class="segment-content">
-            <span class="segment-avatar">{{ player.avatar }}</span>
-            <span class="segment-name">{{ player.name }}</span>
-            <span class="segment-count">{{ getPlayerConfessions(player.id).length }}/{{ minConfessions }}</span>
-          </div>
-        </ion-segment-button>
-      </ion-segment>
-    </div>
 
     <!-- Confession form -->
     <ion-card class="confession-form-card">
@@ -144,56 +164,6 @@
         </div>
       </ion-card-content>
     </ion-card>
-
-    <!-- Overall progress -->
-    <ion-card class="overall-progress-card">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="checkmark-circle"></ion-icon>
-          Progresso Geral
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="player-progress">
-          <div 
-            *ngFor="let player of players"
-            class="player-progress-item"
-            [class.completed]="isPlayerComplete(player.id)">
-            <div class="player-info">
-              <span class="player-avatar">{{ player.avatar }}</span>
-              <span class="player-name">{{ player.name }}</span>
-            </div>
-            <div class="progress-status">
-              <span class="progress-count">
-                {{ getPlayerConfessions(player.id).length }}/{{ minConfessions }}
-              </span>
-              <ion-icon 
-                *ngIf="isPlayerComplete(player.id)"
-                name="checkmark-circle"
-                color="success">
-              </ion-icon>
-            </div>
-          </div>
-        </div>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Start game button -->
-    <div class="bottom-actions">
-      <ion-button 
-        expand="full"
-        size="large"
-        [disabled]="!canStartGame()"
-        (click)="startGame()"
-        class="start-game-button">
-        <ion-icon name="play" slot="end"></ion-icon>
-        {{ canStartGame() ? 'Começar Jogo!' : 'Aguardando confissões...' }}
-      </ion-button>
-      
-      <p class="requirement-text" *ngIf="!canStartGame()">
-        Todos os jogadores devem escrever pelo menos {{ minConfessions }} confissões
-      </p>
-    </div>
   </div>
 
   <!-- Toast de erro -->
