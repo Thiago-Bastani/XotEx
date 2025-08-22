@@ -174,17 +174,6 @@
             <ion-icon name="eye" slot="start"></ion-icon>
             Revelar Resultado
           </ion-button>
-
-          <!-- Debug Info -->
-          <div *ngIf="gamePhase === 'voting'" class="debug-info" style="margin-top: 10px; font-size: 12px; color: #666;">
-            <p>Debug: Jogador atual: {{ currentVotingPlayer?.name || 'Nenhum' }}</p>
-            <p>Debug: Pode votar: {{ canPlayerVote() ? 'Sim' : 'Não' }}</p>
-            <p>Debug: Todos votaram: {{ allPlayersVoted() ? 'Sim' : 'Não' }}</p>
-            <p>Debug: Fase: {{ gamePhase }}</p>
-            <ion-button size="small" fill="clear" (click)="forceUpdateVotingState()">
-              🔄 Atualizar Estado
-            </ion-button>
-          </div>
         </ion-card-content>
       </ion-card>
     </div>

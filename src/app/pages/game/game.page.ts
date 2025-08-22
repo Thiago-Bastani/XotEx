@@ -58,8 +58,6 @@ export class GamePage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.gameSubscription = this.gameService.gameSession$.subscribe((session: GameSession | null) => {
-      console.log('🔄 SUBSCRIPTION TRIGGERED - Session updated');
-      
       if (session) {
         this.players = [...session.players];
         this.heatLevel = session.heatLevel;
@@ -77,10 +75,7 @@ export class GamePage implements OnInit, OnDestroy {
           this.currentVote = preservedCurrentVote;
           
           const newVotesCount = Object.keys(this.votes).length;
-          if (newVotesCount !== oldVotesCount) {
-            console.log(`� VOTOS MUDARAM: ${oldVotesCount} → ${newVotesCount}`);
-            console.log(`� VOTOS ATUAIS:`, Object.keys(this.votes));
-            
+          if (newVotesCount !== oldVotesCount) {            
             // Re-encontrar o jogador atual após sincronização
             this.findNextVotingPlayer();
           }
@@ -147,18 +142,15 @@ export class GamePage implements OnInit, OnDestroy {
 
   // Método principal para encontrar o próximo jogador
   findNextVotingPlayer() {
-    console.log('🔍 PROCURANDO PRÓXIMO JOGADOR...');
     this.currentVotingPlayer = null;
     
     // Verificações de segurança
     if (!this.players || this.players.length === 0) {
-      console.error('❌ Nenhum jogador disponível');
       return;
     }
     
     // Verificar se todos os jogadores já votaram
     if (this.allPlayersVoted()) {
-      console.log('✅ Todos os jogadores votaram - finalizando votação');
       return;
     }
     
@@ -168,12 +160,9 @@ export class GamePage implements OnInit, OnDestroy {
       if (player && player.id && !this.hasPlayerVoted(player.id)) {
         this.currentVotingPlayer = player;
         this.currentVotingPlayerIndex = i;
-        console.log(`🎯 PRÓXIMO JOGADOR: ${player.name} (${this.getVotesCount()}/${this.players.length} votos)`);
         return;
       }
     }
-    
-    console.warn('⚠️ Nenhum jogador válido encontrado para votar');
   }
 
   getCurrentVotingPlayerName(): string {
@@ -183,12 +172,6 @@ export class GamePage implements OnInit, OnDestroy {
   getVotingOptions(): Player[] {
     // Verificar se temos dados válidos
     if (!this.currentConfession || !this.currentVotingPlayer || !this.currentVotingPlayer.id || !this.players) {
-      console.warn('Dados inválidos para getVotingOptions:', {
-        confession: !!this.currentConfession,
-        currentPlayer: !!this.currentVotingPlayer,
-        playerId: this.currentVotingPlayer?.id,
-        players: this.players?.length
-      });
       return [];
     }
     
@@ -218,8 +201,6 @@ export class GamePage implements OnInit, OnDestroy {
   }
 
   vote(playerId: string) {
-    console.log(`🖱️ CLIQUE EM VOTO: ${playerId}`);
-    
     // Validações de segurança
     if (!playerId) {
       this.showError('Erro: ID do jogador inválido');
@@ -227,7 +208,6 @@ export class GamePage implements OnInit, OnDestroy {
     }
     
     if (!this.canPlayerVote()) {
-      console.log('❌ NÃO PODE VOTAR AGORA');
       this.showError('Erro: Não é possível votar agora');
       return;
     }
@@ -244,7 +224,6 @@ export class GamePage implements OnInit, OnDestroy {
       return;
     }
     
-    console.log(`✏️ SELECIONANDO VOTO: ${playerId}`);
     this.currentVote = playerId;
   }
 
@@ -255,8 +234,6 @@ export class GamePage implements OnInit, OnDestroy {
       return;
     }
 
-    console.log(`🗳️ CONFIRMANDO VOTO: ${this.currentVotingPlayer.name} → ${this.currentVote}`);
-
     // Verificar se o jogador ainda não votou (double check)
     if (this.hasPlayerVoted(this.currentVotingPlayer.id)) {
       this.showError('Erro: Jogador já votou');
@@ -264,15 +241,11 @@ export class GamePage implements OnInit, OnDestroy {
     }
     
     try {
-      console.log(`🔵 ANTES DE REGISTRAR NO SERVIÇO: ${Object.keys(this.votes).length} votos locais`);
-      
       // Registrar o voto no serviço
       this.gameService.vote(this.currentVotingPlayer.id, this.currentVote);
       
       // NÃO atualizar votos localmente - deixar a subscription fazer isso
       // Isso evita duplicação de estado
-      
-      console.log(`🔵 APÓS REGISTRAR NO SERVIÇO: ${Object.keys(this.votes).length} votos locais`);
       
       // Limpar seleção atual
       this.currentVote = null;
@@ -388,25 +361,6 @@ export class GamePage implements OnInit, OnDestroy {
 
   goHome() {
     this.router.navigate(['/tabs/tab1']);
-  }
-
-  // Método para forçar atualização do estado (para debug)
-  forceUpdateVotingState() {
-    console.log('Forçando atualização do estado de votação...');
-    this.findNextVotingPlayer();
-  }
-
-  // Debug: obter estado atual
-  getDebugState(): any {
-    return {
-      gamePhase: this.gamePhase,
-      currentPlayer: this.currentVotingPlayer?.name,
-      canVote: this.canPlayerVote(),
-      allVoted: this.allPlayersVoted(),
-      votesCount: this.getVotesCount(),
-      totalPlayers: this.players?.length,
-      votes: this.votes
-    };
   }
 
   // Calcular resultado da rodada sem modificar estado (evitar loop infinito)
