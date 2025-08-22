@@ -1,0 +1,300 @@
+.setup-content {
+  --background: var(--background-gradient);
+  
+  .setup-container {
+    padding: 20px;
+    min-height: 100%;
+  }
+
+  .instructions-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    .instructions {
+      text-align: center;
+      
+      h2 {
+        color: var(--confession-primary);
+        font-weight: 600;
+        margin-bottom: 10px;
+        font-size: 1.4rem;
+      }
+      
+      p {
+        color: var(--confession-dark);
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .add-player-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    ion-item {
+      --background: transparent;
+      --border-color: var(--confession-light);
+      --color: var(--confession-dark);
+      margin-bottom: 15px;
+      
+      ion-label {
+        font-weight: 600;
+        color: var(--confession-primary);
+      }
+      
+      ion-input {
+        --color: var(--confession-dark);
+        font-size: 1.1rem;
+      }
+    }
+    
+    .form-actions {
+      margin-top: 10px;
+      
+      .add-button {
+        height: var(--button-height);
+        border-radius: var(--button-border-radius);
+        font-weight: 600;
+        --background: var(--confession-secondary);
+        --background-activated: var(--confession-primary);
+        --color: white;
+        
+        &:not(.button-disabled):hover {
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(162, 155, 254, 0.3);
+        }
+        
+        &.button-disabled {
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  .players-list-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    ion-card-header {
+      ion-card-title {
+        color: var(--confession-primary);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        
+        ion-icon {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    
+    .players-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      
+      .player-card {
+        position: relative;
+        border-radius: 12px;
+        padding: 16px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s ease;
+        
+        &:hover {
+          transform: translateY(-2px);
+        }
+        
+        .player-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          flex: 1;
+          
+          .player-avatar {
+            font-size: 2rem;
+            margin-bottom: 8px;
+          }
+          
+          .player-name {
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.95rem;
+            word-break: break-word;
+          }
+        }
+        
+        .remove-button {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          --color: white;
+          --background: rgba(0, 0, 0, 0.2);
+          --border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          
+          &:hover {
+            --background: rgba(255, 0, 0, 0.3);
+          }
+        }
+      }
+    }
+  }
+
+  .empty-state-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    .empty-state {
+      text-align: center;
+      padding: 20px;
+      
+      .empty-icon {
+        font-size: 4rem;
+        margin-bottom: 15px;
+        opacity: 0.7;
+      }
+      
+      h3 {
+        color: var(--confession-primary);
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+      
+      p {
+        color: var(--confession-dark);
+        margin: 0;
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .bottom-actions {
+    margin-top: 30px;
+    
+    .continue-button {
+      height: var(--button-height);
+      border-radius: var(--button-border-radius);
+      font-weight: 600;
+      font-size: 1.1rem;
+      --background: var(--confession-success);
+      --background-activated: #00a082;
+      --color: white;
+      margin-bottom: 10px;
+      
+      &:not(.button-disabled):hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
+      }
+      
+      &.button-disabled {
+        opacity: 0.5;
+        --background: var(--ion-color-medium);
+      }
+    }
+    
+    .requirement-text {
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      margin: 0;
+      font-style: italic;
+    }
+  }
+}
+
+// Animações
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.instructions-card {
+  animation: slideInUp 0.5s ease-out;
+}
+
+.add-player-card {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.players-list-card {
+  animation: slideInUp 0.7s ease-out;
+}
+
+.player-card {
+  animation: fadeIn 0.3s ease-out;
+}
+
+// Responsividade
+@media (max-width: 480px) {
+  .setup-content .setup-container {
+    padding: 16px;
+    
+    .players-grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      
+      .player-card {
+        padding: 12px;
+        min-height: 80px;
+        
+        .player-info {
+          .player-avatar {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+          }
+          
+          .player-name {
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .setup-content .setup-container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}

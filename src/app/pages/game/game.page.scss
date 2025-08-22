@@ -1,0 +1,694 @@
+.game-content {
+  --background: var(--background-gradient);
+  
+  .game-container {
+    padding: 20px;
+    min-height: 100%;
+  }
+
+  .status-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    .game-status {
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+      
+      .status-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        
+        ion-icon {
+          font-size: 1.5rem;
+        }
+        
+        span {
+          color: var(--confession-dark);
+          font-weight: 600;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  // Mystery Box
+  .mystery-box-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    margin-bottom: 20px;
+    
+    .mystery-box {
+      background: var(--card-gradient);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: var(--box-shadow);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 40px rgba(108, 92, 231, 0.3);
+      }
+      
+      &.opening {
+        animation: boxOpening 1s ease-out;
+        transform: rotateY(180deg);
+      }
+      
+      .box-top {
+        text-align: center;
+        
+        .box-emoji {
+          font-size: 5rem;
+          margin-bottom: 20px;
+          animation: bounce 2s infinite;
+        }
+        
+        .box-text {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: var(--confession-primary);
+          margin-bottom: 10px;
+        }
+        
+        .box-subtitle {
+          color: var(--confession-dark);
+          font-style: italic;
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+  // Confession Card
+  .confession-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    animation: slideInUp 0.5s ease-out;
+    
+    ion-card-header {
+      ion-card-title {
+        color: var(--confession-primary);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      ion-card-subtitle {
+        color: var(--confession-secondary);
+        font-weight: 500;
+        margin-top: 8px;
+      }
+    }
+    
+    .confession-text {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      color: var(--confession-dark);
+      font-style: italic;
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      border-left: 4px solid var(--confession-accent);
+    }
+  }
+
+  // Voting Section
+  .voting-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    ion-card-header {
+      ion-card-title {
+        color: var(--confession-primary);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      
+      ion-card-subtitle {
+        color: var(--confession-dark);
+        margin-top: 5px;
+      }
+    }
+    
+    .players-voting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+      
+      .voting-player-card {
+        position: relative;
+        border-radius: 12px;
+        padding: 16px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        
+        &:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        &.selected {
+          transform: scale(1.05);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+          border: 3px solid white;
+        }
+        
+        .voting-player-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          flex: 1;
+          
+          .voting-player-avatar {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+          }
+          
+          .voting-player-name {
+            font-weight: 600;
+            text-align: center;
+            font-size: 1rem;
+          }
+        }
+        
+        .selected-icon {
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          background: white;
+          border-radius: 50%;
+          color: var(--confession-success);
+          font-size: 1.5rem;
+        }
+      }
+    }
+    
+    .voting-actions {
+      margin-top: 20px;
+      
+      .confirm-vote-button {
+        height: var(--button-height);
+        border-radius: var(--button-border-radius);
+        font-weight: 600;
+        --background: var(--confession-success);
+        --background-activated: #00a082;
+        --color: white;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
+        }
+      }
+    }
+  }
+
+  // Voting Progress
+  .voting-progress-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    ion-card-header {
+      ion-card-title {
+        color: var(--confession-primary);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+    
+    .voting-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 20px;
+      
+      .voting-progress-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        
+        &.voted {
+          background: rgba(0, 184, 148, 0.2);
+          border: 1px solid var(--confession-success);
+        }
+        
+        .progress-avatar {
+          font-size: 1.2rem;
+          margin-right: 10px;
+        }
+        
+        .progress-name {
+          color: var(--confession-dark);
+          font-weight: 600;
+          flex: 1;
+        }
+        
+        ion-icon {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    
+    .reveal-button {
+      height: var(--button-height);
+      border-radius: var(--button-border-radius);
+      font-weight: 600;
+      --background: var(--confession-warning);
+      --background-activated: #e0ac08;
+      --color: var(--confession-dark);
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(253, 203, 110, 0.3);
+      }
+    }
+  }
+
+  // Results Section
+  .results-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    animation: slideInUp 0.5s ease-out;
+    
+    ion-card-header {
+      ion-card-title {
+        color: var(--confession-primary);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+    }
+    
+    .author-reveal {
+      text-align: center;
+      margin-bottom: 30px;
+      
+      h3 {
+        color: var(--confession-dark);
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+      
+      .author-card {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border-radius: 16px;
+        color: white;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        
+        .author-avatar {
+          font-size: 3rem;
+          margin-bottom: 10px;
+        }
+        
+        .author-name {
+          font-size: 1.2rem;
+          font-weight: 700;
+        }
+      }
+    }
+    
+    .vote-results {
+      margin-bottom: 30px;
+      
+      h4 {
+        color: var(--confession-secondary);
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+      
+      .vote-results-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        
+        .vote-result-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          
+          &.correct {
+            background: rgba(0, 184, 148, 0.2);
+            border: 1px solid var(--confession-success);
+          }
+          
+          .vote-player-info {
+            display: flex;
+            flex-direction: column;
+            
+            .vote-player-name {
+              color: var(--confession-dark);
+              font-weight: 600;
+            }
+            
+            .vote-count {
+              color: var(--confession-secondary);
+              font-size: 0.9rem;
+            }
+          }
+          
+          ion-icon {
+            font-size: 1.3rem;
+          }
+        }
+      }
+    }
+    
+    .consequences {
+      margin-bottom: 30px;
+      
+      .consequence-section {
+        margin-bottom: 20px;
+        
+        h4 {
+          color: var(--confession-secondary);
+          font-weight: 600;
+          margin-bottom: 12px;
+        }
+        
+        .consequence-players {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          
+          .consequence-player {
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            
+            &.correct {
+              background: rgba(0, 184, 148, 0.2);
+              color: var(--confession-success);
+              border: 1px solid var(--confession-success);
+            }
+            
+            &.wrong {
+              background: rgba(232, 67, 147, 0.2);
+              color: var(--confession-danger);
+              border: 1px solid var(--confession-danger);
+            }
+          }
+        }
+      }
+    }
+    
+    .continue-actions {
+      .next-round-button {
+        height: var(--button-height);
+        border-radius: var(--button-border-radius);
+        font-weight: 600;
+        font-size: 1.1rem;
+        --background: var(--confession-primary);
+        --background-activated: var(--confession-secondary);
+        --color: white;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
+        }
+      }
+    }
+  }
+
+  // Finished Section
+  .finished-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    animation: slideInUp 0.5s ease-out;
+    
+    ion-card-header {
+      text-align: center;
+      
+      ion-card-title {
+        color: var(--confession-success);
+        font-weight: 700;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+      
+      ion-card-subtitle {
+        color: var(--confession-dark);
+        margin-top: 10px;
+        font-size: 1rem;
+      }
+    }
+    
+    .final-stats {
+      h3 {
+        color: var(--confession-primary);
+        font-weight: 600;
+        margin-bottom: 15px;
+      }
+      
+      .stats-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 25px;
+        
+        .stat-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          
+          ion-icon {
+            color: var(--confession-secondary);
+            font-size: 1.2rem;
+          }
+          
+          span {
+            color: var(--confession-dark);
+            font-weight: 500;
+          }
+        }
+      }
+      
+      .player-final-stats {
+        h4 {
+          color: var(--confession-secondary);
+          font-weight: 600;
+          margin-bottom: 15px;
+        }
+        
+        .player-stat-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          margin-bottom: 10px;
+          
+          .player-stat-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            
+            .stat-avatar {
+              font-size: 1.2rem;
+            }
+            
+            .stat-name {
+              color: var(--confession-dark);
+              font-weight: 600;
+            }
+          }
+          
+          .player-stat-data {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            
+            .stat-accuracy {
+              color: var(--confession-success);
+              font-weight: 600;
+              font-size: 0.9rem;
+            }
+            
+            .stat-confessions {
+              color: var(--confession-secondary);
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+    }
+    
+    .finish-actions {
+      margin-top: 30px;
+      
+      .home-button {
+        height: var(--button-height);
+        border-radius: var(--button-border-radius);
+        font-weight: 600;
+        font-size: 1.1rem;
+        --background: var(--confession-primary);
+        --background-activated: var(--confession-secondary);
+        --color: white;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
+        }
+      }
+    }
+  }
+}
+
+// Animações
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes boxOpening {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(90deg) scale(1.1);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsividade
+@media (max-width: 480px) {
+  .game-content .game-container {
+    padding: 16px;
+    
+    .mystery-box-container {
+      min-height: 250px;
+      
+      .mystery-box {
+        padding: 30px 20px;
+        
+        .box-top {
+          .box-emoji {
+            font-size: 4rem;
+            margin-bottom: 15px;
+          }
+          
+          .box-text {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+    
+    .players-voting-grid {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      
+      .voting-player-card {
+        padding: 12px;
+        min-height: 80px;
+        
+        .voting-player-info {
+          .voting-player-avatar {
+            font-size: 2rem;
+            margin-bottom: 6px;
+          }
+          
+          .voting-player-name {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+    
+    .confession-text {
+      font-size: 1.1rem;
+      padding: 15px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .game-content .game-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}

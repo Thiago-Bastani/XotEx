@@ -1,0 +1,211 @@
+.home-content {
+  --background: var(--background-gradient);
+  
+  .home-container {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .logo-section {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    
+    .logo-emoji {
+      font-size: 80px;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+    
+    .app-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: white;
+      margin: 10px 0;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      letter-spacing: 2px;
+    }
+    
+    .app-subtitle {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+      font-weight: 300;
+    }
+  }
+
+  .main-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    
+    ion-card-content {
+      padding: 24px;
+      
+      .game-description {
+        h2 {
+          color: var(--confession-primary);
+          font-weight: 600;
+          margin-bottom: 15px;
+          font-size: 1.3rem;
+        }
+        
+        ol {
+          margin: 0;
+          padding-left: 20px;
+          
+          li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+            color: var(--confession-dark);
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+
+  .action-buttons {
+    margin-bottom: 20px;
+    
+    ion-button {
+      margin-bottom: 12px;
+      height: var(--button-height);
+      border-radius: var(--button-border-radius);
+      font-weight: 600;
+      font-size: 1.1rem;
+      
+      &.primary-button {
+        --background: var(--confession-primary);
+        --background-activated: var(--confession-secondary);
+        --background-hover: var(--confession-secondary);
+        --color: white;
+        box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+        
+        &:not(.button-disabled):hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+        }
+      }
+      
+      &.secondary-button {
+        --border-color: white;
+        --color: white;
+        
+        &:not(.button-disabled):hover {
+          --background: rgba(255, 255, 255, 0.1);
+        }
+      }
+      
+      &.tertiary-button {
+        --color: rgba(255, 255, 255, 0.8);
+        
+        &:not(.button-disabled):hover {
+          --color: white;
+        }
+      }
+    }
+  }
+
+  .current-game-card {
+    background: var(--card-gradient);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    
+    ion-card-header {
+      padding-bottom: 0;
+      
+      ion-card-title {
+        color: var(--confession-primary);
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+    }
+    
+    ion-card-content {
+      .game-info {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 16px;
+        
+        .info-item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          
+          ion-icon {
+            color: var(--confession-secondary);
+            font-size: 1.2rem;
+          }
+          
+          span {
+            color: var(--confession-dark);
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animações
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.logo-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.main-card {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.action-buttons {
+  animation: fadeInUp 1s ease-out;
+}
+
+// Responsividade
+@media (max-width: 480px) {
+  .home-content .home-container {
+    padding: 16px;
+    
+    .logo-section {
+      margin-top: 20px;
+      margin-bottom: 20px;
+      
+      .logo-emoji {
+        font-size: 60px;
+      }
+      
+      .app-title {
+        font-size: 2.5rem;
+      }
+      
+      .app-subtitle {
+        font-size: 1rem;
+      }
+    }
+    
+    .main-card ion-card-content {
+      padding: 20px;
+    }
+  }
+}

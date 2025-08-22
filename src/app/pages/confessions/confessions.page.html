@@ -1,0 +1,208 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/setup"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Escrever Confissões</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="confessions-content">
+  <div class="confessions-container">
+    <!-- Progress indicator -->
+    <ion-card class="progress-card">
+      <ion-card-content>
+        <div class="progress-info">
+          <h2>
+            <span class="player-avatar">{{ currentPlayer?.avatar }}</span>
+            {{ currentPlayer?.name }}
+          </h2>
+          <p>Escreva suas confissões ({{ currentPlayerConfessions.length }}/{{ minConfessions }})</p>
+          <ion-progress-bar 
+            [value]="getProgressValue()"
+            color="secondary">
+          </ion-progress-bar>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Navigation -->
+    <div class="player-navigation" *ngIf="players.length > 1">
+      <ion-segment 
+        [(ngModel)]="currentPlayerIndex" 
+        (ionChange)="onPlayerChange($event)"
+        scrollable="true">
+        <ion-segment-button 
+          *ngFor="let player of players; let i = index" 
+          [value]="i">
+          <div class="segment-content">
+            <span class="segment-avatar">{{ player.avatar }}</span>
+            <span class="segment-name">{{ player.name }}</span>
+            <span class="segment-count">{{ getPlayerConfessions(player.id).length }}/{{ minConfessions }}</span>
+          </div>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+
+    <!-- Confession form -->
+    <ion-card class="confession-form-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="lock-closed"></ion-icon>
+          Nova Confissão
+        </ion-card-title>
+        <ion-card-subtitle>
+          Passe o celular para {{ currentPlayer?.name }} escrever de forma privada
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <form (ngSubmit)="addConfession()" #confessionForm="ngForm">
+          <!-- Category selector -->
+          <ion-item>
+            <ion-label position="stacked">Categoria</ion-label>
+            <ion-select 
+              [(ngModel)]="selectedCategory"
+              name="category"
+              placeholder="Escolha uma categoria"
+              interface="popover">
+              <ion-select-option 
+                *ngFor="let category of availableCategories" 
+                [value]="category">
+                {{ getCategoryEmoji(category) }} {{ category }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- Confession text -->
+          <ion-item>
+            <ion-label position="stacked">Confissão</ion-label>
+            <ion-textarea
+              [(ngModel)]="confessionText"
+              name="confession"
+              placeholder="Digite sua confissão..."
+              rows="4"
+              maxlength="200"
+              [counter]="true">
+            </ion-textarea>
+          </ion-item>
+
+          <!-- Suggestions -->
+          <div class="suggestions" *ngIf="suggestions.length > 0 && !confessionText">
+            <h4>💡 Sugestões para {{ selectedCategory }}:</h4>
+            <div class="suggestion-chips">
+              <ion-chip 
+                *ngFor="let suggestion of suggestions"
+                (click)="useSuggestion(suggestion)"
+                color="secondary">
+                <ion-label>{{ suggestion }}</ion-label>
+              </ion-chip>
+            </div>
+          </div>
+
+          <!-- Form actions -->
+          <div class="form-actions">
+            <ion-button 
+              type="submit"
+              expand="block"
+              [disabled]="!isValidConfession()"
+              class="add-confession-button">
+              <ion-icon name="add-circle" slot="start"></ion-icon>
+              Adicionar Confissão
+            </ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Current player confessions -->
+    <ion-card class="confessions-list-card" *ngIf="currentPlayerConfessions.length > 0">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="list"></ion-icon>
+          Suas Confissões ({{ currentPlayerConfessions.length }})
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="confessions-list">
+          <div 
+            *ngFor="let confession of currentPlayerConfessions; let i = index"
+            class="confession-item">
+            <div class="confession-content">
+              <div class="confession-category">
+                {{ getCategoryEmoji(confession.category) }} {{ confession.category }}
+              </div>
+              <div class="confession-text">{{ confession.text }}</div>
+            </div>
+            <ion-button 
+              fill="clear" 
+              size="small"
+              color="danger"
+              (click)="removeConfession(confession.id)">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Overall progress -->
+    <ion-card class="overall-progress-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="checkmark-circle"></ion-icon>
+          Progresso Geral
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="player-progress">
+          <div 
+            *ngFor="let player of players"
+            class="player-progress-item"
+            [class.completed]="isPlayerComplete(player.id)">
+            <div class="player-info">
+              <span class="player-avatar">{{ player.avatar }}</span>
+              <span class="player-name">{{ player.name }}</span>
+            </div>
+            <div class="progress-status">
+              <span class="progress-count">
+                {{ getPlayerConfessions(player.id).length }}/{{ minConfessions }}
+              </span>
+              <ion-icon 
+                *ngIf="isPlayerComplete(player.id)"
+                name="checkmark-circle"
+                color="success">
+              </ion-icon>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Start game button -->
+    <div class="bottom-actions">
+      <ion-button 
+        expand="full"
+        size="large"
+        [disabled]="!canStartGame()"
+        (click)="startGame()"
+        class="start-game-button">
+        <ion-icon name="play" slot="end"></ion-icon>
+        {{ canStartGame() ? 'Começar Jogo!' : 'Aguardando confissões...' }}
+      </ion-button>
+      
+      <p class="requirement-text" *ngIf="!canStartGame()">
+        Todos os jogadores devem escrever pelo menos {{ minConfessions }} confissões
+      </p>
+    </div>
+  </div>
+
+  <!-- Toast de erro -->
+  <ion-toast
+    [isOpen]="showErrorToast"
+    [message]="errorMessage"
+    duration="3000"
+    color="danger"
+    position="top"
+    (didDismiss)="showErrorToast = false">
+  </ion-toast>
+</ion-content>

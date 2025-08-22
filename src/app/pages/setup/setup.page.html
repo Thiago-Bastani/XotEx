@@ -1,0 +1,120 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Configurar Jogadores</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="setup-content">
+  <div class="setup-container">
+    <!-- Instruções -->
+    <ion-card class="instructions-card">
+      <ion-card-content>
+        <div class="instructions">
+          <h2>👥 Adicione os Jogadores</h2>
+          <p>Mínimo de 3 e máximo de 8 jogadores para começar a diversão!</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Formulário para adicionar jogador -->
+    <ion-card class="add-player-card">
+      <ion-card-content>
+        <form (ngSubmit)="addPlayer()" #playerForm="ngForm">
+          <ion-item>
+            <ion-label position="stacked">Nome do Jogador</ion-label>
+            <ion-input
+              [(ngModel)]="newPlayerName"
+              name="playerName"
+              placeholder="Digite o nome..."
+              maxlength="20"
+              [clearInput]="true"
+              #nameInput>
+            </ion-input>
+          </ion-item>
+          
+          <div class="form-actions">
+            <ion-button 
+              type="submit"
+              expand="block"
+              [disabled]="!isValidPlayerName()"
+              class="add-button">
+              <ion-icon name="person-add" slot="start"></ion-icon>
+              Adicionar Jogador
+            </ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Lista de jogadores -->
+    <ion-card class="players-list-card" *ngIf="players.length > 0">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="people"></ion-icon>
+          Jogadores ({{ players.length }}/8)
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="players-grid">
+          <div 
+            *ngFor="let player of players; trackBy: trackByPlayerId"
+            class="player-card"
+            [style.background-color]="player.color">
+            <div class="player-info">
+              <div class="player-avatar">{{ player.avatar }}</div>
+              <div class="player-name">{{ player.name }}</div>
+            </div>
+            <ion-button 
+              fill="clear" 
+              size="small"
+              class="remove-button"
+              (click)="removePlayer(player.id)">
+              <ion-icon name="close" color="light"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Mensagem quando não há jogadores -->
+    <ion-card class="empty-state-card" *ngIf="players.length === 0">
+      <ion-card-content>
+        <div class="empty-state">
+          <div class="empty-icon">👥</div>
+          <h3>Nenhum jogador adicionado</h3>
+          <p>Adicione pelo menos 3 jogadores para começar!</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botão para continuar -->
+    <div class="bottom-actions">
+      <ion-button 
+        expand="full"
+        size="large"
+        [disabled]="players.length < 3"
+        (click)="proceedToConfessions()"
+        class="continue-button">
+        <ion-icon name="arrow-forward" slot="end"></ion-icon>
+        Continuar ({{ players.length >= 3 ? 'Pronto!' : players.length + '/3' }})
+      </ion-button>
+      
+      <p class="requirement-text" *ngIf="players.length < 3">
+        Adicione mais {{ 3 - players.length }} jogador(es) para continuar
+      </p>
+    </div>
+  </div>
+
+  <!-- Toast de erro -->
+  <ion-toast
+    [isOpen]="showErrorToast"
+    [message]="errorMessage"
+    duration="3000"
+    color="danger"
+    position="top"
+    (didDismiss)="showErrorToast = false">
+  </ion-toast>
+</ion-content>

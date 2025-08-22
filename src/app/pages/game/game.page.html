@@ -1,0 +1,297 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title>XotEx - Jogo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="showGameStats()">
+        <ion-icon name="stats-chart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="game-content">
+  <div class="game-container">
+    
+    <!-- Game Status -->
+    <ion-card class="status-card">
+      <ion-card-content>
+        <div class="game-status">
+          <div class="status-item">
+            <ion-icon name="flame" color="warning"></ion-icon>
+            <span>Heat Level {{ heatLevel }}</span>
+          </div>
+          <div class="status-item">
+            <ion-icon name="trophy" color="secondary"></ion-icon>
+            <span>Rodada {{ completedRounds + 1 }}</span>
+          </div>
+          <div class="status-item">
+            <ion-icon name="people" color="primary"></ion-icon>
+            <span>{{ players.length }} jogadores</span>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Mystery Box (when not revealed) -->
+    <div class="mystery-box-container" *ngIf="gamePhase === 'reading'">
+      <div class="mystery-box" [class.opening]="isBoxOpening" (click)="openBox()">
+        <div class="box-top">
+          <div class="box-emoji">📦</div>
+          <div class="box-text">Caixa Misteriosa</div>
+          <div class="box-subtitle">Toque para revelar a confissão</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confession Display (when revealed) -->
+    <ion-card class="confession-card" *ngIf="gamePhase === 'voting' || gamePhase === 'results'">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="chatbubble"></ion-icon>
+          Confissão Revelada
+        </ion-card-title>
+        <ion-card-subtitle>
+          {{ getCategoryEmoji(currentConfession?.category) }} {{ currentConfession?.category }}
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="confession-text">
+          "{{ currentConfession?.text }}"
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Voting Phase -->
+    <div class="voting-section" *ngIf="gamePhase === 'voting'">
+      <ion-card class="voting-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="help-circle"></ion-icon>
+            Quem escreveu esta confissão?
+          </ion-card-title>
+          <ion-card-subtitle>
+            Escolha quem você acha que foi o autor
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="players-voting-grid">
+            <div 
+              *ngFor="let player of getVotablePlayers()"
+              class="voting-player-card"
+              [class.selected]="currentVote === player.id"
+              [style.background-color]="player.color"
+              (click)="vote(player.id)">
+              <div class="voting-player-info">
+                <div class="voting-player-avatar">{{ player.avatar }}</div>
+                <div class="voting-player-name">{{ player.name }}</div>
+              </div>
+              <ion-icon 
+                *ngIf="currentVote === player.id"
+                name="checkmark-circle"
+                class="selected-icon">
+              </ion-icon>
+            </div>
+          </div>
+          
+          <div class="voting-actions" *ngIf="currentVote">
+            <ion-button 
+              expand="full"
+              size="large"
+              (click)="confirmVote()"
+              class="confirm-vote-button">
+              <ion-icon name="checkmark" slot="start"></ion-icon>
+              Confirmar Voto
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Voting Progress -->
+      <ion-card class="voting-progress-card" *ngIf="hasVotes()">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="time"></ion-icon>
+            Progresso da Votação
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="voting-progress">
+            <div 
+              *ngFor="let player of getVotablePlayers()"
+              class="voting-progress-item"
+              [class.voted]="hasPlayerVoted(player.id)">
+              <span class="progress-avatar">{{ player.avatar }}</span>
+              <span class="progress-name">{{ player.name }}</span>
+              <ion-icon 
+                *ngIf="hasPlayerVoted(player.id)"
+                name="checkmark-circle"
+                color="success">
+              </ion-icon>
+            </div>
+          </div>
+          
+          <ion-button 
+            *ngIf="allPlayersVoted()"
+            expand="full"
+            (click)="revealResults()"
+            class="reveal-button">
+            <ion-icon name="eye" slot="start"></ion-icon>
+            Revelar Resultado
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Results Phase -->
+    <div class="results-section" *ngIf="gamePhase === 'results' && roundResult">
+      <ion-card class="results-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="trophy"></ion-icon>
+            Resultado da Rodada
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <!-- Author Reveal -->
+          <div class="author-reveal">
+            <h3>O autor da confissão foi:</h3>
+            <div 
+              class="author-card"
+              [style.background-color]="roundResult.actualAuthor.color">
+              <div class="author-avatar">{{ roundResult.actualAuthor.avatar }}</div>
+              <div class="author-name">{{ roundResult.actualAuthor.name }}</div>
+            </div>
+          </div>
+
+          <!-- Vote Results -->
+          <div class="vote-results">
+            <h4>Resultados dos Votos:</h4>
+            <div class="vote-results-list">
+              <div 
+                *ngFor="let result of roundResult.votes"
+                class="vote-result-item"
+                [class.correct]="result.isCorrect">
+                <div class="vote-player-info">
+                  <span class="vote-player-name">{{ result.playerName }}</span>
+                  <span class="vote-count">{{ result.votes }} voto(s)</span>
+                </div>
+                <ion-icon 
+                  [name]="result.isCorrect ? 'checkmark-circle' : 'close-circle'"
+                  [color]="result.isCorrect ? 'success' : 'danger'">
+                </ion-icon>
+              </div>
+            </div>
+          </div>
+
+          <!-- Consequences -->
+          <div class="consequences">
+            <div class="consequence-section" *ngIf="roundResult.correctGuessers.length > 0">
+              <h4>🎉 Acertaram (distribuem doses):</h4>
+              <div class="consequence-players">
+                <span 
+                  *ngFor="let player of roundResult.correctGuessers"
+                  class="consequence-player correct">
+                  {{ player.avatar }} {{ player.name }}
+                </span>
+              </div>
+            </div>
+            
+            <div class="consequence-section" *ngIf="roundResult.wrongGuessers.length > 0">
+              <h4>🍺 Erraram (bebem):</h4>
+              <div class="consequence-players">
+                <span 
+                  *ngFor="let player of roundResult.wrongGuessers"
+                  class="consequence-player wrong">
+                  {{ player.avatar }} {{ player.name }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Continue Button -->
+          <div class="continue-actions">
+            <ion-button 
+              expand="full"
+              size="large"
+              (click)="nextRound()"
+              class="next-round-button">
+              <ion-icon name="arrow-forward" slot="end"></ion-icon>
+              Próxima Rodada
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Game Finished -->
+    <div class="game-finished-section" *ngIf="gamePhase === 'finished'">
+      <ion-card class="finished-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="checkmark-circle"></ion-icon>
+            Jogo Finalizado!
+          </ion-card-title>
+          <ion-card-subtitle>
+            Parabéns! Vocês revelaram todas as confissões disponíveis.
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="final-stats" *ngIf="gameStats">
+            <h3>Estatísticas Finais:</h3>
+            <div class="stats-list">
+              <div class="stat-item">
+                <ion-icon name="trophy"></ion-icon>
+                <span>{{ gameStats.totalRounds }} rodadas jogadas</span>
+              </div>
+              <div class="stat-item">
+                <ion-icon name="flame"></ion-icon>
+                <span>Heat Level máximo: {{ gameStats.heatLevel }}</span>
+              </div>
+            </div>
+            
+            <div class="player-final-stats">
+              <h4>Desempenho dos Jogadores:</h4>
+              <div 
+                *ngFor="let stat of gameStats.playerStats"
+                class="player-stat-item">
+                <div class="player-stat-info">
+                  <span class="stat-avatar">{{ stat.player.avatar }}</span>
+                  <span class="stat-name">{{ stat.player.name }}</span>
+                </div>
+                <div class="player-stat-data">
+                  <span class="stat-accuracy">{{ stat.accuracy.toFixed(1) }}% acertos</span>
+                  <span class="stat-confessions">{{ stat.confessionsRevealed }} confissões reveladas</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="finish-actions">
+            <ion-button 
+              expand="full"
+              size="large"
+              (click)="goHome()"
+              class="home-button">
+              <ion-icon name="home" slot="start"></ion-icon>
+              Voltar ao Início
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </div>
+
+  <!-- Toast de erro -->
+  <ion-toast
+    [isOpen]="showErrorToast"
+    [message]="errorMessage"
+    duration="3000"
+    color="danger"
+    position="top"
+    (didDismiss)="showErrorToast = false">
+  </ion-toast>
+</ion-content>
