@@ -1,5 +1,5 @@
 /*
- * App Global CSS
+ * App Global CSS - XotEx NEON CLUB Style
  * ----------------------------------------------------------------------------
  * Put style rules here that you want to apply globally. These styles are for
  * the entire app and not just one component. Additionally, this file can be
@@ -35,3 +35,308 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/* ===============================================
+   XOTEX NEON CLUB - GLOBAL STYLES
+   =============================================== */
+
+// NEON CLUB Font imports
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@400;600;700;800;900&display=swap');
+
+// Global body styling - NEON CLUB
+body {
+  font-family: 'Exo 2', 'Roboto', sans-serif;
+  background: var(--pure-black, #000000);
+  color: var(--pure-white, #ffffff);
+  
+  // Smooth transitions globais
+  * {
+    transition: all 0.15s ease;
+  }
+}
+
+// NEON CLUB Headers
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', 'Exo 2', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Override Ionic defaults with NEON CLUB style
+ion-app {
+  background: var(--pure-black, #000000);
+}
+
+// Global button styling - NEON CLUB
+ion-button {
+  --border-radius: 4px;
+  --box-shadow: none;
+  font-family: 'Exo 2', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  &:not(.button-clear):not(.button-outline) {
+    border: 2px solid var(--pure-black, #000000);
+  }
+  
+  &.button-solid {
+    --background: var(--neon-purple, #8b5dff);
+    --color: var(--pure-white, #ffffff);
+    
+    &:hover {
+      --background: var(--neon-pink, #ff1493);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Global card styling - NEON CLUB
+ion-card {
+  --background: var(--pure-white, #ffffff);
+  --color: var(--pure-black, #000000);
+  border: 2px solid var(--pure-black, #000000);
+  border-radius: 8px;
+  box-shadow: none;
+  margin: 8px;
+  
+  ion-card-header {
+    ion-card-title {
+      font-family: 'Orbitron', monospace;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--neon-purple, #8b5dff);
+    }
+    
+    ion-card-subtitle {
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--pure-black, #000000);
+    }
+  }
+}
+
+// Global toolbar styling - NEON CLUB
+ion-toolbar {
+  --background: var(--neon-purple, #8b5dff);
+  --color: var(--pure-white, #ffffff);
+  --border-color: var(--pure-black, #000000);
+  border-bottom: 3px solid var(--pure-black, #000000);
+  
+  ion-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  ion-button {
+    --color: var(--pure-white, #ffffff);
+    
+    &:hover {
+      --background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// Global tab bar styling - NEON CLUB
+ion-tab-bar {
+  --background: var(--pure-black, #000000);
+  --color: var(--pure-white, #ffffff);
+  border-top: 3px solid var(--neon-purple, #8b5dff);
+  
+  ion-tab-button {
+    --color: var(--pure-white, #ffffff);
+    --color-selected: var(--neon-pink, #ff1493);
+    
+    &.tab-selected {
+      --color: var(--neon-pink, #ff1493);
+      background: var(--neon-purple, #8b5dff);
+    }
+  }
+}
+
+// Global modal styling - NEON CLUB
+ion-modal {
+  --background: var(--pure-white, #ffffff);
+  --color: var(--pure-black, #000000);
+  border: 4px solid var(--pure-black, #000000);
+  border-radius: 8px;
+}
+
+// Global toast styling - NEON CLUB
+ion-toast {
+  --background: var(--neon-red, #ff007f);
+  --color: var(--pure-white, #ffffff);
+  --border-radius: 4px;
+  border: 2px solid var(--pure-black, #000000);
+  font-weight: 700;
+  text-transform: uppercase;
+  
+  &.toast-success {
+    --background: var(--neon-green, #00ff41);
+    --color: var(--pure-black, #000000);
+  }
+  
+  &.toast-warning {
+    --background: var(--neon-yellow, #ffff00);
+    --color: var(--pure-black, #000000);
+  }
+}
+
+// Global input styling - NEON CLUB
+ion-input, ion-textarea, ion-select {
+  --background: var(--pure-white, #ffffff);
+  --color: var(--pure-black, #000000);
+  --placeholder-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid var(--pure-black, #000000);
+  border-radius: 4px;
+  font-weight: 600;
+  
+  &.ion-focused {
+    border-color: var(--neon-purple, #8b5dff);
+  }
+}
+
+// Global item styling - NEON CLUB
+ion-item {
+  --background: var(--pure-white, #ffffff);
+  --color: var(--pure-black, #000000);
+  --border-color: var(--pure-black, #000000);
+  --inner-border-width: 0;
+  border: 2px solid var(--pure-black, #000000);
+  border-radius: 4px;
+  margin: 4px 0;
+  font-weight: 600;
+  
+  ion-label {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+}
+
+// Global list styling - NEON CLUB
+ion-list {
+  background: transparent;
+  padding: 8px;
+}
+
+// Global content styling - NEON CLUB
+ion-content {
+  --background: var(--pure-black, #000000);
+  --color: var(--pure-white, #ffffff);
+}
+
+// NEON CLUB Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pure-black, #000000);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--neon-purple, #8b5dff);
+  border-radius: 4px;
+  
+  &:hover {
+    background: var(--neon-pink, #ff1493);
+  }
+}
+
+// NEON CLUB Selection styling
+::selection {
+  background: var(--neon-yellow, #ffff00);
+  color: var(--pure-black, #000000);
+}
+
+// NEON CLUB Focus outline
+*:focus {
+  outline: 2px solid var(--neon-green, #00ff41);
+  outline-offset: 2px;
+}
+
+// NEON CLUB Disabled elements
+*:disabled {
+  opacity: 0.5;
+  filter: grayscale(50%);
+}
+
+// NEON CLUB Loading animation
+.loading-neon {
+  animation: neon-pulse 1s ease-in-out infinite;
+}
+
+// NEON CLUB Error states
+.error-neon {
+  border-color: var(--neon-red, #ff007f) !important;
+  background: rgba(255, 0, 127, 0.1) !important;
+}
+
+// NEON CLUB Success states
+.success-neon {
+  border-color: var(--neon-green, #00ff41) !important;
+  background: rgba(0, 255, 65, 0.1) !important;
+}
+
+// NEON CLUB Text utilities
+.text-shadow-neon {
+  text-shadow: 0 0 8px currentColor;
+}
+
+.text-bold {
+  font-weight: 800;
+}
+
+.text-extra-bold {
+  font-weight: 900;
+}
+
+.text-spacing {
+  letter-spacing: 0.5px;
+}
+
+.text-spacing-wide {
+  letter-spacing: 1px;
+}
+
+// NEON CLUB Layout utilities
+.full-height {
+  height: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.center-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// NEON CLUB Mobile optimizations
+@media (max-width: 480px) {
+  ion-card {
+    margin: 4px;
+  }
+  
+  ion-button {
+    height: 40px;
+    font-size: 0.9rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: 0.3px;
+  }
+}

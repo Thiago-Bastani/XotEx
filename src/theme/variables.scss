@@ -1,156 +1,274 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
-/** Ionic CSS Variables **/
+/** Ionic CSS Variables - XotEx MODERN NEON Style **/
 :root {
-  /** primary **/
-  --ion-color-primary: #6c5ce7;
-  --ion-color-primary-rgb: 108, 92, 231;
+  /** primary - NEON PURPLE **/
+  --ion-color-primary: #8b5dff;
+  --ion-color-primary-rgb: 139, 93, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #5f51cb;
-  --ion-color-primary-tint: #7b6ce9;
+  --ion-color-primary-shade: #7a52e6;
+  --ion-color-primary-tint: #9970ff;
 
-  /** secondary **/
-  --ion-color-secondary: #a29bfe;
-  --ion-color-secondary-rgb: 162, 155, 254;
-  --ion-color-secondary-contrast: #000000;
-  --ion-color-secondary-contrast-rgb: 0, 0, 0;
-  --ion-color-secondary-shade: #8f88e0;
-  --ion-color-secondary-tint: #aba5fe;
+  /** secondary - NEON PINK **/
+  --ion-color-secondary: #ff1493;
+  --ion-color-secondary-rgb: 255, 20, 147;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #e61282;
+  --ion-color-secondary-tint: #ff27a0;
 
-  /** tertiary **/
-  --ion-color-tertiary: #fd79a8;
-  --ion-color-tertiary-rgb: 253, 121, 168;
-  --ion-color-tertiary-contrast: #000000;
-  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #df6b94;
-  --ion-color-tertiary-tint: #fd86b1;
+  /** tertiary - NEON ORANGE **/
+  --ion-color-tertiary: #ff4500;
+  --ion-color-tertiary-rgb: 255, 69, 0;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #e63e00;
+  --ion-color-tertiary-tint: #ff5a1a;
 
-  /** success **/
-  --ion-color-success: #00b894;
-  --ion-color-success-rgb: 0, 184, 148;
-  --ion-color-success-contrast: #ffffff;
-  --ion-color-success-contrast-rgb: 255, 255, 255;
-  --ion-color-success-shade: #00a282;
-  --ion-color-success-tint: #1ac09f;
+  /** success - NEON GREEN **/
+  --ion-color-success: #00ff41;
+  --ion-color-success-rgb: 0, 255, 65;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: #00e639;
+  --ion-color-success-tint: #1aff54;
 
-  /** warning **/
-  --ion-color-warning: #fdcb6e;
-  --ion-color-warning-rgb: 253, 203, 110;
+  /** warning - NEON YELLOW **/
+  --ion-color-warning: #ffff00;
+  --ion-color-warning-rgb: 255, 255, 0;
   --ion-color-warning-contrast: #000000;
   --ion-color-warning-contrast-rgb: 0, 0, 0;
-  --ion-color-warning-shade: #dfb361;
-  --ion-color-warning-tint: #fdd17d;
+  --ion-color-warning-shade: #e6e600;
+  --ion-color-warning-tint: #ffff1a;
 
-  /** danger **/
-  --ion-color-danger: #e84393;
-  --ion-color-danger-rgb: 232, 67, 147;
+  /** danger - NEON RED **/
+  --ion-color-danger: #ff007f;
+  --ion-color-danger-rgb: 255, 0, 127;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: #cc3c81;
-  --ion-color-danger-tint: #ea569e;
+  --ion-color-danger-shade: #e60070;
+  --ion-color-danger-tint: #ff1a8c;
 
-  /** dark **/
-  --ion-color-dark: #2d3436;
-  --ion-color-dark-rgb: 45, 52, 54;
+  /** dark - PURE BLACK **/
+  --ion-color-dark: #000000;
+  --ion-color-dark-rgb: 0, 0, 0;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #282e30;
-  --ion-color-dark-tint: #42494a;
+  --ion-color-dark-shade: #000000;
+  --ion-color-dark-tint: #1a1a1a;
 
-  /** medium **/
-  --ion-color-medium: #ddd6fe;
-  --ion-color-medium-rgb: 221, 214, 254;
-  --ion-color-medium-contrast: #000000;
-  --ion-color-medium-contrast-rgb: 0, 0, 0;
-  --ion-color-medium-shade: #c2bce0;
-  --ion-color-medium-tint: #e0dafe;
+  /** medium - DARK GRAY **/
+  --ion-color-medium: #1a1a1a;
+  --ion-color-medium-rgb: 26, 26, 26;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #171717;
+  --ion-color-medium-tint: #2d2d2d;
 
-  /** light **/
-  --ion-color-light: #f4f5f8;
-  --ion-color-light-rgb: 244, 245, 248;
+  /** light - PURE WHITE **/
+  --ion-color-light: #ffffff;
+  --ion-color-light-rgb: 255, 255, 255;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
-  --ion-color-light-shade: #d7d8da;
-  --ion-color-light-tint: #f5f6f9;
+  --ion-color-light-shade: #e6e6e6;
+  --ion-color-light-tint: #ffffff;
 
-  // Custom XotEx Colors
-  --confession-primary: #6c5ce7;
-  --confession-secondary: #a29bfe;
-  --confession-accent: #fd79a8;
-  --confession-warning: #fdcb6e;
-  --confession-danger: #e84393;
-  --confession-success: #00b894;
-  --confession-dark: #2d3436;
-  --confession-light: #ddd6fe;
+  // Modern Neon Colors
+  --neon-purple: #8b5dff;
+  --neon-pink: #ff1493;
+  --neon-orange: #ff4500;
+  --neon-green: #00ff41;
+  --neon-yellow: #ffff00;
+  --neon-blue: #00bfff;
+  --neon-cyan: #00ffff;
+  --neon-red: #ff007f;
+  --pure-black: #000000;
+  --pure-white: #ffffff;
+  --dark-gray: #1a1a1a;
 
-  // Card styling
-  --card-border-radius: 16px;
-  --button-border-radius: 16px;
-  --button-height: 56px;
+  // Modern Design System
+  --bg-primary: var(--pure-black);
+  --text-primary: var(--pure-white);
+  --border-primary: var(--neon-purple);
+  --border-secondary: var(--neon-pink);
+  --border-accent: var(--neon-orange);
+  --border-success: var(--neon-green);
+  --border-warning: var(--neon-yellow);
+  --border-danger: var(--neon-red);
 
-  // Background gradients
-  --background-gradient: linear-gradient(135deg, var(--confession-primary), var(--confession-secondary));
-  --card-gradient: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
-  --box-shadow: 0 8px 32px rgba(108, 92, 231, 0.15);
+  // Border Styles - Modern Neon
+  --border-radius-round: 12px;
+  --border-radius-square: 0px;
+  --border-width-thin: 1px;
+  --border-width-thick: 3px;
+  --border-width-heavy: 6px;
+
+  // Component Heights
+  --button-height: 48px;
+  --button-height-small: 36px;
+  --input-height: 44px;
+
+  // Modern Glow Effects
+  --glow-purple: 0 0 15px rgba(139, 93, 255, 0.6);
+  --glow-pink: 0 0 15px rgba(255, 20, 147, 0.6);
+  --glow-orange: 0 0 15px rgba(255, 69, 0, 0.6);
+  --glow-green: 0 0 15px rgba(0, 255, 65, 0.6);
+  --glow-yellow: 0 0 15px rgba(255, 255, 0, 0.6);
+  --glow-red: 0 0 15px rgba(255, 0, 127, 0.6);
+
+  // Typography
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --font-weight-heavy: 800;
+  --letter-spacing-normal: 0.3px;
+  --letter-spacing-wide: 0.8px;
 }
 
+// MODERN NEON ANIMATIONS - Minimal and Elegant
+@keyframes modern-glow {
+  0%, 100% { 
+    box-shadow: 0 0 5px currentColor;
+  }
+  50% { 
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+@keyframes subtle-pulse {
+  0%, 100% { 
+    opacity: 1;
+  }
+  50% { 
+    opacity: 0.8;
+  }
+}
+
+@keyframes border-glow {
+  0%, 100% { 
+    border-color: var(--neon-purple);
+    box-shadow: 0 0 5px var(--neon-purple);
+  }
+  33% { 
+    border-color: var(--neon-pink);
+    box-shadow: 0 0 5px var(--neon-pink);
+  }
+  66% { 
+    border-color: var(--neon-orange);
+    box-shadow: 0 0 5px var(--neon-orange);
+  }
+}
+
+// Modern Utility Classes
+.modern-glow {
+  animation: modern-glow 3s ease-in-out infinite;
+}
+
+.subtle-pulse {
+  animation: subtle-pulse 2s ease-in-out infinite;
+}
+
+.border-glow {
+  animation: border-glow 4s ease-in-out infinite;
+}
+
+// Border Styles - Modern Mix
+.border-round-thick {
+  border: var(--border-width-thick) solid;
+  border-radius: var(--border-radius-round);
+}
+
+.border-square-thin {
+  border: var(--border-width-thin) solid;
+  border-radius: var(--border-radius-square);
+}
+
+.border-left-heavy {
+  border-left: var(--border-width-heavy) solid;
+  border-radius: 0 var(--border-radius-round) var(--border-radius-round) 0;
+}
+
+.border-bottom-heavy {
+  border-bottom: var(--border-width-heavy) solid;
+  border-radius: var(--border-radius-round) var(--border-radius-round) 0 0;
+}
+
+// Color Classes - Modern Neon
+.bg-black { background-color: var(--pure-black) !important; }
+.text-white { color: var(--pure-white) !important; }
+
+.border-neon-purple { border-color: var(--neon-purple) !important; }
+.border-neon-pink { border-color: var(--neon-pink) !important; }
+.border-neon-orange { border-color: var(--neon-orange) !important; }
+.border-neon-green { border-color: var(--neon-green) !important; }
+.border-neon-yellow { border-color: var(--neon-yellow) !important; }
+.border-neon-red { border-color: var(--neon-red) !important; }
+
+.glow-purple { box-shadow: var(--glow-purple) !important; }
+.glow-pink { box-shadow: var(--glow-pink) !important; }
+.glow-orange { box-shadow: var(--glow-orange) !important; }
+.glow-green { box-shadow: var(--glow-green) !important; }
+.glow-yellow { box-shadow: var(--glow-yellow) !important; }
+.glow-red { box-shadow: var(--glow-red) !important; }
+
+// Typography Classes
+.font-bold { font-weight: var(--font-weight-bold) !important; }
+.font-heavy { font-weight: var(--font-weight-heavy) !important; }
+.letter-wide { letter-spacing: var(--letter-spacing-wide) !important; }
+.text-upper { text-transform: uppercase !important; }
+
 /*
- * Dark Colors
+ * Dark Colors - MODERN NEON DARK MODE
  * -------------------------------------------
  */
 
 body.dark {
-  --ion-color-primary: #a29bfe;
-  --ion-color-primary-rgb: 162, 155, 254;
-  --ion-color-primary-contrast: #000000;
-  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary: #8b5dff;
+  --ion-color-primary-rgb: 139, 93, 255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
 
-  --ion-color-secondary: #6c5ce7;
-  --ion-color-secondary-rgb: 108, 92, 231;
+  --ion-color-secondary: #ff1493;
+  --ion-color-secondary-rgb: 255, 20, 147;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
 
-  --ion-color-tertiary: #fd79a8;
-  --ion-color-tertiary-rgb: 253, 121, 168;
-  --ion-color-tertiary-contrast: #000000;
-  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
+  --ion-color-tertiary: #ff4500;
+  --ion-color-tertiary-rgb: 255, 69, 0;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
 
-  --ion-color-success: #00b894;
-  --ion-color-success-rgb: 0, 184, 148;
-  --ion-color-success-contrast: #ffffff;
-  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success: #00ff41;
+  --ion-color-success-rgb: 0, 255, 65;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
 
-  --ion-color-warning: #fdcb6e;
-  --ion-color-warning-rgb: 253, 203, 110;
+  --ion-color-warning: #ffff00;
+  --ion-color-warning-rgb: 255, 255, 0;
   --ion-color-warning-contrast: #000000;
   --ion-color-warning-contrast-rgb: 0, 0, 0;
 
-  --ion-color-danger: #e84393;
-  --ion-color-danger-rgb: 232, 67, 147;
+  --ion-color-danger: #ff007f;
+  --ion-color-danger-rgb: 255, 0, 127;
   --ion-color-danger-contrast: #ffffff;
   --ion-color-danger-contrast-rgb: 255, 255, 255;
 
-  --ion-color-dark: #f4f5f8;
-  --ion-color-dark-rgb: 244, 245, 248;
+  --ion-color-dark: #ffffff;
+  --ion-color-dark-rgb: 255, 255, 255;
   --ion-color-dark-contrast: #000000;
   --ion-color-dark-contrast-rgb: 0, 0, 0;
 
-  --ion-color-medium: #989aa2;
-  --ion-color-medium-rgb: 152, 154, 162;
+  --ion-color-medium: #1a1a1a;
+  --ion-color-medium-rgb: 26, 26, 26;
   --ion-color-medium-contrast: #ffffff;
   --ion-color-medium-contrast-rgb: 255, 255, 255;
 
-  --ion-color-light: #222428;
-  --ion-color-light-rgb: 34, 36, 40;
+  --ion-color-light: #000000;
+  --ion-color-light-rgb: 0, 0, 0;
   --ion-color-light-contrast: #ffffff;
   --ion-color-light-contrast-rgb: 255, 255, 255;
-
-  // Dark mode adjustments
-  --background-gradient: linear-gradient(135deg, #2d3436, #636e72);
-  --card-gradient: linear-gradient(145deg, rgba(45,52,54,0.9), rgba(45,52,54,0.7));
-  --box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /*

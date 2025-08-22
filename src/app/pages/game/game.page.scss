@@ -1,18 +1,35 @@
+// ===============================================
+// XOTEX NEON CLUB - MODERN YOUNG DESIGN 🔥
+// ===============================================
+// - Fundo: 100% preto
+// - Texto: 100% branco  
+// - Componentes: Preto com bordas neon coloridas
+// - Bordas: Mistas (grossas unilaterais redondas + finas quadradas)
+// - Animações: Apenas glow sutil com box-shadow
+// - Zero hover: Focado em mobile
+// - Estilo: Moderno, jovem, minimalista neon
+
 .game-content {
-  --background: var(--background-gradient);
+  background: var(--pure-black);
+  color: var(--pure-white);
   
   .game-container {
-    padding: 20px;
+    padding: 16px;
     min-height: 100%;
+    background: var(--pure-black);
   }
 
+  // STATUS CARD - MODERNO NEON
   .status-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
+    background: var(--pure-black);
+    border-left: 6px solid var(--neon-purple);
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 16px;
+    padding: 16px;
+    
+    &.glow-subtle {
+      box-shadow: 0 0 20px rgba(139, 93, 255, 0.3);
+    }
     
     .game-status {
       display: flex;
@@ -23,697 +40,150 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 5px;
+        gap: 8px;
         
         ion-icon {
-          font-size: 1.5rem;
+          font-size: 2rem;
+          color: var(--pure-white);
         }
         
         span {
-          color: var(--confession-dark);
-          font-weight: 600;
+          color: var(--pure-white);
+          font-weight: 700;
           font-size: 0.9rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
         }
       }
     }
   }
 
-  // Mystery Box
+  // MYSTERY BOX - MODERNO JOVEM
   .mystery-box-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 300px;
+    min-height: 280px;
     margin-bottom: 20px;
     
     .mystery-box {
-      background: var(--card-gradient);
-      border-radius: 20px;
+      background: var(--pure-black);
+      border: 3px solid var(--neon-orange);
+      border-radius: 16px;
       padding: 40px;
-      box-shadow: var(--box-shadow);
-      backdrop-filter: blur(10px);
-      border: 2px solid rgba(255, 255, 255, 0.3);
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: box-shadow 0.3s ease;
       position: relative;
-      overflow: hidden;
+      min-width: 280px;
+      text-align: center;
       
-      &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 12px 40px rgba(108, 92, 231, 0.3);
+      &:active {
+        transform: scale(0.98);
       }
       
       &.opening {
-        animation: boxOpening 1s ease-out;
-        transform: rotateY(180deg);
+        border-color: var(--neon-pink);
+        box-shadow: 0 0 30px rgba(255, 20, 147, 0.6);
       }
       
       .box-top {
-        text-align: center;
-        
         .box-emoji {
-          font-size: 5rem;
+          font-size: 4rem;
           margin-bottom: 20px;
-          animation: bounce 2s infinite;
+          display: block;
         }
         
         .box-text {
-          font-size: 1.8rem;
-          font-weight: 700;
-          color: var(--confession-primary);
-          margin-bottom: 10px;
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: var(--pure-white);
+          margin-bottom: 12px;
+          text-transform: uppercase;
+          letter-spacing: 1px;
         }
         
         .box-subtitle {
-          color: var(--confession-dark);
-          font-style: italic;
+          color: var(--pure-white);
+          font-weight: 600;
+          text-transform: uppercase;
+          font-size: 0.9rem;
           opacity: 0.8;
         }
       }
     }
   }
 
-  // Confession Card
+  // CONFESSION CARD - MODERNO FLAT
   .confession-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: var(--pure-black);
+    border: 2px solid var(--neon-pink);
+    border-radius: 8px;
     margin-bottom: 20px;
-    animation: slideInUp 0.5s ease-out;
+    
+    &.glow-attention {
+      box-shadow: 0 0 25px rgba(255, 20, 147, 0.4);
+    }
     
     ion-card-header {
+      padding: 20px 20px 0;
+      
       ion-card-title {
-        color: var(--confession-primary);
-        font-weight: 600;
+        color: var(--pure-white);
+        font-weight: 800;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 1.1rem;
+        
+        ion-icon {
+          color: var(--neon-pink);
+          font-size: 1.3rem;
+        }
       }
       
       ion-card-subtitle {
-        color: var(--confession-secondary);
-        font-weight: 500;
+        color: var(--pure-white);
+        font-weight: 600;
         margin-top: 8px;
+        text-transform: uppercase;
+        opacity: 0.7;
       }
     }
     
     .confession-text {
       font-size: 1.3rem;
       line-height: 1.6;
-      color: var(--confession-dark);
+      color: var(--pure-white);
       font-style: italic;
       text-align: center;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      border-left: 4px solid var(--confession-accent);
+      padding: 24px;
+      margin: 20px;
+      background: var(--pure-black);
+      border-right: 4px solid var(--neon-yellow);
+      border-radius: 0 8px 8px 0;
+      font-weight: 500;
     }
   }
 
-  // Voting Section
-  .voting-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
-    
-    ion-card-header {
-      ion-card-title {
-        color: var(--confession-primary);
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      
-      ion-card-subtitle {
-        color: var(--confession-dark);
-        margin-top: 5px;
-      }
-    }
-    
-    .players-voting-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
-      
-      .voting-player-card {
-        position: relative;
-        border-radius: 12px;
-        padding: 16px;
-        color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        
-        &:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        &.selected {
-          transform: scale(1.05);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-          border: 3px solid white;
-        }
-        
-        &.self-vote {
-          border: 2px solid rgba(255, 255, 255, 0.5);
-          background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.1));
-        }
-        
-        .voting-player-info {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          flex: 1;
-          
-          .voting-player-avatar {
-            font-size: 2.5rem;
-            margin-bottom: 8px;
-          }
-          
-          .voting-player-name {
-            font-weight: 600;
-            text-align: center;
-            font-size: 1rem;
-            
-            .self-indicator {
-              display: block;
-              font-size: 0.8rem;
-              opacity: 0.8;
-              font-weight: 400;
-              margin-top: 2px;
-              font-style: italic;
-            }
-          }
-        }
-        
-        .selected-icon {
-          position: absolute;
-          top: -5px;
-          right: -5px;
-          background: white;
-          border-radius: 50%;
-          color: var(--confession-success);
-          font-size: 1.5rem;
-        }
-      }
-    }
-    
-    .voting-actions {
-      margin-top: 20px;
-      
-      .confirm-vote-button {
-        height: var(--button-height);
-        border-radius: var(--button-border-radius);
-        font-weight: 600;
-        --background: var(--confession-success);
-        --background-activated: #00a082;
-        --color: white;
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(0, 184, 148, 0.3);
-        }
-      }
-    }
-  }
-
-  // Voting Progress
-  .voting-progress-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
-    
-    ion-card-header {
-      ion-card-title {
-        color: var(--confession-primary);
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-    }
-    
-    .voting-progress {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-      
-      .voting-progress-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 12px 16px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        transition: all 0.3s ease;
-        
-        &.voted {
-          background: rgba(0, 184, 148, 0.2);
-          border: 1px solid var(--confession-success);
-        }
-        
-        .progress-avatar {
-          font-size: 1.2rem;
-          margin-right: 10px;
-        }
-        
-        .progress-name {
-          color: var(--confession-dark);
-          font-weight: 600;
-          flex: 1;
-        }
-        
-        ion-icon {
-          font-size: 1.2rem;
-        }
-      }
-    }
-    
-    .reveal-button {
-      height: var(--button-height);
-      border-radius: var(--button-border-radius);
-      font-weight: 600;
-      --background: var(--confession-warning);
-      --background-activated: #e0ac08;
-      --color: var(--confession-dark);
-      
-      &:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(253, 203, 110, 0.3);
-      }
-    }
-  }
-
-  // Results Section
-  .results-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
-    animation: slideInUp 0.5s ease-out;
-    
-    ion-card-header {
-      ion-card-title {
-        color: var(--confession-primary);
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-    }
-    
-    .author-reveal {
-      text-align: center;
-      margin-bottom: 30px;
-      
-      h3 {
-        color: var(--confession-dark);
-        font-weight: 600;
-        margin-bottom: 15px;
-      }
-      
-      .author-card {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        border-radius: 16px;
-        color: white;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        
-        .author-avatar {
-          font-size: 3rem;
-          margin-bottom: 10px;
-        }
-        
-        .author-name {
-          font-size: 1.2rem;
-          font-weight: 700;
-        }
-      }
-    }
-    
-    .vote-results {
-      margin-bottom: 30px;
-      
-      h4 {
-        color: var(--confession-secondary);
-        font-weight: 600;
-        margin-bottom: 15px;
-      }
-      
-      .vote-results-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        
-        .vote-result-item {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 12px 16px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          
-          &.correct {
-            background: rgba(0, 184, 148, 0.2);
-            border: 1px solid var(--confession-success);
-          }
-          
-          .vote-player-info {
-            display: flex;
-            flex-direction: column;
-            
-            .vote-player-name {
-              color: var(--confession-dark);
-              font-weight: 600;
-            }
-            
-            .vote-count {
-              color: var(--confession-secondary);
-              font-size: 0.9rem;
-            }
-          }
-          
-          ion-icon {
-            font-size: 1.3rem;
-          }
-        }
-      }
-    }
-    
-    .consequences {
-      margin-bottom: 30px;
-      
-      .consequence-section {
-        margin-bottom: 20px;
-        
-        h4 {
-          color: var(--confession-secondary);
-          font-weight: 600;
-          margin-bottom: 12px;
-        }
-        
-        .consequence-players {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          
-          .consequence-player {
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            
-            &.correct {
-              background: rgba(0, 184, 148, 0.2);
-              color: var(--confession-success);
-              border: 1px solid var(--confession-success);
-            }
-            
-            &.wrong {
-              background: rgba(232, 67, 147, 0.2);
-              color: var(--confession-danger);
-              border: 1px solid var(--confession-danger);
-            }
-          }
-        }
-      }
-    }
-    
-    .continue-actions {
-      .next-round-button {
-        height: var(--button-height);
-        border-radius: var(--button-border-radius);
-        font-weight: 600;
-        font-size: 1.1rem;
-        --background: var(--confession-primary);
-        --background-activated: var(--confession-secondary);
-        --color: white;
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
-        }
-      }
-    }
-  }
-
-  // Finished Section
-  .finished-card {
-    background: var(--card-gradient);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin-bottom: 20px;
-    animation: slideInUp 0.5s ease-out;
-    
-    ion-card-header {
-      text-align: center;
-      
-      ion-card-title {
-        color: var(--confession-success);
-        font-weight: 700;
-        font-size: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-      }
-      
-      ion-card-subtitle {
-        color: var(--confession-dark);
-        margin-top: 10px;
-        font-size: 1rem;
-      }
-    }
-    
-    .final-stats {
-      h3 {
-        color: var(--confession-primary);
-        font-weight: 600;
-        margin-bottom: 15px;
-      }
-      
-      .stats-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 25px;
-        
-        .stat-item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 8px;
-          
-          ion-icon {
-            color: var(--confession-secondary);
-            font-size: 1.2rem;
-          }
-          
-          span {
-            color: var(--confession-dark);
-            font-weight: 500;
-          }
-        }
-      }
-      
-      .player-final-stats {
-        h4 {
-          color: var(--confession-secondary);
-          font-weight: 600;
-          margin-bottom: 15px;
-        }
-        
-        .player-stat-item {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 12px 16px;
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-          margin-bottom: 10px;
-          
-          .player-stat-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            
-            .stat-avatar {
-              font-size: 1.2rem;
-            }
-            
-            .stat-name {
-              color: var(--confession-dark);
-              font-weight: 600;
-            }
-          }
-          
-          .player-stat-data {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            
-            .stat-accuracy {
-              color: var(--confession-success);
-              font-weight: 600;
-              font-size: 0.9rem;
-            }
-            
-            .stat-confessions {
-              color: var(--confession-secondary);
-              font-size: 0.8rem;
-            }
-          }
-        }
-      }
-    }
-    
-    .finish-actions {
-      margin-top: 30px;
-      
-      .home-button {
-        height: var(--button-height);
-        border-radius: var(--button-border-radius);
-        font-weight: 600;
-        font-size: 1.1rem;
-        --background: var(--confession-primary);
-        --background-activated: var(--confession-secondary);
-        --color: white;
-        
-        &:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
-        }
-      }
-    }
-  }
-}
-
-// Animações
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
-
-@keyframes boxOpening {
-  0% {
-    transform: rotateY(0deg);
-  }
-  50% {
-    transform: rotateY(90deg) scale(1.1);
-  }
-  100% {
-    transform: rotateY(180deg);
-  }
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-// Responsividade
-@media (max-width: 480px) {
-  .game-content .game-container {
-    padding: 16px;
-    
-    .mystery-box-container {
-      min-height: 250px;
-      
-      .mystery-box {
-        padding: 30px 20px;
-        
-        .box-top {
-          .box-emoji {
-            font-size: 4rem;
-            margin-bottom: 15px;
-          }
-          
-          .box-text {
-            font-size: 1.5rem;
-          }
-        }
-      }
-    }
-    
-    .players-voting-grid {
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: 10px;
-      
-      .voting-player-card {
-        padding: 12px;
-        min-height: 80px;
-        
-        .voting-player-info {
-          .voting-player-avatar {
-            font-size: 2rem;
-            margin-bottom: 6px;
-          }
-          
-          .voting-player-name {
-            font-size: 0.9rem;
-          }
-        }
-      }
-    }
-    
-    .confession-text {
-      font-size: 1.1rem;
-      padding: 15px;
-    }
-  }
-
-  // Current Player Turn
+  // CURRENT PLAYER CARD - DESTAQUE MODERNO
   .current-player-card {
-    background: linear-gradient(135deg, var(--confession-primary), var(--confession-secondary));
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    margin-bottom: 20px;
-    animation: pulse 2s ease-in-out infinite;
+    background: var(--pure-black);
+    border-top: 4px solid var(--neon-purple);
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 16px;
+    padding: 20px;
+    
+    &.glow-pulse {
+      animation: neon-glow-pulse 2s ease-in-out infinite;
+    }
     
     .current-player-turn {
       .turn-indicator {
         display: flex;
         align-items: center;
-        gap: 15px;
+        gap: 16px;
         
         .turn-avatar {
           width: 60px;
@@ -723,39 +193,237 @@
           align-items: center;
           justify-content: center;
           font-size: 2rem;
-          color: white;
-          font-weight: bold;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          font-weight: 900;
+          border: 3px solid var(--pure-white);
         }
         
         .turn-info {
           flex: 1;
           
           h3 {
-            color: white;
-            font-weight: 600;
-            margin: 0 0 5px 0;
+            color: var(--pure-white);
+            font-weight: 800;
+            margin: 0 0 8px 0;
             font-size: 1.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
           }
           
           p {
-            color: rgba(255, 255, 255, 0.9);
+            color: var(--pure-white);
             margin: 0;
             font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            opacity: 0.8;
           }
         }
       }
     }
   }
 
-  // Voting Progress Updates
+  // VOTING CARD - GRID MODERNO
+  .voting-card {
+    background: var(--pure-black);
+    border: 2px solid var(--neon-green);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    
+    ion-card-header {
+      padding: 0 0 20px 0;
+      
+      ion-card-title {
+        color: var(--pure-white);
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+        ion-icon {
+          color: var(--neon-green);
+          font-size: 1.3rem;
+        }
+      }
+      
+      ion-card-subtitle {
+        color: var(--pure-white);
+        margin-top: 8px;
+        font-weight: 600;
+        opacity: 0.7;
+      }
+    }
+    
+    .players-voting-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+      
+      .voting-player-card {
+        background: var(--pure-black);
+        border: 2px solid var(--pure-white);
+        border-radius: 8px;
+        padding: 16px;
+        color: var(--pure-white);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        
+        &:active {
+          transform: scale(0.95);
+        }
+        
+        &.selected {
+          border-color: var(--neon-yellow);
+          border-width: 3px;
+          box-shadow: 0 0 20px rgba(255, 255, 0, 0.4);
+        }
+        
+        .voting-player-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          flex: 1;
+          
+          .voting-player-avatar {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+          }
+          
+          .voting-player-name {
+            font-weight: 700;
+            text-align: center;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+          }
+        }
+        
+        .selected-icon {
+          position: absolute;
+          top: -8px;
+          right: -8px;
+          background: var(--neon-yellow);
+          color: var(--pure-black);
+          border-radius: 50%;
+          font-size: 1.2rem;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 900;
+        }
+      }
+    }
+    
+    .voting-actions {
+      .confirm-vote-button {
+        width: 100%;
+        height: 56px;
+        background: var(--pure-black);
+        border: 3px solid var(--neon-green);
+        border-radius: 8px;
+        color: var(--pure-white);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.1rem;
+        
+        &:active {
+          background: var(--neon-green);
+          color: var(--pure-black);
+        }
+        
+        &.glow-ready {
+          box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+        }
+      }
+    }
+  }
+
+  // VOTING PROGRESS - LISTA MODERNA
   .voting-progress-card {
+    background: var(--pure-black);
+    border: 2px solid var(--neon-blue);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    
+    ion-card-header {
+      padding: 0 0 16px 0;
+      
+      ion-card-title {
+        color: var(--pure-white);
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+        ion-icon {
+          color: var(--neon-blue);
+          font-size: 1.3rem;
+        }
+      }
+      
+      ion-card-subtitle {
+        color: var(--pure-white);
+        font-weight: 600;
+        text-transform: uppercase;
+        opacity: 0.7;
+        margin-top: 8px;
+      }
+    }
+    
     .voting-progress {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+      
       .voting-progress-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        background: var(--pure-black);
+        border: 2px solid var(--pure-white);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        
+        &.voted {
+          border-color: var(--neon-green);
+          border-left-width: 6px;
+          border-radius: 0 8px 8px 0;
+        }
+        
         &.current {
-          background: rgba(253, 203, 110, 0.2);
-          border-color: var(--confession-warning);
-          animation: glow 1.5s ease-in-out infinite alternate;
+          border-color: var(--neon-yellow);
+          border-left-width: 6px;
+          border-radius: 0 8px 8px 0;
+          box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+        }
+        
+        .progress-avatar {
+          font-size: 1.4rem;
+          margin-right: 12px;
+        }
+        
+        .progress-name {
+          color: var(--pure-white);
+          font-weight: 700;
+          flex: 1;
+          text-transform: uppercase;
+          letter-spacing: 0.3px;
         }
         
         .progress-status {
@@ -763,124 +431,533 @@
           align-items: center;
           gap: 8px;
           
-          .waiting-indicator {
-            font-size: 1.2rem;
-            opacity: 0.6;
+          ion-icon {
+            font-size: 1.3rem;
           }
+          
+          .waiting-indicator {
+            font-size: 1.3rem;
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+    
+    .reveal-button {
+      width: 100%;
+      height: 56px;
+      background: var(--pure-black);
+      border: 3px solid var(--neon-orange);
+      border-radius: 8px;
+      color: var(--pure-white);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1.1rem;
+      
+      &.glow-attention {
+        box-shadow: 0 0 30px rgba(255, 69, 0, 0.6);
+      }
+      
+      &:active {
+        background: var(--neon-orange);
+        color: var(--pure-black);
+      }
+    }
+  }
+
+  // RESULTS SECTION - EXPLOSÃO MODERNA
+  .results-card {
+    background: var(--pure-black);
+    border: 3px solid var(--neon-red);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 24px;
+    
+    &.glow-results {
+      box-shadow: 0 0 40px rgba(255, 0, 127, 0.5);
+    }
+    
+    ion-card-header {
+      padding: 0 0 24px 0;
+      text-align: center;
+      
+      ion-card-title {
+        color: var(--pure-white);
+        font-weight: 900;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.4rem;
+        
+        ion-icon {
+          color: var(--neon-red);
+          font-size: 1.5rem;
+        }
+      }
+    }
+    
+    .author-reveal {
+      text-align: center;
+      margin-bottom: 32px;
+      
+      h3 {
+        color: var(--pure-white);
+        font-weight: 800;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      .author-card {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 32px;
+        background: var(--pure-black);
+        border: 3px solid var(--pure-white);
+        border-radius: 12px;
+        
+        .author-avatar {
+          font-size: 3rem;
+          margin-bottom: 12px;
+        }
+        
+        .author-name {
+          font-size: 1.2rem;
+          font-weight: 800;
+          color: var(--pure-white);
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+    
+    .vote-results {
+      margin-bottom: 32px;
+      
+      h4 {
+        color: var(--pure-white);
+        font-weight: 800;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      .vote-results-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        
+        .vote-result-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px;
+          background: var(--pure-black);
+          border: 2px solid var(--pure-white);
+          border-radius: 8px;
+          
+          &.correct {
+            border-color: var(--neon-green);
+            border-left-width: 6px;
+            border-radius: 0 8px 8px 0;
+          }
+          
+          .vote-player-info {
+            display: flex;
+            flex-direction: column;
+            
+            .vote-player-name {
+              color: var(--pure-white);
+              font-weight: 700;
+              text-transform: uppercase;
+              letter-spacing: 0.3px;
+            }
+            
+            .vote-count {
+              color: var(--pure-white);
+              font-size: 0.9rem;
+              font-weight: 600;
+              opacity: 0.7;
+              text-transform: uppercase;
+            }
+          }
+          
+          ion-icon {
+            font-size: 1.5rem;
+          }
+        }
+      }
+    }
+    
+    .consequences {
+      margin-bottom: 32px;
+      
+      .consequence-section {
+        margin-bottom: 24px;
+        
+        h4 {
+          color: var(--pure-white);
+          font-weight: 800;
+          margin-bottom: 16px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        
+        .consequence-players {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          
+          .consequence-player {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--pure-black);
+            border-radius: 8px;
+            
+            &.correct {
+              border-left: 6px solid var(--neon-green);
+              border-radius: 0 8px 8px 0;
+            }
+            
+            &.wrong {
+              border-left: 6px solid var(--neon-red);
+              border-radius: 0 8px 8px 0;
+            }
+            
+            .consequence-avatar {
+              font-size: 1.6rem;
+            }
+            
+            .consequence-name {
+              flex: 1;
+              color: var(--pure-white);
+              font-weight: 800;
+              text-transform: uppercase;
+              letter-spacing: 0.3px;
+            }
+            
+            .consequence-action {
+              color: var(--pure-white);
+              font-weight: 800;
+              font-size: 0.9rem;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+      
+      .author-story-section {
+        background: var(--pure-black);
+        border: 2px solid var(--neon-yellow);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        
+        h4 {
+          color: var(--pure-white);
+          margin: 0 0 12px 0;
+          font-weight: 800;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        
+        .story-instruction {
+          color: var(--pure-white);
+          margin: 0;
+          font-weight: 600;
+          text-transform: uppercase;
+          opacity: 0.8;
+        }
+      }
+    }
+    
+    .continue-actions {
+      .next-round-button {
+        width: 100%;
+        height: 56px;
+        background: var(--pure-black);
+        border: 3px solid var(--neon-purple);
+        border-radius: 8px;
+        color: var(--pure-white);
+        font-weight: 900;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        &.glow-next {
+          box-shadow: 0 0 30px rgba(139, 93, 255, 0.6);
+        }
+        
+        &:active {
+          background: var(--neon-purple);
+          color: var(--pure-black);
         }
       }
     }
   }
 
-  // Enhanced Consequences
-  .consequences {
-    .consequence-section {
-      margin-bottom: 20px;
+  // FINISHED CARD - CELEBRAÇÃO MODERNA
+  .finished-card {
+    background: var(--pure-black);
+    border: 3px solid var(--neon-green);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    padding: 24px;
+    
+    &.glow-celebration {
+      box-shadow: 0 0 50px rgba(0, 255, 65, 0.6);
+    }
+    
+    ion-card-header {
+      padding: 0 0 24px 0;
+      text-align: center;
       
-      .consequence-players {
+      ion-card-title {
+        color: var(--pure-white);
+        font-weight: 900;
+        font-size: 1.6rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        ion-icon {
+          color: var(--neon-green);
+          font-size: 1.8rem;
+        }
+      }
+      
+      ion-card-subtitle {
+        color: var(--pure-white);
+        margin-top: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+    }
+    
+    .final-stats {
+      h3 {
+        color: var(--pure-white);
+        font-weight: 800;
+        margin-bottom: 16px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      
+      .stats-list {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
+        margin-bottom: 24px;
         
-        .consequence-player {
+        .stat-item {
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding: 12px 16px;
-          border-radius: 12px;
-          transition: all 0.3s ease;
+          gap: 16px;
+          padding: 16px;
+          background: var(--pure-black);
+          border: 2px solid var(--pure-white);
+          border-radius: 8px;
           
-          &.correct {
-            background: rgba(0, 184, 148, 0.15);
-            border: 1px solid rgba(0, 184, 148, 0.3);
+          ion-icon {
+            font-size: 1.4rem;
           }
           
-          &.wrong {
-            background: rgba(232, 67, 147, 0.15);
-            border: 1px solid rgba(232, 67, 147, 0.3);
+          span {
+            color: var(--pure-white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
           }
+        }
+      }
+      
+      .player-final-stats {
+        h4 {
+          color: var(--pure-white);
+          font-weight: 800;
+          margin-bottom: 16px;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+        }
+        
+        .player-stat-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px;
+          background: var(--pure-black);
+          border: 2px solid var(--pure-white);
+          border-radius: 8px;
+          margin-bottom: 12px;
           
-          .consequence-avatar {
-            font-size: 1.5rem;
-          }
-          
-          .consequence-name {
-            flex: 1;
-            font-weight: 600;
-            color: var(--confession-dark);
-          }
-          
-          .consequence-action {
-            font-weight: 600;
-            font-size: 0.9rem;
+          .player-stat-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             
-            .correct & {
-              color: var(--confession-success);
+            .stat-avatar {
+              font-size: 1.4rem;
             }
             
-            .wrong & {
-              color: var(--confession-danger);
+            .stat-name {
+              color: var(--pure-white);
+              font-weight: 800;
+              text-transform: uppercase;
+              letter-spacing: 0.3px;
+            }
+          }
+          
+          .player-stat-data {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            
+            .stat-accuracy {
+              color: var(--pure-white);
+              font-weight: 800;
+              font-size: 0.9rem;
+              text-transform: uppercase;
+            }
+            
+            .stat-confessions {
+              color: var(--pure-white);
+              font-size: 0.8rem;
+              font-weight: 600;
+              text-transform: uppercase;
+              opacity: 0.7;
             }
           }
         }
       }
     }
     
-    .author-story-section {
-      background: linear-gradient(135deg, var(--confession-warning), var(--confession-tertiary));
-      padding: 20px;
-      border-radius: 16px;
-      margin-top: 20px;
+    .finish-actions {
+      margin-top: 24px;
       
-      h4 {
-        color: white;
-        margin: 0 0 10px 0;
-        font-weight: 600;
-        text-align: center;
+      .home-button {
+        width: 100%;
+        height: 56px;
+        background: var(--pure-black);
+        border: 3px solid var(--neon-purple);
+        border-radius: 8px;
+        color: var(--pure-white);
+        font-weight: 900;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        
+        &:active {
+          background: var(--neon-purple);
+          color: var(--pure-black);
+        }
       }
-      
-      .story-instruction {
-        color: rgba(255, 255, 255, 0.9);
-        margin: 0;
-        text-align: center;
-        font-style: italic;
-      }
-    }
-  }
-
-  // Animations
-  @keyframes pulse {
-    0%, 100% {
-      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
-    }
-    50% {
-      box-shadow: 0 8px 20px rgba(108, 92, 231, 0.5);
-    }
-  }
-
-  @keyframes glow {
-    from {
-      box-shadow: 0 2px 8px rgba(253, 203, 110, 0.3);
-    }
-    to {
-      box-shadow: 0 4px 16px rgba(253, 203, 110, 0.6);
     }
   }
 }
 
+// ===============================================
+// ANIMAÇÕES MODERNAS - APENAS GLOW SUTIL
+// ===============================================
+
+@keyframes neon-glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(139, 93, 255, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(139, 93, 255, 0.6);
+  }
+}
+
+// ===============================================
+// RESPONSIVIDADE MODERNA
+// ===============================================
+
 @media (max-width: 480px) {
   .game-content .game-container {
-    padding: 16px;
+    padding: 12px;
+    
+    .mystery-box-container {
+      min-height: 240px;
+      
+      .mystery-box {
+        padding: 32px 24px;
+        min-width: 240px;
+        
+        .box-top {
+          .box-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+          }
+          
+          .box-text {
+            font-size: 1.3rem;
+          }
+          
+          .box-subtitle {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+    
+    .players-voting-grid {
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 12px;
+      
+      .voting-player-card {
+        padding: 12px;
+        min-height: 90px;
+        
+        .voting-player-info {
+          .voting-player-avatar {
+            font-size: 2rem;
+            margin-bottom: 6px;
+          }
+          
+          .voting-player-name {
+            font-size: 0.8rem;
+          }
+        }
+        
+        .selected-icon {
+          top: -6px;
+          right: -6px;
+          font-size: 1rem;
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+    
+    .confession-text {
+      font-size: 1.1rem;
+      padding: 20px;
+      margin: 16px;
+    }
     
     .current-player-card {
+      padding: 16px;
+      
       .current-player-turn {
         .turn-indicator {
-          gap: 10px;
+          gap: 12px;
           
           .turn-avatar {
             width: 50px;
             height: 50px;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
           }
           
           .turn-info {
@@ -896,18 +973,38 @@
       }
     }
     
-    .consequence-players {
-      .consequence-player {
-        padding: 10px 12px;
-        gap: 8px;
-        
-        .consequence-avatar {
-          font-size: 1.2rem;
-        }
-        
-        .consequence-action {
-          font-size: 0.8rem;
-        }
+    .confirm-vote-button,
+    .reveal-button,
+    .next-round-button,
+    .home-button {
+      height: 48px;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+    }
+    
+    .voting-progress-item {
+      padding: 12px;
+      
+      .progress-avatar {
+        font-size: 1.2rem;
+        margin-right: 8px;
+      }
+      
+      .progress-name {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .consequence-player {
+      padding: 12px;
+      gap: 12px;
+      
+      .consequence-avatar {
+        font-size: 1.4rem;
+      }
+      
+      .consequence-action {
+        font-size: 0.8rem;
       }
     }
   }
@@ -917,5 +1014,41 @@
   .game-content .game-container {
     max-width: 800px;
     margin: 0 auto;
+    padding: 24px;
+    
+    .mystery-box {
+      padding: 48px;
+      min-width: 320px;
+      
+      .box-top {
+        .box-emoji {
+          font-size: 5rem;
+        }
+        
+        .box-text {
+          font-size: 1.8rem;
+        }
+      }
+    }
+    
+    .players-voting-grid {
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 20px;
+      
+      .voting-player-card {
+        padding: 20px;
+        min-height: 110px;
+        
+        .voting-player-info {
+          .voting-player-avatar {
+            font-size: 2.4rem;
+          }
+          
+          .voting-player-name {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
   }
 }
