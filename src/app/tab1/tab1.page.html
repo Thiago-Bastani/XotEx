@@ -1,9 +1,9 @@
 <ion-content [fullscreen]="true" class="home-content">
-  <div class="home-container">
+  <div class="home-container" [class.logo-eating]="isLogoEating">
     <!-- Hero Section -->
     <div class="hero-section">
       <div class="brand-logo">
-        <div class="logo-icon">🎭</div>
+        <img src="assets/logo.png" alt="XotEx Logo" class="logo-image">
         <h1 class="brand-title">XotEx</h1>
       </div>
       <p class="brand-subtitle">O jogo de confissões que revela segredos</p>
@@ -45,24 +45,13 @@
       </ion-button>
     </div>
 
-    <!-- Navigation Section -->
-    <div class="navigation-section">
+    <!-- Help Icon -->
+    <div class="help-icon-container">
       <ion-button 
-        expand="full" 
         fill="clear"
-        class="nav-action-btn"
+        class="help-icon-btn"
         (click)="goToHelp()">
-        <ion-icon name="help-circle-outline" slot="start"></ion-icon>
-        Como Jogar
-      </ion-button>
-
-      <ion-button 
-        expand="full" 
-        fill="clear"
-        class="nav-action-btn"
-        (click)="goToSettings()">
-        <ion-icon name="settings-outline" slot="start"></ion-icon>
-        Configurações
+        <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>
     </div>
 

@@ -18,6 +18,7 @@ import { GameSession, GameStatus } from '../models/game.model';
 export class Tab1Page implements OnInit, OnDestroy {
   currentGame: GameSession | null = null;
   hasExistingGame = false;
+  isLogoEating = false;
   private gameSubscription: Subscription | null = null;
 
   constructor(
@@ -69,8 +70,14 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   private createNewGame() {
-    const gameId = this.gameService.createNewGame();
-    this.router.navigate(['/setup']);
+    // Trigger logo eating animation
+    this.isLogoEating = true;
+    
+    // Wait for animation to complete before navigating
+    setTimeout(() => {
+      const gameId = this.gameService.createNewGame();
+      this.router.navigate(['/setup']);
+    }, 1800); // Match animation duration
   }
 
   continueGame() {
@@ -96,9 +103,6 @@ export class Tab1Page implements OnInit, OnDestroy {
     this.router.navigate(['/help']);
   }
 
-  goToSettings() {
-    this.router.navigate(['/settings']);
-  }
 
   async confirmClearGame() {
     const alert = await this.alertController.create({

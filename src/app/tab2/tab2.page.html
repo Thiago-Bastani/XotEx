@@ -1,107 +1,151 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/home"></ion-back-button>
-    </ion-buttons>
-    <ion-title>
-      Ajuda
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true" class="help-content">
   <div class="help-container">
-    <!-- Logo e título -->
-    <div class="logo-section">
-      <div class="logo-emoji">🎭</div>
-      <h1 class="app-title">XotEx</h1>
-      <p class="app-subtitle">Jogo de confissões para grupos de amigos</p>
+    <!-- Header with close button -->
+    <div class="help-header">
+      <ion-button 
+        fill="clear" 
+        class="close-btn"
+        (click)="goBack()">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+      
+      <div class="header-content">
+        <img src="assets/logo.png" alt="XotEx Logo" class="help-logo">
+        <h1 class="help-title">Como Jogar</h1>
+        <p class="help-subtitle">Aprenda as regras do XotEx</p>
+      </div>
     </div>
 
-    <!-- Instruções do jogo -->
-    <ion-card class="instructions-card">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="help-circle" color="primary"></ion-icon>
-          Como jogar
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="game-description">
-          <ol class="instructions-list">
-            <li>Cada jogador escreve confissões anônimas</li>
-            <li>Uma confissão é revelada</li>
-            <li>Todos tentam adivinhar quem escreveu</li>
-            <li>Quem erra bebe, quem acerta distribui!</li>
-          </ol>
+    <!-- Quick Start -->
+    <div class="quick-start-section">
+      <h2 class="section-title">🚀 Início Rápido</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Cadastre os Jogadores</h3>
+            <p>4-8 pessoas para máxima diversão</p>
+          </div>
         </div>
-      </ion-card-content>
-    </ion-card>
-
-    <!-- Regras detalhadas -->
-    <ion-card class="rules-card">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="book" color="secondary"></ion-icon>
-          Regras Completas
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="rules-content">
-          <h3>🎯 Objetivo</h3>
-          <p>Adivinhar quem escreveu cada confissão!</p>
-          
-          <h3>👥 Jogadores</h3>
-          <p>De 4 a 8 jogadores</p>
-          
-          <h3>📝 Preparação</h3>
-          <ul>
-            <li>Cada jogador escreve 3-5 confissões anônimas</li>
-            <li>As confissões podem ser engraçadas, constrangedoras ou íntimas</li>
-            <li>Seja criativo e honesto!</li>
-          </ul>
-          
-          <h3>🎮 Gameplay</h3>
-          <ul>
-            <li>Uma confissão aleatória é revelada</li>
-            <li><strong>Todos votam</strong> em quem acham que escreveu (incluindo o autor!)</li>
-            <li>O <strong>anonimato é mantido</strong> durante toda a votação</li>
-            <li>O autor é revelado apenas no final</li>
-            <li>Continue até acabarem as confissões</li>
-          </ul>
-          
-          <h3>🍺 Consequências</h3>
-          <ul>
-            <li><strong>Quem errou:</strong> bebe!</li>
-            <li><strong>Quem acertou:</strong> distribui doses!</li>
-            <li><strong>Autor da confissão:</strong> conta a história completa (sem consequências)!</li>
-          </ul>
-          
-          <h3>🔥 Heat Level</h3>
-          <p>O nível de intensidade aumenta conforme o jogo progride, revelando confissões mais picantes!</p>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Escreva Confissões</h3>
+            <p>Cada um escreve 3+ confissões anônimas</p>
+          </div>
         </div>
-      </ion-card-content>
-    </ion-card>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Vote e Descubra</h3>
+            <p>Adivinhe quem escreveu cada confissão</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Dicas -->
-    <ion-card class="tips-card">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="bulb" color="warning"></ion-icon>
-          Dicas para se divertir
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ul class="tips-list">
-          <li>Seja criativo com suas confissões</li>
-          <li>Misture confissões verdadeiras com algumas inventadas</li>
-          <li>Observe as reações dos outros jogadores</li>
-          <li><strong>Mantenha o anonimato:</strong> não revele que você é o autor durante a votação</li>
-          <li><strong>Se você é o autor:</strong> vote normalmente como qualquer outro jogador</li>
-          <li>Lembre-se: o objetivo é se divertir!</li>
-          <li>Mantenha um ambiente respeitoso</li>
-        </ul>
-      </ion-card-content>
-    </ion-card>
+    <!-- Game Flow -->
+    <div class="game-flow-section">
+      <h2 class="section-title">🎮 Fluxo do Jogo</h2>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-icon">📦</div>
+          <div class="flow-text">
+            <h4>Revelação</h4>
+            <p>Uma confissão misteriosa aparece</p>
+          </div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-icon">🗳️</div>
+          <div class="flow-text">
+            <h4>Votação</h4>
+            <p>Todos votam em quem acham que escreveu</p>
+          </div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-icon">🎭</div>
+          <div class="flow-text">
+            <h4>Revelação</h4>
+            <p>O autor verdadeiro é revelado!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories-section">
+      <h2 class="section-title">🌶️ Categorias</h2>
+      <div class="categories-grid">
+        <div class="category-card funny">
+          <div class="category-emoji">🤣</div>
+          <h4>Engraçado</h4>
+          <p>Momentos hilários e situações cômicas</p>
+        </div>
+        <div class="category-card childish">
+          <div class="category-emoji">🧸</div>
+          <h4>Infantil</h4>
+          <p>Memórias da infância e travessuras</p>
+        </div>
+        <div class="category-card embarrassing">
+          <div class="category-emoji">😳</div>
+          <h4>Vergonhoso</h4>
+          <p>Aqueles momentos que preferimos esquecer</p>
+        </div>
+        <div class="category-card romantic">
+          <div class="category-emoji">💕</div>
+          <h4>Romântico</h4>
+          <p>Crushes, encontros e relacionamentos</p>
+        </div>
+        <div class="category-card spicy">
+          <div class="category-emoji">🌶️</div>
+          <h4>Picante</h4>
+          <p>Para os mais corajosos... 🔞</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tips -->
+    <div class="tips-section">
+      <h2 class="section-title">💡 Dicas de Ouro</h2>
+      <div class="tips-list">
+        <div class="tip-item">
+          <div class="tip-icon">🎯</div>
+          <div class="tip-text">
+            <strong>Seja estratégico:</strong> Vote em você mesmo para confundir os outros
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-icon">🤫</div>
+          <div class="tip-text">
+            <strong>Mantenha poker face:</strong> Não revele suas reações durante a votação
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-icon">✍️</div>
+          <div class="tip-text">
+            <strong>Misture verdade e ficção:</strong> Algumas confissões podem ser inventadas
+          </div>
+        </div>
+        <div class="tip-item">
+          <div class="tip-icon">🎪</div>
+          <div class="tip-text">
+            <strong>Diversão em primeiro lugar:</strong> O objetivo é rir e se conhecer melhor
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="cta-section">
+      <ion-button 
+        expand="full"
+        class="start-playing-btn"
+        (click)="startGame()">
+        <ion-icon name="play" slot="start"></ion-icon>
+        Começar a Jogar!
+      </ion-button>
+    </div>
   </div>
 </ion-content>
